@@ -174,6 +174,35 @@
     #preloader{display:none !important;}
   }
 
+  /* ===== Video modal ===== */
+  #video-modal{
+    position:fixed;inset:0;z-index:2000;display:flex;align-items:center;justify-content:center;
+    padding:24px;background:rgba(3,3,3,.92);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+    opacity:0;visibility:hidden;transition:opacity .35s var(--ease), visibility .35s var(--ease);
+  }
+  #video-modal.open{opacity:1;visibility:visible;}
+  .video-modal-inner{
+    position:relative;width:100%;max-width:900px;
+    border-radius:14px;overflow:hidden;border:1px solid var(--border-strong);
+    background:var(--card);box-shadow:0 60px 120px -40px rgba(0,0,0,.85);
+    transform:translateY(18px) scale(.97);transition:transform .4s var(--ease);
+  }
+  #video-modal.open .video-modal-inner{transform:translateY(0) scale(1);}
+  .video-modal-frame{position:relative;width:100%;aspect-ratio:16/9;background:#000;}
+  .video-modal-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+  .video-modal-close{
+    position:absolute;top:-46px;right:0;width:38px;height:38px;border-radius:50%;
+    background:rgba(245,245,245,.1);border:1px solid var(--border-strong);
+    display:flex;align-items:center;justify-content:center;color:var(--text);
+    transition:background .3s var(--ease), transform .3s var(--ease), border-color .3s var(--ease);
+  }
+  .video-modal-close:hover{background:var(--red);border-color:var(--red);transform:rotate(90deg);}
+  .video-modal-close svg{width:18px;height:18px;}
+  @media (max-width:520px){
+    .video-modal-close{top:auto;bottom:-52px;right:50%;transform:translateX(50%);}
+    .video-modal-close:hover{transform:translateX(50%) rotate(90deg);}
+  }
+
   /* ===== Announcement bar ===== */
   .announce{
     background:linear-gradient(90deg, var(--red), #c8142a);
@@ -577,6 +606,17 @@
   <span class="seg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>5X SEM JUROS <span class="highlight">POR TEMPO LIMITADO</span></span>
 </div>
 
+<div id="video-modal" role="dialog" aria-modal="true" aria-label="Vídeo de apresentação do Boneco Wilson">
+  <div class="video-modal-inner">
+    <button class="video-modal-close" id="video-modal-close" aria-label="Fechar vídeo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <div class="video-modal-frame">
+      <iframe id="video-modal-iframe" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
+
 <header id="header">
   <nav>
     <a href="#top" class="logo" aria-label="Boneco Wilson, início">
@@ -632,13 +672,13 @@
           Frete grátis para todo o Brasil
         </div>
       </div>
-      <div class="video-card" role="button" tabindex="0" aria-label="Assistir vídeo do Boneco Wilson">
-        <img src="https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?q=80&w=1200&auto=format&fit=crop" alt="Motorista dirigindo à noite, com sensação de companhia no veículo">
+      <div class="video-card" role="button" tabindex="0" aria-label="Assistir vídeo do Boneco Wilson" id="video-trigger" data-youtube-id="NPlYQAWT_SQ">
+        <img src="https://img.youtube.com/vi/NPlYQAWT_SQ/maxresdefault.jpg" alt="Prévia do vídeo de apresentação do Boneco Wilson">
         <div class="overlay"></div>
         <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         <div class="caption">
           <p>Conheça o Wilson</p>
-          <span>1 min · Apresentação do produto</span>
+          <span>Apresentação do produto</span>
         </div>
       </div>
     </div>
@@ -1025,12 +1065,35 @@
     });
   });
 
-  // Video card click (placeholder interaction)
-  document.querySelectorAll('.video-card').forEach(function(card){
-    function trigger(){ card.querySelector('.play-btn').style.transform = 'translate(-50%,-50%) scale(0.9)'; setTimeout(()=>{card.querySelector('.play-btn').style.transform='';},180); }
-    card.addEventListener('click', trigger);
-    card.addEventListener('keypress', function(e){ if(e.key === 'Enter' || e.key === ' '){ trigger(); } });
-  });
+  // Video modal
+  var videoModal = document.getElementById('video-modal');
+  var videoIframe = document.getElementById('video-modal-iframe');
+  var videoTrigger = document.getElementById('video-trigger');
+  var videoClose = document.getElementById('video-modal-close');
+  var youtubeId = videoTrigger ? videoTrigger.getAttribute('data-youtube-id') : '';
+
+  function openVideoModal(){
+    if(!videoModal) return;
+    videoIframe.src = 'https://www.youtube.com/embed/' + youtubeId + '?autoplay=1&rel=0';
+    videoModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    videoClose.focus();
+  }
+  function closeVideoModal(){
+    if(!videoModal) return;
+    videoModal.classList.remove('open');
+    videoIframe.src = '';
+    document.body.style.overflow = '';
+  }
+  if(videoTrigger){
+    videoTrigger.addEventListener('click', openVideoModal);
+    videoTrigger.addEventListener('keypress', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openVideoModal(); } });
+  }
+  if(videoClose){ videoClose.addEventListener('click', closeVideoModal); }
+  if(videoModal){
+    videoModal.addEventListener('click', function(e){ if(e.target === videoModal){ closeVideoModal(); } });
+  }
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && videoModal && videoModal.classList.contains('open')){ closeVideoModal(); } });
 })();
 </script>
 
