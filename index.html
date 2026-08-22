@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boneco Wilson | Mais tranquilidade no trânsito</title>
+<meta name="description" content="Boneco Wilson: um companheiro de viagem pensado para trazer mais presença, confiança e tranquilidade aos seus deslocamentos. Frete grátis para todo o Brasil.">
+<meta property="og:title" content="Boneco Wilson | Mais tranquilidade no trânsito">
+<meta property="og:description" content="Um companheiro de viagem criado para aumentar sua sensação de segurança e trazer mais tranquilidade para o dia a dia.">
+<meta property="og:type" content="product">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Boneco Wilson",
+  "description": "Companheiro de viagem pensado para trazer mais presença e tranquilidade no trânsito.",
+  "brand": { "@type": "Brand", "name": "Boneco Wilson" },
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "BRL",
+    "availability": "https://schema.org/InStock",
+    "shippingDetails": { "@type": "OfferShippingDetails", "shippingRate": { "@type":"MonetaryAmount","value":"0","currency":"BRL" } }
+  }
+}
+</script>
+<style>
+  :root{
+    --black:#050505;
+    --dark:#0A0A0A;
+    --card:#111111;
+    --elevated:#181818;
+    --text:#F5F5F5;
+    --text-secondary:#A0A0A0;
+    --yellow:#FFE000;
+    --red:#ED1B2F;
+    --border:rgba(245,245,245,0.09);
+    --border-strong:rgba(245,245,245,0.16);
+    --display:'Manrope',sans-serif;
+    --body:'Inter',sans-serif;
+    --ease:cubic-bezier(.16,.8,.24,1);
+    --container:1320px;
+  }
+
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--black);
+    color:var(--text);
+    font-family:var(--body);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  button{font-family:inherit;cursor:pointer;}
+  ul{list-style:none;}
+  h1,h2,h3,h4{font-family:var(--display);font-weight:800;letter-spacing:-0.02em;line-height:1.05;}
+  .container{max-width:var(--container);margin:0 auto;padding:0 24px;}
+  section{position:relative;}
+  ::selection{background:var(--yellow);color:var(--black);}
+  :focus-visible{outline:2px solid var(--yellow);outline-offset:3px;}
+
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:var(--body);font-weight:700;font-size:12px;
+    letter-spacing:0.16em;text-transform:uppercase;
+    color:var(--yellow);margin-bottom:16px;
+  }
+  .eyebrow::before{content:"";width:18px;height:2px;background:var(--yellow);display:inline-block;}
+
+  /* ===== Buttons ===== */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:10px;
+    padding:17px 32px;border-radius:6px;font-weight:700;font-size:14.5px;
+    letter-spacing:0.03em;text-transform:uppercase;border:1px solid transparent;
+    transition:transform .35s var(--ease), box-shadow .35s var(--ease), background .35s var(--ease), border-color .35s var(--ease), color .35s var(--ease);
+    white-space:nowrap;
+  }
+  .btn-primary{
+    background:var(--red);color:#fff;
+    box-shadow:0 0 0 0 rgba(237,27,47,0);
+  }
+  .btn-primary:hover{transform:translateY(-2px) scale(1.015);box-shadow:0 14px 34px -10px rgba(237,27,47,.55);}
+  .btn-primary:active{transform:translateY(0) scale(.98);}
+  .btn-primary .arrow{transition:transform .35s var(--ease);}
+  .btn-primary:hover .arrow{transform:translateX(4px);}
+
+  .btn-ghost{
+    background:transparent;color:var(--text);border-color:var(--border-strong);
+  }
+  .btn-ghost:hover{border-color:var(--yellow);color:var(--yellow);transform:translateY(-2px);}
+
+  .btn-yellow{background:var(--yellow);color:var(--black);}
+  .btn-yellow:hover{transform:translateY(-2px) scale(1.015);box-shadow:0 14px 34px -10px rgba(255,224,0,.4);}
+
+  /* ===== Scroll progress ===== */
+  #scroll-progress{
+    position:fixed;top:0;left:0;width:100%;height:3px;z-index:1000;
+    background:repeating-linear-gradient(90deg,rgba(245,245,245,.1) 0 14px, transparent 14px 26px);
+  }
+  #scroll-progress::before{
+    content:"";position:absolute;top:0;left:0;height:100%;width:var(--p,0%);
+    background:linear-gradient(90deg,var(--yellow),var(--red));
+    transition:width .08s linear;
+  }
+
+  /* ===== Preloader ===== */
+  #preloader{
+    position:fixed;inset:0;z-index:9999;background:var(--black);
+    display:flex;align-items:center;justify-content:center;overflow:hidden;
+    transition:opacity .6s var(--ease), visibility .6s var(--ease);
+  }
+  #preloader.fade-out{opacity:0;visibility:hidden;pointer-events:none;}
+  #preloader .pre-grid{
+    position:absolute;inset:0;opacity:.1;
+    background-image:linear-gradient(var(--border-strong) 1px, transparent 1px),linear-gradient(90deg,var(--border-strong) 1px, transparent 1px);
+    background-size:56px 56px;
+    mask-image:radial-gradient(ellipse 70% 60% at 50% 50%, black, transparent 75%);
+  }
+  .pre-stage{position:relative;width:100%;max-width:520px;padding:0 24px;}
+  .pre-road{
+    position:relative;height:2px;width:100%;
+    background:repeating-linear-gradient(90deg, var(--border-strong) 0 22px, transparent 22px 40px);
+    margin:0 auto;
+  }
+  .pre-car{
+    position:absolute;left:50%;bottom:2px;width:104px;height:auto;
+    transform:translateX(calc(-50% - 220px));
+    animation:carDrive 6s var(--ease) forwards;
+  }
+  .pre-car .wheel{transform-origin:center;animation:wheelSpin 6s linear forwards;}
+  .pre-car .brake-light{animation:brakeGlow 6s ease forwards;}
+  .pre-logo{
+    position:absolute;left:0;right:0;bottom:34px;text-align:center;
+    opacity:0;transform:translateY(10px) scale(.96);
+    animation:logoReveal 6s var(--ease) forwards;
+  }
+  .pre-logo .pre-brand{
+    font-family:var(--display);font-weight:900;font-size:clamp(24px,5vw,34px);letter-spacing:-0.01em;
+  }
+  .pre-logo .pre-brand .sub{color:var(--yellow);}
+  .pre-logo .pre-slogan{
+    margin-top:8px;font-size:13px;font-weight:600;color:var(--text-secondary);letter-spacing:.03em;
+  }
+  @keyframes carDrive{
+    0%{transform:translateX(calc(-50% - 220px));}
+    33.3%{transform:translateX(-50%);}
+    66.6%{transform:translateX(-50%);}
+    83.3%{transform:translateX(calc(-50% + 260px));}
+    100%{transform:translateX(calc(-50% + 260px));}
+  }
+  @keyframes wheelSpin{
+    0%{transform:rotate(0deg);}
+    33.3%{transform:rotate(320deg);}
+    66.6%{transform:rotate(320deg);}
+    83.3%{transform:rotate(680deg);}
+    100%{transform:rotate(680deg);}
+  }
+  @keyframes brakeGlow{
+    0%,27%{opacity:.3;}
+    31%,42%{opacity:1;filter:drop-shadow(0 0 6px rgba(237,27,47,.85));}
+    50%,100%{opacity:.3;filter:none;}
+  }
+  @keyframes logoReveal{
+    0%,64%{opacity:0;transform:translateY(10px) scale(.96);}
+    83.3%{opacity:1;transform:translateY(0) scale(1);}
+    100%{opacity:1;transform:translateY(0) scale(1);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    #preloader{display:none !important;}
+  }
+
+  /* ===== Announcement bar ===== */
+  .announce{
+    background:linear-gradient(90deg, var(--red), #c8142a);
+    padding:11px 20px;text-align:center;
+    font-size:13px;font-weight:800;letter-spacing:.05em;
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;
+  }
+  .announce .seg{display:inline-flex;align-items:center;gap:7px;}
+  .announce .seg svg{width:15px;height:15px;flex-shrink:0;}
+  .announce .divider{width:1px;height:14px;background:rgba(255,255,255,.35);}
+  .announce .highlight{
+    color:var(--black);background:var(--yellow);
+    padding:2px 9px;border-radius:20px;font-weight:900;letter-spacing:.03em;
+    animation:pulseBadge 2.2s ease-in-out infinite;
+  }
+  @keyframes pulseBadge{0%,100%{box-shadow:0 0 0 0 rgba(255,224,0,.55);}50%{box-shadow:0 0 0 6px rgba(255,224,0,0);}}
+  @media (max-width:640px){.announce{font-size:11.5px;padding:10px 14px;gap:10px;}}
+
+  /* ===== Navbar ===== */
+  header{
+    position:sticky;top:0;z-index:900;
+    background:rgba(5,5,5,0.55);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border-bottom:1px solid transparent;
+    transition:background .4s var(--ease), border-color .4s var(--ease), box-shadow .4s var(--ease);
+  }
+  header.scrolled{
+    background:rgba(5,5,5,0.86);
+    border-bottom-color:var(--border);
+    box-shadow:0 12px 32px -18px rgba(0,0,0,.7);
+  }
+  nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 24px;max-width:var(--container);margin:0 auto;
+  }
+  .logo{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:900;font-size:19px;letter-spacing:-0.02em;}
+  .logo .mark{width:34px;height:34px;flex-shrink:0;}
+  .logo .sub{color:var(--yellow);}
+
+  .nav-links{display:flex;align-items:center;gap:38px;}
+  .nav-links a{font-size:14px;font-weight:600;color:var(--text-secondary);position:relative;transition:color .3s var(--ease);}
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:1.5px;background:var(--yellow);transition:width .3s var(--ease);}
+  .nav-links a:hover{color:var(--text);}
+  .nav-links a:hover::after{width:100%;}
+
+  .nav-cta{display:flex;align-items:center;gap:14px;}
+  .nav-cta .btn{padding:12px 22px;font-size:13px;}
+  .hamburger{display:none;flex-direction:column;gap:5px;width:28px;background:none;border:none;padding:6px;}
+  .hamburger span{display:block;width:100%;height:2px;background:var(--text);transition:transform .35s var(--ease), opacity .3s var(--ease);}
+  .hamburger.active span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .hamburger.active span:nth-child(2){opacity:0;}
+  .hamburger.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+  .mobile-menu{
+    display:none;position:fixed;inset:0;z-index:890;
+    background:rgba(5,5,5,0.98);backdrop-filter:blur(10px);
+    padding:110px 32px 40px;
+    transform:translateY(-12px);opacity:0;pointer-events:none;
+    transition:transform .4s var(--ease), opacity .35s var(--ease);
+  }
+  .mobile-menu.open{transform:translateY(0);opacity:1;pointer-events:auto;}
+  .mobile-menu a{display:block;font-size:24px;font-weight:700;font-family:var(--display);padding:16px 0;border-bottom:1px solid var(--border);}
+  .mobile-menu .btn{margin-top:28px;width:100%;}
+
+  /* ===== Hero ===== */
+  .hero{
+    position:relative;padding:96px 0 90px;overflow:hidden;
+    background:var(--black);
+  }
+  .hero-bg{
+    position:absolute;inset:0;z-index:0;
+    background-image:linear-gradient(180deg, rgba(5,5,5,.55) 0%, rgba(5,5,5,.86) 62%, var(--black) 100%),
+      radial-gradient(ellipse 70% 55% at 78% 15%, rgba(255,224,0,.10), transparent 60%),
+      url('https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=1740&auto=format&fit=crop');
+    background-size:cover;background-position:center 32%;
+    will-change:transform;
+  }
+  .hero-grid{position:absolute;inset:0;z-index:1;opacity:.12;
+    background-image:linear-gradient(var(--border-strong) 1px, transparent 1px),linear-gradient(90deg,var(--border-strong) 1px, transparent 1px);
+    background-size:64px 64px;
+    mask-image:radial-gradient(ellipse 80% 60% at 50% 0%, black, transparent 75%);
+  }
+  .hero-inner{position:relative;z-index:2;display:grid;grid-template-columns:1.15fr 0.85fr;gap:56px;align-items:center;}
+  .hero-copy .headline{font-size:clamp(36px,5.2vw,64px);text-transform:uppercase;}
+  .hero-copy .headline .accent{color:var(--yellow);}
+  .hero-copy .sub-headline{font-family:var(--display);font-weight:700;font-size:clamp(18px,2vw,23px);color:var(--text);margin-top:18px;}
+  .hero-copy .support{color:var(--text-secondary);font-size:16.5px;max-width:480px;margin-top:18px;}
+  .hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px;}
+  .free-shipping{
+    display:inline-flex;align-items:center;gap:8px;margin-top:26px;
+    font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--yellow);
+  }
+  .free-shipping svg{width:16px;height:16px;}
+
+  .hero-anim > *{opacity:0;transform:translateY(22px);animation:heroIn .8s var(--ease) forwards;}
+  .hero-anim .headline{animation-delay:.05s;}
+  .hero-anim .sub-headline{animation-delay:.18s;}
+  .hero-anim .support{animation-delay:.3s;}
+  .hero-anim .hero-cta{animation-delay:.42s;}
+  .hero-anim .free-shipping{animation-delay:.52s;}
+  .hero-anim .video-card{animation-delay:.3s;}
+  @keyframes heroIn{to{opacity:1;transform:translateY(0);}}
+
+  .video-card{
+    position:relative;border-radius:14px;overflow:hidden;
+    border:1px solid var(--border-strong);
+    box-shadow:0 40px 80px -30px rgba(0,0,0,.75);
+    aspect-ratio:4/5;
+  }
+  .video-card img{width:100%;height:100%;object-fit:cover;transform:scale(1.02);}
+  .video-card .overlay{position:absolute;inset:0;background:linear-gradient(180deg, rgba(5,5,5,0) 45%, rgba(5,5,5,.85) 100%);}
+  .video-card .play-btn{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:74px;height:74px;border-radius:50%;
+    background:rgba(245,245,245,.12);backdrop-filter:blur(6px);
+    border:1px solid rgba(245,245,245,.35);
+    display:flex;align-items:center;justify-content:center;
+    transition:transform .35s var(--ease), background .35s var(--ease);
+  }
+  .video-card .play-btn::after{content:"";width:0;height:0;border-left:18px solid var(--black);border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:4px;background:var(--yellow);border-radius:2px;}
+  .video-card .play-btn svg{width:22px;height:22px;fill:var(--black);margin-left:3px;}
+  .video-card:hover .play-btn{transform:translate(-50%,-50%) scale(1.08);background:var(--yellow);}
+  .video-card .play-btn{background:var(--yellow);}
+  .video-card:hover img{transform:scale(1.06);}
+  .video-card img{transition:transform .8s var(--ease);}
+  .video-card .caption{position:absolute;left:20px;right:20px;bottom:18px;z-index:2;}
+  .video-card .caption p{font-weight:700;font-size:14.5px;}
+  .video-card .caption span{font-size:12px;color:var(--text-secondary);}
+
+  /* ===== Trust bar ===== */
+  .trust-bar{background:var(--dark);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:26px 0;}
+  .trust-inner{display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;}
+  .trust-item{display:flex;align-items:center;gap:10px;font-size:13.5px;font-weight:600;color:var(--text-secondary);}
+  .trust-item svg{width:19px;height:19px;stroke:var(--yellow);flex-shrink:0;}
+
+  /* ===== Section heading shared ===== */
+  .section-pad{padding:110px 0;}
+  .heading-block{max-width:640px;}
+  .heading-block h2{font-size:clamp(28px,3.6vw,44px);text-transform:uppercase;}
+  .heading-block p{color:var(--text-secondary);margin-top:16px;font-size:16px;max-width:520px;}
+  .center{text-align:center;margin-left:auto;margin-right:auto;}
+
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease), transform .8s var(--ease);}
+  .reveal.in{opacity:1;transform:translateY(0);}
+  .stagger .reveal:nth-child(1){transition-delay:.05s;}
+  .stagger .reveal:nth-child(2){transition-delay:.14s;}
+  .stagger .reveal:nth-child(3){transition-delay:.23s;}
+  .stagger .reveal:nth-child(4){transition-delay:.32s;}
+  .stagger .reveal:nth-child(5){transition-delay:.41s;}
+  .stagger .reveal:nth-child(6){transition-delay:.5s;}
+
+  /* ===== Product intro ===== */
+  .product-intro{background:var(--dark);}
+  .pi-grid{display:grid;grid-template-columns:0.85fr 1.15fr;gap:64px;align-items:center;}
+  .pi-visual{
+    position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--border-strong);
+    aspect-ratio:3/4;
+  }
+  .pi-visual img{width:100%;height:100%;object-fit:cover;}
+  .pi-visual .glow{position:absolute;inset:0;background:radial-gradient(ellipse at 30% 20%, rgba(255,224,0,.18), transparent 55%);}
+  .benefit-list{display:flex;flex-direction:column;gap:2px;margin-top:34px;}
+  .benefit-row{
+    display:grid;grid-template-columns:70px 1fr;gap:22px;padding:26px 4px;
+    border-top:1px solid var(--border);transition:padding-left .4s var(--ease), background .4s var(--ease), border-color .4s var(--ease);
+  }
+  .benefit-row:last-child{border-bottom:1px solid var(--border);}
+  .benefit-row:hover{padding-left:14px;background:rgba(245,245,245,.02);border-color:var(--border-strong);}
+  .benefit-row .num{font-family:var(--display);font-weight:800;font-size:30px;color:var(--yellow);opacity:.85;}
+  .benefit-row h3{font-size:18.5px;font-weight:700;margin-bottom:6px;}
+  .benefit-row p{color:var(--text-secondary);font-size:14.5px;}
+
+  /* ===== Problem section ===== */
+  .problem{background:var(--black);}
+  .problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;}
+  .problem-visual{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:5/6;border:1px solid var(--border-strong);}
+  .problem-visual img{width:100%;height:100%;object-fit:cover;filter:grayscale(.15) brightness(.85);}
+  .problem-visual::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg, rgba(5,5,5,0), rgba(5,5,5,.55));}
+  .problem-copy h2{font-size:clamp(26px,3.4vw,38px);text-transform:uppercase;margin-bottom:20px;}
+  .problem-copy p{color:var(--text-secondary);font-size:16px;margin-bottom:16px;max-width:480px;}
+  .problem-copy p strong{color:var(--text);font-weight:600;}
+  .disclaimer{
+    margin-top:24px;padding:16px 18px;border-left:2px solid var(--yellow);
+    background:rgba(255,224,0,.05);font-size:13px;color:var(--text-secondary);max-width:480px;
+  }
+
+  /* ===== Stats / context section ===== */
+  .stats-section{background:var(--dark);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:52px;}
+  .stat-card{
+    background:var(--card);border:1px solid var(--border);border-radius:12px;padding:30px 24px;text-align:center;
+    transition:transform .4s var(--ease), border-color .4s var(--ease);
+  }
+  .stat-card:hover{transform:translateY(-5px);border-color:var(--yellow);}
+  .stat-num{font-family:var(--display);font-weight:900;font-size:44px;color:var(--yellow);line-height:1;}
+  .stat-num span{font-size:22px;}
+  .stat-label{font-size:13.5px;color:var(--text);margin-top:14px;min-height:56px;}
+  .stat-source{display:block;margin-top:14px;font-size:11px;color:var(--text-secondary);letter-spacing:.03em;}
+  .disclaimer.center{max-width:640px;}
+
+  /* ===== Benefits grid ===== */
+  .benefits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:56px;}
+  .benefit-card{
+    background:var(--card);border:1px solid var(--border);border-radius:12px;padding:32px 26px;
+    transition:transform .4s var(--ease), border-color .4s var(--ease), background .4s var(--ease), box-shadow .4s var(--ease);
+  }
+  .benefit-card:hover{transform:translateY(-6px);border-color:var(--border-strong);background:var(--elevated);box-shadow:0 24px 44px -24px rgba(0,0,0,.6);}
+  .benefit-card .icon-wrap{
+    width:46px;height:46px;border-radius:10px;background:rgba(255,224,0,.08);
+    display:flex;align-items:center;justify-content:center;margin-bottom:20px;
+    transition:background .4s var(--ease), transform .4s var(--ease);
+  }
+  .benefit-card:hover .icon-wrap{background:var(--yellow);transform:scale(1.06) rotate(-4deg);}
+  .benefit-card .icon-wrap svg{width:22px;height:22px;stroke:var(--yellow);transition:stroke .3s var(--ease);}
+  .benefit-card:hover .icon-wrap svg{stroke:var(--black);}
+  .benefit-card .idx{font-family:var(--display);font-weight:800;font-size:12px;color:var(--text-secondary);letter-spacing:.1em;margin-bottom:10px;}
+  .benefit-card h3{font-size:17.5px;margin-bottom:8px;}
+  .benefit-card p{font-size:14px;color:var(--text-secondary);}
+
+  /* ===== Cinematic CTA ===== */
+  .cinematic{
+    position:relative;padding:130px 0;overflow:hidden;
+    background-image:linear-gradient(180deg, rgba(5,5,5,.55), rgba(5,5,5,.92)), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1740&auto=format&fit=crop');
+    background-size:cover;background-position:center;background-attachment:fixed;
+    text-align:center;
+  }
+  @media (max-width:900px){.cinematic{background-attachment:scroll;}}
+  .cinematic h2{font-size:clamp(30px,5vw,58px);text-transform:uppercase;max-width:820px;margin:0 auto 22px;}
+  .cinematic h2 .accent{color:var(--yellow);}
+  .cinematic p.support{color:var(--text-secondary);max-width:460px;margin:0 auto 36px;font-size:16px;}
+  .cinematic .btn{margin:0 auto;}
+  .cinematic .fs{margin-top:20px;color:var(--yellow);font-weight:700;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;}
+
+  /* ===== Why Wilson ===== */
+  .why{background:var(--dark);}
+  .why-grid{display:grid;grid-template-columns:0.9fr 1.1fr;gap:60px;align-items:center;}
+  .why-visual{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:1/1;border:1px solid var(--border-strong);}
+  .why-visual img{width:100%;height:100%;object-fit:cover;}
+  .why-feats{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  .why-feat{padding:22px;border:1px solid var(--border);border-radius:12px;transition:border-color .35s var(--ease), transform .35s var(--ease);}
+  .why-feat:hover{border-color:var(--yellow);transform:translateY(-3px);}
+  .why-feat svg{width:20px;height:20px;stroke:var(--red);margin-bottom:14px;}
+  .why-feat h4{font-size:15.5px;margin-bottom:6px;}
+  .why-feat p{font-size:13px;color:var(--text-secondary);}
+
+  /* ===== Testimonials ===== */
+  .testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:56px;}
+  .t-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:28px;transition:transform .4s var(--ease), border-color .4s var(--ease);}
+  .t-card:hover{transform:translateY(-5px);border-color:var(--border-strong);}
+  .stars{display:flex;gap:3px;margin-bottom:16px;}
+  .stars svg{width:15px;height:15px;fill:var(--yellow);}
+  .t-card p{font-size:14.5px;color:var(--text);margin-bottom:20px;}
+  .t-author{display:flex;align-items:center;gap:10px;}
+  .t-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--yellow),var(--red));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;color:var(--black);}
+  .t-author span{font-size:13.5px;font-weight:600;}
+  .t-author small{display:block;font-size:11.5px;color:var(--text-secondary);}
+
+  /* ===== Final offer ===== */
+  .final-offer{
+    background:linear-gradient(180deg,var(--dark),var(--black));
+    padding:120px 0;text-align:center;position:relative;
+  }
+  .final-offer::before{
+    content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:70%;height:1px;
+    background:linear-gradient(90deg,transparent,var(--border-strong),transparent);
+  }
+  .final-offer h2{font-size:clamp(30px,4.6vw,52px);text-transform:uppercase;margin-bottom:16px;}
+  .final-offer p.support{color:var(--text-secondary);margin-bottom:38px;font-size:16.5px;}
+  .final-offer .btn-primary{padding:22px 52px;font-size:16px;}
+  .checks{display:flex;flex-wrap:wrap;justify-content:center;gap:28px;margin-top:34px;}
+  .checks li{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:600;color:var(--text-secondary);}
+  .checks svg{width:16px;height:16px;stroke:var(--yellow);}
+
+  /* ===== FAQ ===== */
+  .faq{background:var(--dark);}
+  .faq-list{max-width:760px;margin:56px auto 0;}
+  .faq-item{border-bottom:1px solid var(--border);}
+  .faq-q{
+    width:100%;display:flex;align-items:center;justify-content:space-between;gap:20px;
+    background:none;border:none;color:var(--text);text-align:left;padding:24px 4px;
+    font-family:var(--display);font-weight:700;font-size:16.5px;
+  }
+  .faq-q .plus{position:relative;width:18px;height:18px;flex-shrink:0;}
+  .faq-q .plus::before,.faq-q .plus::after{content:"";position:absolute;background:var(--yellow);transition:transform .35s var(--ease);}
+  .faq-q .plus::before{top:50%;left:0;width:100%;height:2px;transform:translateY(-50%);}
+  .faq-q .plus::after{left:50%;top:0;height:100%;width:2px;transform:translateX(-50%);}
+  .faq-item.open .plus::after{transform:translateX(-50%) rotate(90deg);opacity:0;}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .45s var(--ease);}
+  .faq-a p{padding:0 4px 24px;color:var(--text-secondary);font-size:14.5px;max-width:640px;}
+
+  /* ===== Footer ===== */
+  footer{background:var(--black);border-top:1px solid var(--border);padding:70px 0 30px;}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;}
+  .footer-brand p{color:var(--text-secondary);font-size:13.5px;margin-top:14px;max-width:280px;}
+  .footer-col h5{font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-secondary);margin-bottom:16px;}
+  .footer-col a{display:block;font-size:13.5px;color:var(--text);opacity:.85;padding:6px 0;transition:opacity .3s var(--ease), color .3s var(--ease);}
+  .footer-col a:hover{opacity:1;color:var(--yellow);}
+  .footer-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:56px;padding-top:24px;border-top:1px solid var(--border);font-size:12px;color:var(--text-secondary);}
+
+  /* ===== Mobile sticky CTA ===== */
+  .sticky-cta{
+    position:fixed;left:16px;right:16px;bottom:16px;z-index:850;
+    display:none;
+    transform:translateY(120%);opacity:0;transition:transform .4s var(--ease), opacity .4s var(--ease);
+  }
+  .sticky-cta.show{transform:translateY(0);opacity:1;}
+  .sticky-cta .btn{width:100%;box-shadow:0 16px 34px -12px rgba(237,27,47,.6);}
+
+  /* ===== Responsive ===== */
+  @media (max-width:1080px){
+    .nav-links{display:none;}
+    .hamburger{display:flex;}
+    .mobile-menu{display:block;}
+    .hero-inner{grid-template-columns:1fr;}
+    .hero-copy{text-align:center;}
+    .hero-copy .support{margin-left:auto;margin-right:auto;}
+    .hero-cta{justify-content:center;}
+    .free-shipping{justify-content:center;width:100%;}
+    .video-card{max-width:420px;margin:0 auto;}
+    .pi-grid,.problem-grid,.why-grid{grid-template-columns:1fr;gap:40px;}
+    .benefits-grid{grid-template-columns:repeat(2,1fr);}
+    .stats-grid{grid-template-columns:repeat(2,1fr);}
+    .testimonials-grid{grid-template-columns:1fr;overflow-x:auto;display:flex;gap:16px;scroll-snap-type:x mandatory;margin-top:40px;padding-bottom:8px;}
+    .t-card{min-width:78%;scroll-snap-align:start;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+    .sticky-cta{display:block;}
+    .cinematic{background-attachment:scroll;}
+  }
+  @media (max-width:460px){
+    .logo{font-size:15px;gap:7px;}
+    .logo .mark{width:28px;height:28px;}
+    nav{padding:14px 16px;}
+    .nav-cta{gap:8px;}
+    .nav-cta .btn{padding:9px 12px;font-size:11px;}
+    .container{padding:0 18px;}
+  }
+  @media (max-width:640px){
+    .section-pad{padding:74px 0;}
+    .benefits-grid{grid-template-columns:1fr;}
+    .stats-grid{grid-template-columns:1fr;}
+    .why-feats{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr;gap:32px;}
+    .trust-inner{justify-content:flex-start;}
+    .nav-cta .btn{padding:10px 16px;font-size:12px;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important;}
+    .hero-bg{transform:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<div id="preloader" aria-hidden="true">
+  <div class="pre-grid"></div>
+  <div class="pre-stage">
+    <svg class="pre-car" viewBox="0 0 104 44" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="52" cy="38" rx="46" ry="3" fill="rgba(0,0,0,.45)"/>
+      <path d="M6 27c0-2 2-4 5-4l6-10c2-3 5-5 9-5h20c4 0 7 2 9 5l7 9c5 1 9 2 11 4 2 1 3 3 3 5v3c0 2-1 3-3 3h-4a8 8 0 01-16 0H29a8 8 0 01-16 0H9c-2 0-3-1-3-3z" fill="#FFE000"/>
+      <path d="M23 13l-4 9h15v-9z" fill="#111111" opacity=".9"/>
+      <path d="M37 13v9h13l-3-9z" fill="#111111" opacity=".9"/>
+      <rect class="brake-light" x="4" y="21" width="4" height="4" rx="1.4" fill="#ED1B2F"/>
+      <circle class="wheel" cx="29" cy="34" r="7" fill="#0A0A0A"/>
+      <circle cx="29" cy="34" r="2.6" fill="#A0A0A0"/>
+      <circle class="wheel" cx="75" cy="34" r="7" fill="#0A0A0A"/>
+      <circle cx="75" cy="34" r="2.6" fill="#A0A0A0"/>
+    </svg>
+    <div class="pre-road"></div>
+    <div class="pre-logo">
+      <div class="pre-brand">BONECO <span class="sub">WILSON</span></div>
+      <p class="pre-slogan">Simulando presença, uma camada extra de segurança.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function(){
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var pre = document.getElementById('preloader');
+    if(reduceMotion){
+      pre.style.display = 'none';
+      return;
+    }
+    document.body.style.overflow = 'hidden';
+    window.setTimeout(function(){
+      pre.classList.add('fade-out');
+      window.setTimeout(function(){
+        pre.style.display = 'none';
+        document.body.style.overflow = '';
+      }, 620);
+    }, 6000);
+  })();
+</script>
+
+<div id="scroll-progress"></div>
+
+<div class="announce">
+  <span class="seg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="1" y="7" width="15" height="10" rx="1"/><path d="M16 10h3l3 3v4h-6z"/><circle cx="6" cy="19" r="2"/><circle cx="18.5" cy="19" r="2"/></svg>FRETE GRÁTIS PARA TODO O BRASIL</span>
+  <span class="divider"></span>
+  <span class="seg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>5X SEM JUROS <span class="highlight">POR TEMPO LIMITADO</span></span>
+</div>
+
+<header id="header">
+  <nav>
+    <a href="#top" class="logo" aria-label="Boneco Wilson, início">
+      <svg class="mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="40" height="40" rx="8" fill="#FFE000"/>
+        <circle cx="20" cy="16" r="6.4" fill="#050505"/>
+        <rect x="10" y="24" width="20" height="10" rx="4" fill="#050505"/>
+        <rect x="15.5" y="13" width="3.2" height="2.4" rx="1.2" fill="#FFE000"/>
+        <rect x="21.3" y="13" width="3.2" height="2.4" rx="1.2" fill="#FFE000"/>
+      </svg>
+      BONECO <span class="sub">WILSON</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#beneficios">Benefícios</a></li>
+      <li><a href="#como-funciona">Como funciona</a></li>
+      <li><a href="#depoimentos">Depoimentos</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="pagamento.html" class="btn btn-primary">Quero meu Wilson</a>
+      <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#beneficios">Benefícios</a>
+  <a href="#como-funciona">Como funciona</a>
+  <a href="#depoimentos">Depoimentos</a>
+  <a href="#faq">FAQ</a>
+  <a href="pagamento.html" class="btn btn-primary">Quero meu Wilson</a>
+</div>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-bg" id="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="container hero-inner hero-anim">
+      <div class="hero-copy">
+        <h1 class="headline">Proteja-se dos <span class="accent">perigos</span> do trânsito.</h1>
+        <p class="sub-headline">Tenha o Boneco Wilson ao seu lado.</p>
+        <p class="support">Um companheiro de viagem criado para aumentar sua sensação de segurança e trazer mais tranquilidade para o dia a dia.</p>
+        <div class="hero-cta">
+          <a href="pagamento.html" class="btn btn-primary">Quero meu Wilson <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a href="#como-funciona" class="btn btn-ghost">Ver como funciona</a>
+        </div>
+        <div class="free-shipping">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="7" width="15" height="10" rx="1"/><path d="M16 10h3l3 3v4h-6z"/><circle cx="6" cy="19" r="2"/><circle cx="18.5" cy="19" r="2"/></svg>
+          Frete grátis para todo o Brasil
+        </div>
+      </div>
+      <div class="video-card" role="button" tabindex="0" aria-label="Assistir vídeo do Boneco Wilson">
+        <img src="https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?q=80&w=1200&auto=format&fit=crop" alt="Motorista dirigindo à noite, com sensação de companhia no veículo">
+        <div class="overlay"></div>
+        <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        <div class="caption">
+          <p>Conheça o Wilson</p>
+          <span>1 min · Apresentação do produto</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <section class="trust-bar">
+    <div class="container trust-inner">
+      <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Pagamento seguro</div>
+      <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="1" y="7" width="15" height="10" rx="1"/><path d="M16 10h3l3 3v4h-6z"/><circle cx="6" cy="19" r="2"/><circle cx="18.5" cy="19" r="2"/></svg>Frete grátis para todo o Brasil</div>
+      <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/></svg>Compra protegida</div>
+      <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Atendimento ao cliente</div>
+    </div>
+  </section>
+
+  <!-- PRODUCT INTRO -->
+  <section class="product-intro section-pad" id="como-funciona">
+    <div class="container pi-grid">
+      <div class="pi-visual reveal">
+        <img src="https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?q=80&w=1000&auto=format&fit=crop" alt="Banco do carona de um veículo, representando a presença do Boneco Wilson">
+        <div class="glow"></div>
+      </div>
+      <div class="reveal">
+        <span class="eyebrow">Como funciona</span>
+        <h2 style="font-size:clamp(26px,3.4vw,40px);text-transform:uppercase;">Um companheiro de viagem que traz mais segurança.</h2>
+        <div class="benefit-list">
+          <div class="benefit-row"><span class="num">01</span><div><h3>Mais confiança ao dirigir</h3><p>Uma presença extra no banco do carona pode tornar seus trajetos, principalmente à noite, mais tranquilos.</p></div></div>
+          <div class="benefit-row"><span class="num">02</span><div><h3>Uma presença no veículo</h3><p>Wilson foi desenhado para parecer natural dentro do carro, sem chamar atenção indevida.</p></div></div>
+          <div class="benefit-row"><span class="num">03</span><div><h3>Mais tranquilidade no dia a dia</h3><p>Um pequeno detalhe que pode fazer diferença na sua rotina de deslocamentos pela cidade.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section class="problem section-pad">
+    <div class="container problem-grid">
+      <div class="problem-visual reveal">
+        <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&w=1000&auto=format&fit=crop" alt="Motorista solitário observando o retrovisor em uma rua movimentada à noite">
+      </div>
+      <div class="problem-copy reveal">
+        <span class="eyebrow">O problema</span>
+        <h2>Você não precisa dirigir sozinho.</h2>
+        <p>Dirigir sozinho pode trazer uma <strong>sensação de vulnerabilidade</strong>, especialmente em grandes centros urbanos e em trajetos noturnos.</p>
+        <p>Wilson foi pensado para criar uma <strong>presença visual dentro do veículo</strong> e proporcionar mais tranquilidade durante seus deslocamentos do dia a dia.</p>
+        <div class="disclaimer">Wilson é um item de companhia e conforto psicológico. Ele não substitui medidas de segurança, seguros ou cuidados no trânsito.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTEXT / STATISTICS -->
+  <section class="stats-section section-pad" id="contexto">
+    <div class="container">
+      <div class="heading-block center">
+        <span class="eyebrow">Contexto</span>
+        <h2>Uma preocupação real de muitas motoristas.</h2>
+        <p class="center">Pesquisas recentes sobre mobilidade urbana no Brasil mostram como o medo e a insegurança ainda afetam os deslocamentos femininos no dia a dia.</p>
+      </div>
+      <div class="stats-grid stagger">
+        <div class="stat-card reveal">
+          <div class="stat-num">97<span>%</span></div>
+          <p class="stat-label">das mulheres brasileiras relatam sentir medo de sofrer violência ao se deslocar pela cidade.</p>
+          <span class="stat-source">Instituto Patrícia Galvão / Locomotiva, 2024</span>
+        </div>
+        <div class="stat-card reveal">
+          <div class="stat-num">71<span>%</span></div>
+          <p class="stat-label">das mulheres já sofreram algum tipo de violência durante um deslocamento.</p>
+          <span class="stat-source">Instituto Patrícia Galvão / Locomotiva, 2024</span>
+        </div>
+        <div class="stat-card reveal">
+          <div class="stat-num">7<span>/10</span></div>
+          <p class="stat-label">mulheres relatam já ter sofrido assédio ou violência em seus trajetos no Brasil.</p>
+          <span class="stat-source">Estudo Localiza, 2025</span>
+        </div>
+        <div class="stat-card reveal">
+          <div class="stat-num">40<span>%</span></div>
+          <p class="stat-label">preferem estar sempre ou frequentemente acompanhadas ao se deslocar, buscando mais segurança.</p>
+          <span class="stat-source">Estudo Localiza, 2025</span>
+        </div>
+      </div>
+      <div class="disclaimer center" style="margin:36px auto 0;">Esses dados refletem uma preocupação real relatada por motoristas brasileiras em pesquisas independentes — eles não indicam que dirigir sozinha aumenta o risco de crimes, nem que o Wilson previne violência ou garante segurança. Wilson é pensado apenas para oferecer uma sensação adicional de companhia durante o trajeto.</div>
+    </div>
+  </section>
+
+  <!-- BENEFITS -->
+  <section class="section-pad" id="beneficios" style="background:var(--black);">
+    <div class="container">
+      <div class="heading-block center">
+        <span class="eyebrow">Benefícios</span>
+        <h2>Por que levar o Wilson com você?</h2>
+        <p class="center">Seis motivos pelos quais motoristas têm adotado o Wilson como parte da rotina no carro.</p>
+      </div>
+      <div class="benefits-grid stagger">
+        <div class="benefit-card reveal">
+          <div class="idx">01</div>
+          <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></div>
+          <h3>Presença no veículo</h3>
+          <p>Ocupa o banco do carona de forma natural, dando a sensação de companhia.</p>
+        </div>
+        <div class="benefit-card reveal">
+          <div class="idx">02</div>
+          <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></div>
+          <h3>Visual realista</h3>
+          <p>Acabamento e proporções pensados para parecer natural à distância.</p>
+        </div>
+        <div class="benefit-card reveal">
+          <div class="idx">03</div>
+          <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div>
+          <h3>Fácil de usar</h3>
+          <p>Basta posicionar no banco — sem instalação, sem complicação.</p>
+        </div>
+        <div class="benefit-card reveal">
+          <div class="idx">04</div>
+          <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 2l9 4.5v9L12 20l-9-4.5v-9z"/></svg></div>
+          <h3>Leve e prático</h3>
+          <p>Estrutura leve, fácil de guardar e transportar entre veículos.</p>
+        </div>
+        <div class="benefit-card reveal">
+          <div class="idx">05</div>
+          <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="7" width="18" height="12" rx="2"/><circle cx="8" cy="13" r="1.6"/><circle cx="16" cy="13" r="1.6"/></svg></div>
+          <h3>Pensado para motoristas</h3>
+          <p>Desenvolvido com foco em quem passa longas horas no trânsito.</p>
+        </div>
+        <div class="benefit-card reveal">
+          <div class="idx">06</div>
+          <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 21s-7-4.35-9.5-9C.9 8 3 4 7 4c2 0 3.6 1 5 3 1.4-2 3-3 5-3 4 0 6.1 4 4.5 8-2.5 4.65-9.5 9-9.5 9z"/></svg></div>
+          <h3>Mais tranquilidade</h3>
+          <p>Um pequeno reforço na sua sensação de conforto durante o trajeto.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CINEMATIC CTA -->
+  <section class="cinematic">
+    <div class="container">
+      <h2>Leve o Wilson. <span class="accent">Dirija com mais tranquilidade.</span></h2>
+      <p class="support">Um companheiro discreto para os seus trajetos diários, chuva ou sol, dia ou noite.</p>
+      <a href="pagamento.html" class="btn btn-primary">Comprar agora</a>
+      <p class="fs">Frete grátis para todo o Brasil</p>
+    </div>
+  </section>
+
+  <!-- WHY WILSON -->
+  <section class="why section-pad">
+    <div class="container why-grid">
+      <div class="why-visual reveal">
+        <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?q=80&w=1000&auto=format&fit=crop" alt="Interior de um carro moderno ao entardecer">
+      </div>
+      <div class="reveal">
+        <span class="eyebrow">Diferenciais</span>
+        <h2 style="font-size:clamp(26px,3.4vw,38px);text-transform:uppercase;margin-bottom:28px;">O que torna o Wilson diferente.</h2>
+        <div class="why-feats">
+          <div class="why-feat"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 2l9 4.5v9L12 20l-9-4.5v-9z"/></svg><h4>Material resistente</h4><p>Estrutura pensada para durar em uso frequente.</p></div>
+          <div class="why-feat"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg><h4>Pronto para usar</h4><p>Chega montado, sem etapas extras.</p></div>
+          <div class="why-feat"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 12h16M4 6h16M4 18h10"/></svg><h4>Compacto</h4><p>Cabe em praticamente qualquer banco de carro.</p></div>
+          <div class="why-feat"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><h4>Custo acessível</h4><p>Um investimento simples no seu conforto diário.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section-pad" id="depoimentos" style="background:var(--black);">
+    <div class="container">
+      <div class="heading-block center">
+        <span class="eyebrow">Depoimentos</span>
+        <h2>O que dizem os motoristas.</h2>
+      </div>
+      <div class="testimonials-grid">
+        <div class="t-card"><div class="stars">★★★★★</div><p>Comecei usando pela curiosidade, mas gostei muito da sensação de ter uma presença no carro durante meus trajetos.</p><div class="t-author"><div class="t-avatar">MF</div><div><span>Marina F.</span><small>São Paulo, SP</small></div></div></div>
+        <div class="t-card"><div class="stars">★★★★★</div><p>Uso principalmente nas viagens noturnas de volta do trabalho. Fez diferença na minha tranquilidade.</p><div class="t-author"><div class="t-avatar">RC</div><div><span>Rodrigo C.</span><small>Belo Horizonte, MG</small></div></div></div>
+        <div class="t-card"><div class="stars">★★★★★</div><p>Achei o acabamento bem feito e o tamanho ideal para o banco do meu carro. Recomendo.</p><div class="t-author"><div class="t-avatar">JS</div><div><span>Juliana S.</span><small>Curitiba, PR</small></div></div></div>
+        <div class="t-card"><div class="stars">★★★★★</div><p>Entrega rápida e produto bem embalado. Ficou exatamente como nas fotos do site.</p><div class="t-author"><div class="t-avatar">PA</div><div><span>Pedro A.</span><small>Porto Alegre, RS</small></div></div></div>
+        <div class="t-card"><div class="stars">★★★★★</div><p>Comprei para minha mãe, que dirige sozinha à noite. Ela disse que se sente mais confortável agora.</p><div class="t-author"><div class="t-avatar">LT</div><div><span>Lucas T.</span><small>Salvador, BA</small></div></div></div>
+        <div class="t-card"><div class="stars">★★★★★</div><p>Simples, prático e cumpre o que promete. Já indiquei para colegas de trabalho.</p><div class="t-author"><div class="t-avatar">CB</div><div><span>Camila B.</span><small>Recife, PE</small></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL OFFER -->
+  <section class="final-offer" id="oferta">
+    <div class="container">
+      <span class="eyebrow center" style="justify-content:center;">Oferta por tempo limitado</span>
+      <h2>Aproveite enquanto há unidades.</h2>
+      <p class="support">Tenha o Boneco Wilson como seu companheiro de viagem.</p>
+      <a href="pagamento.html" class="btn btn-primary">Quero meu Wilson</a>
+      <ul class="checks">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Frete grátis para todo o Brasil</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Pagamento seguro</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Compra protegida</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq section-pad" id="faq">
+    <div class="container">
+      <div class="heading-block center">
+        <span class="eyebrow">Dúvidas</span>
+        <h2>Perguntas frequentes.</h2>
+      </div>
+      <div class="faq-list" id="faq-list">
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">O que é o Boneco Wilson?<span class="plus"></span></button>
+          <div class="faq-a"><p>É um item de companhia feito para ficar no banco do carona, pensado para trazer mais sensação de presença durante os trajetos.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Como ele é utilizado no veículo?<span class="plus"></span></button>
+          <div class="faq-a"><p>Basta posicioná-lo no banco do carona, ajustando o cinto de segurança conforme desejar. Não requer instalação.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Ele realmente ajuda na segurança?<span class="plus"></span></button>
+          <div class="faq-a"><p>Wilson foi criado para aumentar a sensação de presença e conforto psicológico no veículo. Ele não é um dispositivo de segurança e não substitui medidas de proteção, seguros ou cuidados no trânsito.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">O Wilson cabe em qualquer carro?<span class="plus"></span></button>
+          <div class="faq-a"><p>Sim, seu tamanho compacto foi pensado para se adaptar à maioria dos bancos de carona de carros de passeio.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Qual é o tamanho do produto?<span class="plus"></span></button>
+          <div class="faq-a"><p>O Wilson tem proporções próximas às de um busto humano em tamanho reduzido, adequado ao banco do carona.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Como funciona o envio?<span class="plus"></span></button>
+          <div class="faq-a"><p>O envio é feito para todo o Brasil com frete grátis. O prazo varia conforme a sua região.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Posso acompanhar meu pedido?<span class="plus"></span></button>
+          <div class="faq-a"><p>Sim, após a confirmação da compra você recebe um código de rastreio por e-mail.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Quais são as formas de pagamento?<span class="plus"></span></button>
+          <div class="faq-a"><p>Aceitamos cartão de crédito, Pix e boleto bancário, todos processados com pagamento seguro.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#top" class="logo">
+          <svg class="mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect width="40" height="40" rx="8" fill="#FFE000"/>
+            <circle cx="20" cy="16" r="6.4" fill="#050505"/>
+            <rect x="10" y="24" width="20" height="10" rx="4" fill="#050505"/>
+          </svg>
+          BONECO <span class="sub">WILSON</span>
+        </a>
+        <p>Um companheiro de viagem pensado para trazer mais presença e tranquilidade aos seus deslocamentos diários.</p>
+      </div>
+      <div class="footer-col"><h5>Navegação</h5>
+        <a href="#beneficios">Benefícios</a><a href="#como-funciona">Como funciona</a><a href="#depoimentos">Depoimentos</a><a href="#faq">FAQ</a>
+      </div>
+      <div class="footer-col"><h5>Suporte</h5>
+        <a href="#faq">Central de ajuda</a><a href="#faq">Rastrear pedido</a><a href="#faq">Trocas e devoluções</a>
+      </div>
+      <div class="footer-col"><h5>Institucional</h5>
+        <a href="#">Política de privacidade</a><a href="#">Termos de uso</a><a href="#">Contato</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Boneco Wilson. Todos os direitos reservados.</span>
+      <span>Site não oficial de demonstração.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="sticky-cta" id="sticky-cta">
+  <a href="pagamento.html" class="btn btn-primary">Quero meu Wilson</a>
+</div>
+
+<script>
+(function(){
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Scroll progress
+  const progress = document.getElementById('scroll-progress');
+  function updateProgress(){
+    const h = document.documentElement;
+    const scrolled = h.scrollTop;
+    const height = h.scrollHeight - h.clientHeight;
+    const pct = height > 0 ? (scrolled/height)*100 : 0;
+    progress.style.setProperty('--p', pct + '%');
+  }
+
+  // Header scroll state
+  const header = document.getElementById('header');
+  function updateHeader(){
+    if(window.scrollY > 40){ header.classList.add('scrolled'); } else { header.classList.remove('scrolled'); }
+  }
+
+  // Hero parallax
+  const heroBg = document.getElementById('hero-bg');
+  const hero = document.getElementById('hero');
+  function updateParallax(){
+    if(reduceMotion) return;
+    const rect = hero.getBoundingClientRect();
+    if(rect.bottom < 0 || rect.top > window.innerHeight) return;
+    const offset = window.scrollY * 0.18;
+    heroBg.style.transform = 'translateY(' + offset + 'px) scale(1.08)';
+  }
+
+  // Sticky mobile CTA
+  const stickyCta = document.getElementById('sticky-cta');
+  const finalOffer = document.getElementById('oferta');
+  function updateSticky(){
+    const heroBottom = hero.getBoundingClientRect().bottom;
+    const offerRect = finalOffer.getBoundingClientRect();
+    const pastHero = heroBottom < 0;
+    const inOffer = offerRect.top < window.innerHeight && offerRect.bottom > 0;
+    if(pastHero && !inOffer){ stickyCta.classList.add('show'); } else { stickyCta.classList.remove('show'); }
+  }
+
+  let ticking = false;
+  function onScroll(){
+    if(!ticking){
+      requestAnimationFrame(function(){
+        updateProgress(); updateHeader(); updateParallax(); updateSticky();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  // Mobile menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', function(){
+    const open = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('active', open);
+    hamburger.setAttribute('aria-expanded', open);
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', function(){
+    mobileMenu.classList.remove('open');
+    hamburger.classList.remove('active');
+    hamburger.setAttribute('aria-expanded', 'false');
+  }));
+
+  // Scroll reveal via Intersection Observer
+  const revealEls = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    const io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.15, rootMargin:'0px 0px -60px 0px'});
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('in'));
+  }
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(function(item){
+    const btn = item.querySelector('.faq-q');
+    const answer = item.querySelector('.faq-a');
+    btn.addEventListener('click', function(){
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(function(openItem){
+        if(openItem !== item){
+          openItem.classList.remove('open');
+          openItem.querySelector('.faq-a').style.maxHeight = null;
+          openItem.querySelector('.faq-q').setAttribute('aria-expanded','false');
+        }
+      });
+      if(isOpen){
+        item.classList.remove('open');
+        answer.style.maxHeight = null;
+        btn.setAttribute('aria-expanded','false');
+      } else {
+        item.classList.add('open');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+        btn.setAttribute('aria-expanded','true');
+      }
+    });
+  });
+
+  // Video card click (placeholder interaction)
+  document.querySelectorAll('.video-card').forEach(function(card){
+    function trigger(){ card.querySelector('.play-btn').style.transform = 'translate(-50%,-50%) scale(0.9)'; setTimeout(()=>{card.querySelector('.play-btn').style.transform='';},180); }
+    card.addEventListener('click', trigger);
+    card.addEventListener('keypress', function(e){ if(e.key === 'Enter' || e.key === ' '){ trigger(); } });
+  });
+})();
+</script>
+
+</body>
+</html>

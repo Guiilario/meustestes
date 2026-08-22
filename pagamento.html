@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finalizar Pedido | Boneco Wilson</title>
+<meta name="description" content="Finalize a compra do seu Boneco Wilson com pagamento seguro via Pix (com desconto) ou cartão em até 5x sem juros. Frete grátis para todo o Brasil.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#050505;
+    --dark:#0A0A0A;
+    --card:#111111;
+    --elevated:#181818;
+    --text:#F5F5F5;
+    --text-secondary:#A0A0A0;
+    --yellow:#FFE000;
+    --red:#ED1B2F;
+    --green:#1FD65F;
+    --border:rgba(245,245,245,0.09);
+    --border-strong:rgba(245,245,245,0.16);
+    --display:'Manrope',sans-serif;
+    --body:'Inter',sans-serif;
+    --ease:cubic-bezier(.16,.8,.24,1);
+    --container:1080px;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--black);color:var(--text);font-family:var(--body);line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  button{font-family:inherit;cursor:pointer;}
+  ul{list-style:none;}
+  h1,h2,h3{font-family:var(--display);font-weight:800;letter-spacing:-0.02em;line-height:1.1;}
+  .container{max-width:var(--container);margin:0 auto;padding:0 24px;}
+  ::selection{background:var(--yellow);color:var(--black);}
+  :focus-visible{outline:2px solid var(--yellow);outline-offset:3px;}
+
+  /* Urgency bar */
+  .urgency-bar{
+    background:linear-gradient(90deg, var(--red), #c8142a);
+    text-align:center;padding:11px 16px;font-size:13px;font-weight:700;
+    letter-spacing:.03em;color:#fff;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;
+  }
+  .urgency-bar .timer{
+    font-family:var(--display);font-weight:800;background:rgba(0,0,0,.25);
+    padding:3px 10px;border-radius:5px;letter-spacing:.05em;min-width:56px;text-align:center;
+  }
+
+  /* Header */
+  header{
+    position:sticky;top:0;z-index:200;background:rgba(5,5,5,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--border);
+  }
+  nav{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:var(--container);margin:0 auto;}
+  .logo{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:900;font-size:18px;}
+  .logo .mark{width:32px;height:32px;flex-shrink:0;}
+  .logo .sub{color:var(--yellow);}
+  .back-link{display:flex;align-items:center;gap:6px;font-size:13.5px;font-weight:600;color:var(--text-secondary);transition:color .3s var(--ease);}
+  .back-link:hover{color:var(--yellow);}
+  .back-link svg{width:15px;height:15px;}
+  .secure-tag{display:flex;align-items:center;gap:7px;font-size:12.5px;font-weight:700;color:var(--green);}
+  .secure-tag svg{width:15px;height:15px;stroke:var(--green);}
+
+  main{padding:56px 0 100px;}
+
+  /* Price block */
+  .price-block{text-align:center;margin-bottom:44px;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:12px;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);margin-bottom:14px;
+  }
+  .eyebrow::before{content:"";width:18px;height:2px;background:var(--yellow);display:inline-block;}
+  .price-block h1{font-size:clamp(24px,4vw,34px);text-transform:uppercase;margin-bottom:10px;}
+  .price-row{display:flex;align-items:baseline;justify-content:center;gap:12px;flex-wrap:wrap;font-family:var(--display);}
+  .price-old{font-size:20px;color:var(--text-secondary);text-decoration:line-through;font-weight:600;}
+  .price-new{font-size:38px;font-weight:900;color:var(--green);}
+  .price-sub{color:var(--text-secondary);font-size:14.5px;margin-top:10px;}
+
+  /* Payment options */
+  .pay-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-bottom:52px;}
+  .pay-card{
+    position:relative;background:var(--card);border:1px solid var(--border);border-radius:16px;
+    padding:34px 28px;text-align:center;transition:transform .4s var(--ease), border-color .4s var(--ease), box-shadow .4s var(--ease);
+  }
+  .pay-card.featured{border-color:rgba(31,214,95,.4);box-shadow:0 0 0 1px rgba(31,214,95,.15) inset;}
+  .pay-card:hover{transform:translateY(-5px);border-color:var(--border-strong);box-shadow:0 24px 50px -26px rgba(0,0,0,.7);}
+  .pay-badge{
+    position:absolute;top:-13px;left:50%;transform:translateX(-50%);
+    background:var(--green);color:#052210;font-size:11.5px;font-weight:800;letter-spacing:.05em;
+    padding:6px 16px;border-radius:20px;text-transform:uppercase;white-space:nowrap;
+  }
+  .pay-card.card-option .pay-badge{background:var(--yellow);color:var(--black);}
+  .pay-icon{width:52px;height:52px;margin:6px auto 18px;border-radius:12px;background:var(--elevated);display:flex;align-items:center;justify-content:center;}
+  .pay-icon svg{width:26px;height:26px;stroke:var(--yellow);}
+  .pay-card h3{font-size:17.5px;margin-bottom:6px;}
+  .pay-card .desc{color:var(--text-secondary);font-size:13.5px;margin-bottom:20px;}
+  .pay-total{font-size:12px;color:var(--text-secondary);letter-spacing:.06em;text-transform:uppercase;margin-bottom:2px;}
+  .pay-amount{font-family:var(--display);font-weight:900;font-size:30px;margin-bottom:22px;}
+  .pay-amount .cents{font-size:17px;}
+  .pay-amount.pix-amount{color:var(--green);}
+  .brands{display:flex;justify-content:center;gap:8px;margin-bottom:20px;flex-wrap:wrap;}
+  .brand-pill{font-size:10.5px;font-weight:800;letter-spacing:.03em;background:var(--elevated);border:1px solid var(--border-strong);color:var(--text-secondary);padding:5px 9px;border-radius:5px;}
+
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:9px;width:100%;
+    padding:16px 22px;border-radius:8px;font-weight:800;font-size:14px;letter-spacing:.03em;text-transform:uppercase;
+    border:none;transition:transform .35s var(--ease), box-shadow .35s var(--ease);
+  }
+  .btn-pix{background:var(--green);color:#052210;}
+  .btn-pix:hover{transform:translateY(-2px);box-shadow:0 16px 32px -12px rgba(31,214,95,.5);}
+  .btn-card{background:var(--red);color:#fff;}
+  .btn-card:hover{transform:translateY(-2px);box-shadow:0 16px 32px -12px rgba(237,27,47,.55);}
+  .btn:active{transform:translateY(0) scale(.98);}
+
+  /* Order summary */
+  .summary{background:var(--dark);border:1px solid var(--border);border-radius:16px;padding:28px 30px;margin-bottom:52px;}
+  .summary h4{font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-secondary);margin-bottom:18px;}
+  .summary-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border);font-size:14.5px;}
+  .summary-row:last-child{border-bottom:none;}
+  .summary-row.total{padding-top:16px;font-weight:800;font-size:17px;font-family:var(--display);}
+  .summary-row.total span:last-child{color:var(--green);}
+  .prod-line{display:flex;align-items:center;gap:12px;}
+  .prod-thumb{width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,var(--yellow),#c8ab00);display:flex;align-items:center;justify-content:center;font-weight:900;color:var(--black);font-size:12px;}
+  .qty{color:var(--text-secondary);font-size:12.5px;}
+
+  /* Trust grid */
+  .trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:52px;}
+  .trust-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px 16px;text-align:center;transition:border-color .35s var(--ease), transform .35s var(--ease);}
+  .trust-box:hover{border-color:var(--border-strong);transform:translateY(-3px);}
+  .trust-box svg{width:22px;height:22px;stroke:var(--yellow);margin-bottom:10px;}
+  .trust-box p{font-size:12.5px;font-weight:600;color:var(--text-secondary);}
+
+  /* Guarantee strip */
+  .guarantee{
+    background:var(--dark);border:1px solid var(--border);border-radius:16px;
+    padding:34px 30px;text-align:center;margin-bottom:52px;
+  }
+  .guarantee p{color:var(--text-secondary);font-size:14px;max-width:520px;margin:0 auto 18px;}
+  .guarantee .pagbank{
+    display:inline-flex;align-items:center;gap:10px;font-family:var(--display);font-weight:900;font-size:20px;
+    background:var(--elevated);padding:12px 22px;border-radius:10px;border:1px solid var(--border-strong);
+  }
+  .guarantee .pagbank .dot{width:10px;height:10px;border-radius:50%;}
+  .guarantee .pagbank .dot.d1{background:#8DD35F;}
+  .guarantee .pagbank .dot.d2{background:#5FC7D3;}
+  .guarantee .pagbank .dot.d3{background:var(--yellow);}
+
+  /* Support callout */
+  .support-callout{
+    display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;
+    background:linear-gradient(135deg, rgba(255,224,0,.06), rgba(237,27,47,.05));
+    border:1px solid var(--border-strong);border-radius:16px;padding:26px 30px;
+  }
+  .support-callout h4{font-size:16px;margin-bottom:4px;}
+  .support-callout p{color:var(--text-secondary);font-size:13.5px;}
+  .support-callout a.btn{width:auto;padding:13px 24px;background:#25D366;color:#052210;}
+
+  footer{background:var(--black);border-top:1px solid var(--border);padding:44px 0 26px;text-align:center;}
+  footer .logo{justify-content:center;margin-bottom:14px;}
+  footer p{color:var(--text-secondary);font-size:12.5px;margin-bottom:6px;}
+  footer a{color:var(--text-secondary);}
+  footer a:hover{color:var(--yellow);}
+
+  /* WhatsApp float */
+  .wa-float{
+    position:fixed;left:20px;bottom:20px;z-index:400;width:56px;height:56px;border-radius:50%;
+    background:#25D366;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 14px 30px -10px rgba(37,211,102,.6);
+    transition:transform .35s var(--ease);
+  }
+  .wa-float:hover{transform:scale(1.08);}
+  .wa-float svg{width:27px;height:27px;fill:#fff;}
+
+  @media (max-width:760px){
+    .pay-grid{grid-template-columns:1fr;}
+    .trust-grid{grid-template-columns:1fr 1fr;}
+    .support-callout{flex-direction:column;text-align:center;}
+    .support-callout a.btn{width:100%;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.01ms !important;transition-duration:.01ms !important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="urgency-bar">
+  APROVEITE! Essa promoção acaba em <span class="timer" id="timer">15:00</span>
+</div>
+
+<header>
+  <nav>
+    <a href="index.html" class="logo" aria-label="Boneco Wilson, início">
+      <svg class="mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="40" height="40" rx="8" fill="#FFE000"/>
+        <circle cx="20" cy="16" r="6.4" fill="#050505"/>
+        <rect x="10" y="24" width="20" height="10" rx="4" fill="#050505"/>
+        <rect x="15.5" y="13" width="3.2" height="2.4" rx="1.2" fill="#FFE000"/>
+        <rect x="21.3" y="13" width="3.2" height="2.4" rx="1.2" fill="#FFE000"/>
+      </svg>
+      BONECO <span class="sub">WILSON</span>
+    </a>
+    <a href="index.html" class="back-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+      Voltar ao site
+    </a>
+    <div class="secure-tag">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+      Ambiente seguro
+    </div>
+  </nav>
+</header>
+
+<main>
+  <div class="container">
+
+    <div class="price-block">
+      <span class="eyebrow">Finalizar pedido</span>
+      <h1>Escolha a melhor forma de pagamento para você</h1>
+      <div class="price-row">
+        <span class="price-old">De R$ 690,00</span>
+        <span class="price-new">por R$ 455,00 no Pix</span>
+      </div>
+      <p class="price-sub">ou em até <strong style="color:var(--text)">5x sem juros de R$ 98,00</strong> no cartão de crédito</p>
+    </div>
+
+    <div class="pay-grid">
+      <div class="pay-card featured">
+        <span class="pay-badge">Pix com desconto</span>
+        <div class="pay-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M9 3l6 6-6 6M15 21l-6-6 6-6"/></svg>
+        </div>
+        <h3>Pagamento via Pix</h3>
+        <p class="desc">Aprovação imediata e 10% de desconto</p>
+        <div class="pay-total">Total à vista</div>
+        <div class="pay-amount pix-amount">R$ 455<span class="cents">,00</span></div>
+        <a class="btn btn-pix" href="https://pagamento.pagbank.com.br/pagamento?code=4278c70b-c295-4a1a-bcf9-435b76c36757&amp;t=b9e251e2-1853-4300-8875-9707ff9df8af">Pagar com Pix</a>
+      </div>
+
+      <div class="pay-card card-option">
+        <span class="pay-badge">5x sem juros</span>
+        <div class="pay-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+        </div>
+        <h3>Cartão de crédito</h3>
+        <p class="desc">Em até 5x sem juros, sem burocracia</p>
+        <div class="pay-total">5x de R$ 98,00 · Total</div>
+        <div class="pay-amount">R$ 490<span class="cents">,00</span></div>
+        <div class="brands">
+          <span class="brand-pill">VISA</span>
+          <span class="brand-pill">MASTER</span>
+          <span class="brand-pill">ELO</span>
+          <span class="brand-pill">HIPER</span>
+          <span class="brand-pill">AMEX</span>
+        </div>
+        <a class="btn btn-card" href="https://pagamento.pagbank.com.br/pagamento?code=bd5ac69f-9c59-4c07-b84d-b0b80ad7d419&amp;t=d3ae02b7-3b3c-4605-962d-3514459e7a9c">Pagar com cartão</a>
+      </div>
+    </div>
+
+    <div class="summary">
+      <h4>Resumo do pedido</h4>
+      <div class="summary-row">
+        <div class="prod-line">
+          <div class="prod-thumb">BW</div>
+          <div>
+            <div>Boneco Wilson — Companheiro de viagem</div>
+            <div class="qty">Quantidade: 1</div>
+          </div>
+        </div>
+        <span>R$ 690,00</span>
+      </div>
+      <div class="summary-row">
+        <span>Frete</span>
+        <span style="color:var(--green);font-weight:700;">Grátis</span>
+      </div>
+      <div class="summary-row">
+        <span>Desconto Pix</span>
+        <span style="color:var(--green);">− R$ 235,00</span>
+      </div>
+      <div class="summary-row total">
+        <span>Total no Pix</span>
+        <span>R$ 455,00</span>
+      </div>
+    </div>
+
+    <div class="trust-grid">
+      <div class="trust-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg><p>Pagamento seguro</p></div>
+      <div class="trust-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M1 7h15v10H1zM16 10h3l3 3v4h-6zM6 19a2 2 0 100-4 2 2 0 000 4zM18.5 19a2 2 0 100-4 2 2 0 000 4z"/></svg><p>Frete grátis Brasil</p></div>
+      <div class="trust-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/></svg><p>Compra protegida</p></div>
+      <div class="trust-box"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg><p>Suporte via WhatsApp</p></div>
+    </div>
+
+    <div class="guarantee">
+      <p>Pagamentos processados pela maior plataforma de pagamentos do Brasil, garantindo segurança e rapidez em todas as transações.</p>
+      <div class="pagbank"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span>Pagamento garantido por PagBank</div>
+    </div>
+
+    <div class="support-callout">
+      <div>
+        <h4>Ficou com alguma dúvida?</h4>
+        <p>Fale com a gente pelo WhatsApp: (11) 99734-3865</p>
+      </div>
+      <a class="btn" href="https://wa.me/5511997343865?text=Ol%C3%A1!%20Tenho%20uma%20d%C3%BAvida%20sobre%20o%20Boneco%20Wilson." target="_blank" rel="noopener">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.39 1.26 4.82L2 22l5.4-1.36a9.9 9.9 0 004.64 1.16h.01c5.46 0 9.9-4.45 9.9-9.9C21.95 6.45 17.5 2 12.04 2zm0 18.02c-1.53 0-2.96-.42-4.19-1.15l-.3-.18-3.2.8.85-3.12-.2-.32a8.2 8.2 0 01-1.26-4.14c0-4.53 3.68-8.21 8.3-8.21 4.63 0 8.31 3.68 8.31 8.21 0 4.53-3.68 8.11-8.31 8.11z"/></svg>
+        Chamar no WhatsApp
+      </a>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <a href="index.html" class="logo">
+    <svg class="mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect width="40" height="40" rx="8" fill="#FFE000"/>
+      <circle cx="20" cy="16" r="6.4" fill="#050505"/>
+      <rect x="10" y="24" width="20" height="10" rx="4" fill="#050505"/>
+    </svg>
+    BONECO <span class="sub">WILSON</span>
+  </a>
+  <p>Dúvidas ou suporte: <a href="https://wa.me/5511997343865">(11) 99734-3865</a> · boneco@bonecowilson.com.br</p>
+  <p>© 2026 Boneco Wilson. Todos os direitos reservados.</p>
+</footer>
+
+<a class="wa-float" href="https://wa.me/5511997343865?text=Ol%C3%A1!%20Tenho%20uma%20d%C3%BAvida%20sobre%20o%20Boneco%20Wilson." target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.39 1.26 4.82L2 22l5.4-1.36a9.9 9.9 0 004.64 1.16h.01c5.46 0 9.9-4.45 9.9-9.9C21.95 6.45 17.5 2 12.04 2zm0 18.02c-1.53 0-2.96-.42-4.19-1.15l-.3-.18-3.2.8.85-3.12-.2-.32a8.2 8.2 0 01-1.26-4.14c0-4.53 3.68-8.21 8.3-8.21 4.63 0 8.31 3.68 8.31 8.21 0 4.53-3.68 8.11-8.31 8.11z"/></svg>
+</a>
+
+<script>
+(function(){
+  // Countdown timer
+  const timerEl = document.getElementById('timer');
+  let seconds = 15 * 60;
+  function tick(){
+    if(seconds <= 0){ seconds = 15 * 60; }
+    const m = Math.floor(seconds / 60).toString().padStart(2,'0');
+    const s = (seconds % 60).toString().padStart(2,'0');
+    timerEl.textContent = m + ':' + s;
+    seconds--;
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+</script>
+
+</body>
+</html>
