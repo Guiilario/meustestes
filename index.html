@@ -316,31 +316,52 @@
   .mobile-menu .btn{margin-top:28px;width:100%;}
 
   /* ===== Hero ===== */
+  .hero-pin-wrap{position:relative;height:260vh;}
   .hero{
-    position:relative;padding:96px 0 90px;overflow:hidden;
+    position:sticky;top:0;left:0;
+    height:100vh;overflow:hidden;
+    display:flex;align-items:center;
     background:var(--black);
   }
-  .hero-bg{
-    position:absolute;inset:0;z-index:0;
-    background-image:linear-gradient(180deg, rgba(5,5,5,.55) 0%, rgba(5,5,5,.86) 62%, var(--black) 100%),
-      radial-gradient(ellipse 70% 55% at 78% 15%, rgba(255,224,0,.10), transparent 60%),
-      url('https://drive.google.com/thumbnail?id=1GR8HCNNcA06bB6ikD46SauMrYBtCKAgm&sz=w1920');
-    background-size:cover;background-position:center 32%;
-    will-change:transform;
+  .hero-frame{
+    position:absolute;inset:0;z-index:0;width:100%;height:100%;object-fit:cover;object-position:center 38%;
   }
-  .hero-grid{position:absolute;inset:0;z-index:1;opacity:.12;
+  .hero::after{
+    content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+    background:linear-gradient(180deg, rgba(5,5,5,.62) 0%, rgba(5,5,5,.4) 40%, rgba(5,5,5,.72) 78%, var(--black) 100%);
+  }
+  .hero-grid{position:absolute;inset:0;z-index:1;opacity:.1;
     background-image:linear-gradient(var(--border-strong) 1px, transparent 1px),linear-gradient(90deg,var(--border-strong) 1px, transparent 1px);
     background-size:64px 64px;
     mask-image:radial-gradient(ellipse 80% 60% at 50% 0%, black, transparent 75%);
   }
-  .hero-inner{position:relative;z-index:2;display:grid;grid-template-columns:1.15fr 0.85fr;gap:56px;align-items:center;}
+  .hero-scroll-hint{
+    position:absolute;left:50%;bottom:28px;transform:translateX(-50%);z-index:2;
+    display:flex;flex-direction:column;align-items:center;gap:8px;
+    opacity:.85;transition:opacity .4s var(--ease);
+  }
+  .hero-scroll-hint span{
+    width:22px;height:34px;border:1.5px solid var(--border-strong);border-radius:20px;position:relative;
+  }
+  .hero-scroll-hint span::before{
+    content:"";position:absolute;top:6px;left:50%;width:3px;height:7px;background:var(--yellow);border-radius:2px;
+    transform:translateX(-50%);animation:scrollHintDot 1.6s ease-in-out infinite;
+  }
+  .hero-scroll-hint p{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-secondary);}
+  @keyframes scrollHintDot{0%,100%{transform:translate(-50%,0);opacity:1;}60%{transform:translate(-50%,10px);opacity:0;}}
+  .hero-scroll-hint.hide{opacity:0;}
+  .hero-inner{
+    position:relative;z-index:2;width:100%;
+    display:flex;flex-direction:column;align-items:center;text-align:center;gap:56px;
+  }
+  .hero-copy{max-width:700px;margin:0 auto;display:flex;flex-direction:column;align-items:center;}
   .hero-copy .headline{font-size:clamp(36px,5.2vw,64px);text-transform:uppercase;}
   .hero-copy .headline .accent{color:var(--yellow);}
   .hero-copy .sub-headline{font-family:var(--display);font-weight:700;font-size:clamp(18px,2vw,23px);color:var(--text);margin-top:18px;}
   .hero-copy .support{color:var(--text-secondary);font-size:16.5px;max-width:480px;margin-top:18px;}
-  .hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px;}
+  .hero-cta{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:34px;}
   .free-shipping{
-    display:inline-flex;align-items:center;gap:8px;margin-top:26px;
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;margin-top:26px;
     font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--yellow);
   }
   .free-shipping svg{width:16px;height:16px;}
@@ -351,34 +372,28 @@
   .hero-anim .support{animation-delay:.3s;}
   .hero-anim .hero-cta{animation-delay:.42s;}
   .hero-anim .free-shipping{animation-delay:.52s;}
-  .hero-anim .video-card{animation-delay:.3s;}
+  .hero-anim .video-teaser{animation-delay:.62s;}
   @keyframes heroIn{to{opacity:1;transform:translateY(0);}}
 
-  .video-card{
-    position:relative;border-radius:14px;overflow:hidden;
-    border:1px solid var(--border-strong);
-    box-shadow:0 40px 80px -30px rgba(0,0,0,.75);
-    aspect-ratio:4/5;
+  /* Compact video teaser bar at the bottom of the hero */
+  .video-teaser{
+    display:inline-flex;align-items:center;gap:14px;
+    background:rgba(17,17,17,.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    border:1px solid var(--border-strong);border-radius:100px;
+    padding:8px 22px 8px 8px;margin:0 auto;
+    transition:transform .35s var(--ease), border-color .35s var(--ease), background .35s var(--ease);
   }
-  .video-card img{width:100%;height:100%;object-fit:cover;transform:scale(1.02);}
-  .video-card .overlay{position:absolute;inset:0;background:linear-gradient(180deg, rgba(5,5,5,0) 45%, rgba(5,5,5,.85) 100%);}
-  .video-card .play-btn{
-    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-    width:74px;height:74px;border-radius:50%;
-    background:rgba(245,245,245,.12);backdrop-filter:blur(6px);
-    border:1px solid rgba(245,245,245,.35);
-    display:flex;align-items:center;justify-content:center;
-    transition:transform .35s var(--ease), background .35s var(--ease);
+  .video-teaser:hover{transform:translateY(-3px);border-color:var(--yellow);background:rgba(17,17,17,.75);}
+  .vt-thumb{position:relative;width:48px;height:48px;border-radius:50%;overflow:hidden;flex-shrink:0;border:1px solid var(--border-strong);}
+  .vt-thumb img{width:100%;height:100%;object-fit:cover;}
+  .vt-play{
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    background:rgba(5,5,5,.35);
   }
-  .video-card .play-btn::after{content:"";width:0;height:0;border-left:18px solid var(--black);border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:4px;background:var(--yellow);border-radius:2px;}
-  .video-card .play-btn svg{width:22px;height:22px;fill:var(--black);margin-left:3px;}
-  .video-card:hover .play-btn{transform:translate(-50%,-50%) scale(1.08);background:var(--yellow);}
-  .video-card .play-btn{background:var(--yellow);}
-  .video-card:hover img{transform:scale(1.06);}
-  .video-card img{transition:transform .8s var(--ease);}
-  .video-card .caption{position:absolute;left:20px;right:20px;bottom:18px;z-index:2;}
-  .video-card .caption p{font-weight:700;font-size:14.5px;}
-  .video-card .caption span{font-size:12px;color:var(--text-secondary);}
+  .vt-play svg{width:16px;height:16px;fill:var(--yellow);}
+  .vt-text{text-align:left;}
+  .vt-text p{font-size:13.5px;font-weight:700;color:var(--text);}
+  .vt-text span{font-size:11.5px;color:var(--text-secondary);}
 
   /* ===== Trust bar ===== */
   .trust-bar{background:var(--dark);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:26px 0;}
@@ -485,6 +500,7 @@
 
   /* ===== Why Wilson ===== */
   .why{background:var(--dark);}
+  .report-cta{background:var(--black);border-top:1px solid var(--border);}
   .why-grid{display:grid;grid-template-columns:0.9fr 1.1fr;gap:60px;align-items:center;}
   .why-visual{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:1/1;border:1px solid var(--border-strong);}
   .why-visual img{width:100%;height:100%;object-fit:cover;}
@@ -563,12 +579,8 @@
     .nav-links{display:none;}
     .hamburger{display:flex;}
     .mobile-menu{display:block;}
-    .hero-inner{grid-template-columns:1fr;}
-    .hero-copy{text-align:center;}
-    .hero-copy .support{margin-left:auto;margin-right:auto;}
-    .hero-cta{justify-content:center;}
-    .free-shipping{justify-content:center;width:100%;}
-    .video-card{max-width:420px;margin:0 auto;}
+    .hero-pin-wrap{height:160vh;}
+    .hero-inner{gap:40px;}
     .pi-grid,.problem-grid,.why-grid{grid-template-columns:1fr;gap:40px;}
     .benefits-grid{grid-template-columns:repeat(2,1fr);}
     .stats-grid{grid-template-columns:repeat(2,1fr);}
@@ -585,6 +597,10 @@
     .nav-cta{gap:8px;}
     .nav-cta .btn{padding:9px 12px;font-size:11px;}
     .container{padding:0 18px;}
+    .video-teaser{padding:8px 16px 8px 8px;gap:10px;max-width:calc(100% - 36px);}
+    .vt-thumb{width:40px;height:40px;}
+    .vt-text p{font-size:12.5px;}
+    .vt-text span{display:none;}
   }
   @media (max-width:640px){
     .section-pad{padding:74px 0;}
@@ -598,7 +614,9 @@
 
   @media (prefers-reduced-motion: reduce){
     *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important;}
-    .hero-bg{transform:none !important;}
+    .hero-pin-wrap{height:auto !important;}
+    .hero{position:relative !important;height:88vh !important;min-height:560px;}
+    .hero-scroll-hint{display:none !important;}
   }
 </style>
 </head>
@@ -702,34 +720,31 @@
 <main id="top">
 
   <!-- HERO -->
-  <section class="hero" id="hero">
-    <div class="hero-bg" id="hero-bg"></div>
-    <div class="hero-grid"></div>
-    <div class="container hero-inner hero-anim">
-      <div class="hero-copy">
-        <h1 class="headline">Proteja-se dos <span class="accent">perigos</span> do trânsito.</h1>
-        <p class="sub-headline">Tenha o Boneco Wilson ao seu lado.</p>
-        <p class="support">Um companheiro de viagem criado para aumentar sua sensação de segurança e trazer mais tranquilidade para o dia a dia.</p>
-        <div class="hero-cta">
-          <a href="pagamento.html" class="btn btn-primary fx-spec"><span class="btn-label">Quero meu Wilson</span> <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          <a href="#como-funciona" class="btn btn-ghost">Ver como funciona</a>
-        </div>
-        <div class="free-shipping">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="7" width="15" height="10" rx="1"/><path d="M16 10h3l3 3v4h-6z"/><circle cx="6" cy="19" r="2"/><circle cx="18.5" cy="19" r="2"/></svg>
-          Frete grátis para todo o Brasil
-        </div>
-      </div>
-      <div class="video-card" role="button" tabindex="0" aria-label="Assistir vídeo do Boneco Wilson" id="video-trigger" data-youtube-id="NPlYQAWT_SQ">
-        <img src="https://img.youtube.com/vi/NPlYQAWT_SQ/maxresdefault.jpg" alt="Prévia do vídeo de apresentação do Boneco Wilson">
-        <div class="overlay"></div>
-        <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        <div class="caption">
-          <p>Conheça o Wilson</p>
-          <span>Apresentação do produto</span>
+  <div class="hero-pin-wrap" id="hero-pin-wrap">
+    <section class="hero" id="hero">
+      <img class="hero-frame" id="hero-frame" src="assets/frames/frame_001.jpg" alt="Boneco Wilson ao lado de uma motorista dirigindo à noite">
+      <div class="hero-grid"></div>
+      <div class="container hero-inner hero-anim" id="hero-inner">
+        <div class="hero-copy">
+          <h1 class="headline">Proteja-se dos <span class="accent">perigos</span> do trânsito.</h1>
+          <p class="sub-headline">Tenha o Boneco Wilson ao seu lado.</p>
+          <p class="support">Um companheiro de viagem criado para aumentar sua sensação de segurança e trazer mais tranquilidade para o dia a dia.</p>
+          <div class="hero-cta">
+            <a href="pagamento.html" class="btn btn-primary fx-spec"><span class="btn-label">Quero meu Wilson</span> <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <a href="#como-funciona" class="btn btn-ghost">Ver como funciona</a>
+          </div>
+          <div class="free-shipping">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="7" width="15" height="10" rx="1"/><path d="M16 10h3l3 3v4h-6z"/><circle cx="6" cy="19" r="2"/><circle cx="18.5" cy="19" r="2"/></svg>
+            Frete grátis para todo o Brasil
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+      <div class="hero-scroll-hint" id="hero-scroll-hint" aria-hidden="true">
+        <span></span>
+        <p>role para ver mais</p>
+      </div>
+    </section>
+  </div>
 
   <!-- TRUST BAR -->
   <section class="trust-bar">
@@ -888,6 +903,25 @@
     </div>
   </section>
 
+  <!-- REPORTAGEM -->
+  <section class="report-cta section-pad">
+    <div class="container" style="text-align:center;">
+      <span class="eyebrow center" style="justify-content:center;">Na mídia</span>
+      <h2 class="center" style="font-size:clamp(26px,3.4vw,38px);text-transform:uppercase;max-width:640px;">Assista à reportagem sobre o Wilson.</h2>
+      <p class="center" style="color:var(--text-secondary);max-width:520px;margin:16px auto 40px;">Veja como o Boneco Wilson é usado no dia a dia e por que motoristas têm adotado essa camada extra de companhia no trânsito.</p>
+      <div class="video-teaser" role="button" tabindex="0" aria-label="Assistir reportagem sobre o Boneco Wilson" id="video-trigger" data-youtube-id="NPlYQAWT_SQ" style="margin:0 auto;">
+        <div class="vt-thumb">
+          <img src="https://img.youtube.com/vi/NPlYQAWT_SQ/hqdefault.jpg" alt="Prévia da reportagem sobre o Boneco Wilson">
+          <span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+        </div>
+        <div class="vt-text">
+          <p>Assista à reportagem sobre o Wilson</p>
+          <span>Veja como ele é usado no dia a dia</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- TESTIMONIALS -->
   <section class="section-pad" id="depoimentos" style="background:var(--black);">
     <div class="container">
@@ -1022,15 +1056,59 @@
     if(window.scrollY > 40){ header.classList.add('scrolled'); } else { header.classList.remove('scrolled'); }
   }
 
-  // Hero parallax
-  const heroBg = document.getElementById('hero-bg');
+  // Hero scroll-scrubbed frame sequence
+  const heroPinWrap = document.getElementById('hero-pin-wrap');
   const hero = document.getElementById('hero');
-  function updateParallax(){
-    if(reduceMotion) return;
-    const rect = hero.getBoundingClientRect();
-    if(rect.bottom < 0 || rect.top > window.innerHeight) return;
-    const offset = window.scrollY * 0.18;
-    heroBg.style.transform = 'translateY(' + offset + 'px) scale(1.08)';
+  const heroFrame = document.getElementById('hero-frame');
+  const heroCopy = document.querySelector('.hero-copy');
+  const heroScrollHint = document.getElementById('hero-scroll-hint');
+  const TOTAL_FRAMES = 99;
+  function framePath(n){ return 'assets/frames/frame_' + String(n).padStart(3, '0') + '.jpg'; }
+  let currentFrame = 1;
+
+  function preloadFrames(){
+    var i = 2;
+    function loadNext(){
+      if(i > TOTAL_FRAMES) return;
+      var img = new Image();
+      img.onload = advance;
+      img.onerror = advance;
+      img.src = framePath(i);
+      function advance(){
+        i++;
+        if(window.requestIdleCallback){ requestIdleCallback(loadNext, {timeout:200}); }
+        else { setTimeout(loadNext, 25); }
+      }
+    }
+    loadNext();
+  }
+
+  function updateHeroScrub(){
+    if(!heroPinWrap || !heroFrame) return;
+    var rect = heroPinWrap.getBoundingClientRect();
+    var total = rect.height - window.innerHeight;
+    if(total <= 0){ return; }
+    var scrolled = -rect.top;
+    var progress = Math.min(Math.max(scrolled / total, 0), 1);
+    var frameIndex = Math.min(TOTAL_FRAMES, Math.max(1, Math.round(progress * (TOTAL_FRAMES - 1)) + 1));
+    if(frameIndex !== currentFrame){
+      currentFrame = frameIndex;
+      heroFrame.src = framePath(frameIndex);
+    }
+    if(heroCopy){
+      var textProgress = Math.min(progress / 0.3, 1);
+      heroCopy.style.opacity = String(1 - textProgress);
+      heroCopy.style.transform = 'translateY(' + (-textProgress * 26) + 'px)';
+    }
+    if(heroScrollHint){
+      if(progress > 0.04){ heroScrollHint.classList.add('hide'); } else { heroScrollHint.classList.remove('hide'); }
+    }
+  }
+
+  if(reduceMotion){
+    if(heroFrame){ heroFrame.src = framePath(90); }
+  } else {
+    window.addEventListener('load', function(){ preloadFrames(); });
   }
 
   // Sticky mobile CTA
@@ -1048,7 +1126,7 @@
   function onScroll(){
     if(!ticking){
       requestAnimationFrame(function(){
-        updateProgress(); updateHeader(); updateParallax(); updateSticky();
+        updateProgress(); updateHeader(); if(!reduceMotion){ updateHeroScrub(); } updateSticky();
         ticking = false;
       });
       ticking = true;
