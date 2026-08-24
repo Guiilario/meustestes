@@ -317,10 +317,12 @@
 
   /* ===== Hero ===== */
   /* Global fixed background: scroll-scrubbed frame sequence, sits behind all content */
-  .scroll-bg{position:fixed;inset:0;z-index:-1;overflow:hidden;background:var(--black);}
-  .scroll-bg-frame{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 38%;opacity:.9;}
-  .scroll-bg-overlay{position:absolute;inset:0;background:rgba(5,5,5,.7);transition:opacity .5s var(--ease);}
+  .scroll-bg{position:fixed;inset:0;z-index:0;overflow:hidden;background:var(--black);}
+  .scroll-bg-frame{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 38%;opacity:.95;}
+  .scroll-bg-overlay{position:absolute;inset:0;background:rgba(5,5,5,.52);transition:opacity .5s var(--ease), background .5s var(--ease);}
   .scroll-bg.done .scroll-bg-overlay{opacity:1;background:var(--black);}
+  #page-content{position:relative;z-index:1;}
+  .hero-copy .headline,.hero-copy .sub-headline,.hero-copy .support{text-shadow:0 2px 24px rgba(0,0,0,.55);}
 
   .hero{
     position:relative;padding:150px 0 90px;overflow:hidden;
@@ -621,6 +623,8 @@
   <img id="hero-frame" class="scroll-bg-frame" src="assets/frames/frame_001.jpg" alt="">
   <div class="scroll-bg-overlay"></div>
 </div>
+
+<div id="page-content">
 
 <div id="preloader" aria-hidden="true">
   <div class="pre-grid"></div>
@@ -1031,6 +1035,8 @@
 
 <div class="sticky-cta" id="sticky-cta">
   <a href="pagamento.html" class="btn btn-primary fx-spec"><span class="btn-label">Quero meu Wilson</span></a>
+</div>
+
 </div>
 
 <script>
