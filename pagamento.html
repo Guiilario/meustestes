@@ -165,6 +165,16 @@
   footer a{color:var(--text-secondary);}
   footer a:hover{color:var(--yellow);}
 
+  /* Specular shine on payment buttons */
+  .fx-spec{position:relative;overflow:hidden;isolation:isolate;}
+  .fx-spec::before{
+    content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+    background:radial-gradient(90px circle at var(--sx,50%) var(--sy,50%), rgba(255,255,255,.55), transparent 68%);
+    opacity:var(--spec-opacity,0);mix-blend-mode:overlay;transition:opacity .15s linear;
+  }
+  .fx-spec .btn-label{position:relative;z-index:1;}
+  @media (hover:none){ .fx-spec::before{display:none;} }
+
   /* WhatsApp float */
   .wa-float{
     position:fixed;left:20px;bottom:20px;z-index:400;width:56px;height:56px;border-radius:50%;
@@ -239,7 +249,7 @@
         <p class="desc">Aprovação imediata e 10% de desconto</p>
         <div class="pay-total">Total à vista</div>
         <div class="pay-amount pix-amount">R$ 455<span class="cents">,00</span></div>
-        <a class="btn btn-pix" href="https://pagamento.pagbank.com.br/pagamento?code=4278c70b-c295-4a1a-bcf9-435b76c36757&amp;t=b9e251e2-1853-4300-8875-9707ff9df8af">Pagar com Pix</a>
+        <a class="btn btn-pix fx-spec" href="https://pagamento.pagbank.com.br/pagamento?code=4278c70b-c295-4a1a-bcf9-435b76c36757&amp;t=b9e251e2-1853-4300-8875-9707ff9df8af"><span class="btn-label">Pagar com Pix</span></a>
       </div>
 
       <div class="pay-card card-option">
@@ -258,7 +268,7 @@
           <span class="brand-pill">HIPER</span>
           <span class="brand-pill">AMEX</span>
         </div>
-        <a class="btn btn-card" href="https://pagamento.pagbank.com.br/pagamento?code=bd5ac69f-9c59-4c07-b84d-b0b80ad7d419&amp;t=d3ae02b7-3b3c-4605-962d-3514459e7a9c">Pagar com cartão</a>
+        <a class="btn btn-card fx-spec" href="https://pagamento.pagbank.com.br/pagamento?code=bd5ac69f-9c59-4c07-b84d-b0b80ad7d419&amp;t=d3ae02b7-3b3c-4605-962d-3514459e7a9c"><span class="btn-label">Pagar com cartão</span></a>
       </div>
     </div>
 
@@ -345,6 +355,32 @@
   }
   tick();
   setInterval(tick, 1000);
+
+  // Specular shine on payment buttons (follows cursor within proximity)
+  var specBtns = document.querySelectorAll('.fx-spec');
+  if(specBtns.length){
+    var specProximity = 250;
+    var specTicking = false;
+    var lastSpecEvent = null;
+    function updateSpecButtons(){
+      specBtns.forEach(function(btn){
+        var r = btn.getBoundingClientRect();
+        var cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+        var dist = Math.hypot(lastSpecEvent.clientX - cx, lastSpecEvent.clientY - cy);
+        var strength = Math.max(0, 1 - dist / specProximity);
+        btn.style.setProperty('--spec-opacity', strength.toFixed(3));
+        var lx = Math.min(Math.max(lastSpecEvent.clientX, r.left), r.right) - r.left;
+        var ly = Math.min(Math.max(lastSpecEvent.clientY, r.top), r.bottom) - r.top;
+        btn.style.setProperty('--sx', (lx / r.width * 100) + '%');
+        btn.style.setProperty('--sy', (ly / r.height * 100) + '%');
+      });
+      specTicking = false;
+    }
+    document.addEventListener('mousemove', function(e){
+      lastSpecEvent = e;
+      if(!specTicking){ requestAnimationFrame(updateSpecButtons); specTicking = true; }
+    }, {passive:true});
+  }
 })();
 </script>
 

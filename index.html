@@ -203,6 +203,52 @@
     .video-modal-close:hover{transform:translateX(50%) rotate(90deg);}
   }
 
+  /* ===== Interactive FX: Spotlight (Como funciona rows + stat cards) ===== */
+  .fx-spotlight{position:relative;overflow:hidden;}
+  .fx-spotlight::before{
+    content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+    background:radial-gradient(280px circle at var(--sx,50%) var(--sy,50%), var(--spot-color, rgba(255,224,0,.16)), transparent 70%);
+    opacity:0;transition:opacity .45s var(--ease);
+  }
+  .fx-spotlight:hover::before{opacity:1;}
+  .fx-spotlight > *{position:relative;z-index:1;}
+
+  /* ===== Interactive FX: Chroma grid (Benefícios cards) ===== */
+  .fx-chroma{
+    --chroma-color:#FFE000;--chroma-soft:rgba(255,224,0,.4);--proximity:0;
+    position:relative;overflow:hidden;
+    border-color:rgba(245,245,245,.09);
+    filter:grayscale(calc((1 - var(--proximity)) * 0.6)) brightness(calc(0.94 + var(--proximity) * 0.12));
+    transition:transform .4s var(--ease), filter .35s linear, box-shadow .4s var(--ease);
+  }
+  .fx-chroma::before{
+    content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+    background:radial-gradient(260px circle at var(--sx,50%) var(--sy,50%), var(--chroma-soft), transparent 72%);
+    opacity:var(--proximity);transition:opacity .2s linear;
+  }
+  .fx-chroma::after{
+    content:"";position:absolute;inset:0;border-radius:inherit;z-index:0;pointer-events:none;
+    box-shadow:0 0 0 1.5px var(--chroma-soft) inset;
+    opacity:calc(var(--proximity) * 0.85 + 0.12);transition:opacity .2s linear;
+  }
+  .fx-chroma:hover{transform:translateY(-6px);box-shadow:0 24px 44px -24px rgba(0,0,0,.6);}
+  .fx-chroma > *{position:relative;z-index:1;}
+
+  /* ===== Interactive FX: Specular button shine (payment CTAs) ===== */
+  .fx-spec{position:relative;overflow:hidden;isolation:isolate;}
+  .fx-spec::before{
+    content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+    background:radial-gradient(90px circle at var(--sx,50%) var(--sy,50%), rgba(255,255,255,.55), transparent 68%);
+    opacity:var(--spec-opacity,0);mix-blend-mode:overlay;transition:opacity .15s linear;
+  }
+  .fx-spec .btn-label{position:relative;z-index:1;}
+  .fx-spec .arrow{position:relative;z-index:1;}
+
+  @media (hover:none){
+    .fx-spotlight::before,.fx-chroma::before,.fx-chroma::after,.fx-spec::before{display:none;}
+    .fx-chroma{filter:none;}
+  }
+
   /* ===== Announcement bar ===== */
   .announce{
     background:linear-gradient(90deg, var(--red), #c8142a);
@@ -636,7 +682,7 @@
       <li><a href="#faq">FAQ</a></li>
     </ul>
     <div class="nav-cta">
-      <a href="pagamento.html" class="btn btn-primary">Quero meu Wilson</a>
+      <a href="pagamento.html" class="btn btn-primary fx-spec"><span class="btn-label">Quero meu Wilson</span></a>
       <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-menu">
         <span></span><span></span><span></span>
       </button>
@@ -649,7 +695,7 @@
   <a href="#como-funciona">Como funciona</a>
   <a href="#depoimentos">Depoimentos</a>
   <a href="#faq">FAQ</a>
-  <a href="pagamento.html" class="btn btn-primary">Quero meu Wilson</a>
+  <a href="pagamento.html" class="btn btn-primary fx-spec"><span class="btn-label">Quero meu Wilson</span></a>
 </div>
 
 <main id="top">
@@ -664,7 +710,7 @@
         <p class="sub-headline">Tenha o Boneco Wilson ao seu lado.</p>
         <p class="support">Um companheiro de viagem criado para aumentar sua sensação de segurança e trazer mais tranquilidade para o dia a dia.</p>
         <div class="hero-cta">
-          <a href="pagamento.html" class="btn btn-primary">Quero meu Wilson <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a href="pagamento.html" class="btn btn-primary fx-spec"><span class="btn-label">Quero meu Wilson</span> <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
           <a href="#como-funciona" class="btn btn-ghost">Ver como funciona</a>
         </div>
         <div class="free-shipping">
@@ -698,16 +744,16 @@
   <section class="product-intro section-pad" id="como-funciona">
     <div class="container pi-grid">
       <div class="pi-visual reveal">
-        <img src="https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?q=80&w=1000&auto=format&fit=crop" alt="Banco do carona de um veículo, representando a presença do Boneco Wilson">
+        <img src="https://drive.google.com/thumbnail?id=1It4LC4Vn_ZoX1JaviWVBJOosjjWAUOFC&sz=w1000" alt="Boneco Wilson posicionado no banco do carona de um veículo" loading="lazy">
         <div class="glow"></div>
       </div>
       <div class="reveal">
         <span class="eyebrow">Como funciona</span>
         <h2 style="font-size:clamp(26px,3.4vw,40px);text-transform:uppercase;">Um companheiro de viagem que traz mais segurança.</h2>
         <div class="benefit-list">
-          <div class="benefit-row"><span class="num">01</span><div><h3>Mais confiança ao dirigir</h3><p>Uma presença extra no banco do carona pode tornar seus trajetos, principalmente à noite, mais tranquilos.</p></div></div>
-          <div class="benefit-row"><span class="num">02</span><div><h3>Uma presença no veículo</h3><p>Wilson foi desenhado para parecer natural dentro do carro, sem chamar atenção indevida.</p></div></div>
-          <div class="benefit-row"><span class="num">03</span><div><h3>Mais tranquilidade no dia a dia</h3><p>Um pequeno detalhe que pode fazer diferença na sua rotina de deslocamentos pela cidade.</p></div></div>
+          <div class="benefit-row fx-spotlight"><span class="num">01</span><div><h3>Mais confiança ao dirigir</h3><p>Uma presença extra no banco do carona pode tornar seus trajetos, principalmente à noite, mais tranquilos.</p></div></div>
+          <div class="benefit-row fx-spotlight"><span class="num">02</span><div><h3>Uma presença no veículo</h3><p>Wilson foi desenhado para parecer natural dentro do carro, sem chamar atenção indevida.</p></div></div>
+          <div class="benefit-row fx-spotlight"><span class="num">03</span><div><h3>Mais tranquilidade no dia a dia</h3><p>Um pequeno detalhe que pode fazer diferença na sua rotina de deslocamentos pela cidade.</p></div></div>
         </div>
       </div>
     </div>
@@ -717,7 +763,7 @@
   <section class="problem section-pad">
     <div class="container problem-grid">
       <div class="problem-visual reveal">
-        <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&w=1000&auto=format&fit=crop" alt="Motorista solitário observando o retrovisor em uma rua movimentada à noite">
+        <img src="https://drive.google.com/thumbnail?id=1g-qsQiqxNQ8R8WuznzG9n2wWWJ9puB29&sz=w1000" alt="Motorista solitário no veículo, contexto da insegurança no trânsito" loading="lazy">
       </div>
       <div class="problem-copy reveal">
         <span class="eyebrow">O problema</span>
@@ -738,22 +784,22 @@
         <p class="center">Pesquisas recentes sobre mobilidade urbana no Brasil mostram como o medo e a insegurança ainda afetam os deslocamentos femininos no dia a dia.</p>
       </div>
       <div class="stats-grid stagger">
-        <div class="stat-card reveal">
+        <div class="stat-card fx-spotlight reveal">
           <div class="stat-num">97<span>%</span></div>
           <p class="stat-label">das mulheres brasileiras relatam sentir medo de sofrer violência ao se deslocar pela cidade.</p>
           <span class="stat-source">Instituto Patrícia Galvão / Locomotiva, 2024</span>
         </div>
-        <div class="stat-card reveal">
+        <div class="stat-card fx-spotlight reveal">
           <div class="stat-num">71<span>%</span></div>
           <p class="stat-label">das mulheres já sofreram algum tipo de violência durante um deslocamento.</p>
           <span class="stat-source">Instituto Patrícia Galvão / Locomotiva, 2024</span>
         </div>
-        <div class="stat-card reveal">
+        <div class="stat-card fx-spotlight reveal">
           <div class="stat-num">7<span>/10</span></div>
           <p class="stat-label">mulheres relatam já ter sofrido assédio ou violência em seus trajetos no Brasil.</p>
           <span class="stat-source">Estudo Localiza, 2025</span>
         </div>
-        <div class="stat-card reveal">
+        <div class="stat-card fx-spotlight reveal">
           <div class="stat-num">40<span>%</span></div>
           <p class="stat-label">preferem estar sempre ou frequentemente acompanhadas ao se deslocar, buscando mais segurança.</p>
           <span class="stat-source">Estudo Localiza, 2025</span>
@@ -771,38 +817,38 @@
         <h2>Por que levar o Wilson com você?</h2>
         <p class="center">Seis motivos pelos quais motoristas têm adotado o Wilson como parte da rotina no carro.</p>
       </div>
-      <div class="benefits-grid stagger">
-        <div class="benefit-card reveal">
+      <div class="benefits-grid stagger" id="chroma-grid">
+        <div class="benefit-card fx-chroma reveal" style="--chroma-color:#FFE000;--chroma-soft:rgba(255,224,0,.4);">
           <div class="idx">01</div>
           <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></div>
           <h3>Presença no veículo</h3>
           <p>Ocupa o banco do carona de forma natural, dando a sensação de companhia.</p>
         </div>
-        <div class="benefit-card reveal">
+        <div class="benefit-card fx-chroma reveal" style="--chroma-color:#ED1B2F;--chroma-soft:rgba(237,27,47,.4);">
           <div class="idx">02</div>
           <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></div>
           <h3>Visual realista</h3>
           <p>Acabamento e proporções pensados para parecer natural à distância.</p>
         </div>
-        <div class="benefit-card reveal">
+        <div class="benefit-card fx-chroma reveal" style="--chroma-color:#FFB800;--chroma-soft:rgba(255,184,0,.4);">
           <div class="idx">03</div>
           <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div>
           <h3>Fácil de usar</h3>
           <p>Basta posicionar no banco — sem instalação, sem complicação.</p>
         </div>
-        <div class="benefit-card reveal">
+        <div class="benefit-card fx-chroma reveal" style="--chroma-color:#FF5470;--chroma-soft:rgba(255,84,112,.4);">
           <div class="idx">04</div>
           <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 2l9 4.5v9L12 20l-9-4.5v-9z"/></svg></div>
           <h3>Leve e prático</h3>
           <p>Estrutura leve, fácil de guardar e transportar entre veículos.</p>
         </div>
-        <div class="benefit-card reveal">
+        <div class="benefit-card fx-chroma reveal" style="--chroma-color:#E8C15A;--chroma-soft:rgba(232,193,90,.4);">
           <div class="idx">05</div>
           <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="7" width="18" height="12" rx="2"/><circle cx="8" cy="13" r="1.6"/><circle cx="16" cy="13" r="1.6"/></svg></div>
           <h3>Pensado para motoristas</h3>
           <p>Desenvolvido com foco em quem passa longas horas no trânsito.</p>
         </div>
-        <div class="benefit-card reveal">
+        <div class="benefit-card fx-chroma reveal" style="--chroma-color:#FF7A3D;--chroma-soft:rgba(255,122,61,.4);">
           <div class="idx">06</div>
           <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 21s-7-4.35-9.5-9C.9 8 3 4 7 4c2 0 3.6 1 5 3 1.4-2 3-3 5-3 4 0 6.1 4 4.5 8-2.5 4.65-9.5 9-9.5 9z"/></svg></div>
           <h3>Mais tranquilidade</h3>
@@ -817,7 +863,7 @@
     <div class="container">
       <h2>Leve o Wilson. <span class="accent">Dirija com mais tranquilidade.</span></h2>
       <p class="support">Um companheiro discreto para os seus trajetos diários, chuva ou sol, dia ou noite.</p>
-      <a href="pagamento.html" class="btn btn-primary">Comprar agora</a>
+      <a href="pagamento.html" class="btn btn-primary fx-spec"><span class="btn-label">Comprar agora</span></a>
       <p class="fs">Frete grátis para todo o Brasil</p>
     </div>
   </section>
@@ -826,7 +872,7 @@
   <section class="why section-pad">
     <div class="container why-grid">
       <div class="why-visual reveal">
-        <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?q=80&w=1000&auto=format&fit=crop" alt="Interior de um carro moderno ao entardecer">
+        <img src="https://drive.google.com/thumbnail?id=1UGTn_FLKMdGAd9d--_F-g9cmXy9KjQkL&sz=w1000" alt="Boneco Wilson no interior do veículo" loading="lazy">
       </div>
       <div class="reveal">
         <span class="eyebrow">Diferenciais</span>
@@ -865,7 +911,7 @@
       <span class="eyebrow center" style="justify-content:center;">Oferta por tempo limitado</span>
       <h2>Aproveite enquanto há unidades.</h2>
       <p class="support">Tenha o Boneco Wilson como seu companheiro de viagem.</p>
-      <a href="pagamento.html" class="btn btn-primary">Quero meu Wilson</a>
+      <a href="pagamento.html" class="btn btn-primary fx-spec"><span class="btn-label">Quero meu Wilson</span></a>
       <ul class="checks">
         <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Frete grátis para todo o Brasil</li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Pagamento seguro</li>
@@ -952,7 +998,7 @@
 </footer>
 
 <div class="sticky-cta" id="sticky-cta">
-  <a href="pagamento.html" class="btn btn-primary">Quero meu Wilson</a>
+  <a href="pagamento.html" class="btn btn-primary fx-spec"><span class="btn-label">Quero meu Wilson</span></a>
 </div>
 
 <script>
@@ -1094,6 +1140,63 @@
     videoModal.addEventListener('click', function(e){ if(e.target === videoModal){ closeVideoModal(); } });
   }
   document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && videoModal && videoModal.classList.contains('open')){ closeVideoModal(); } });
+
+  // Interactive FX: Spotlight (Como funciona rows + stat cards)
+  var spotEls = document.querySelectorAll('.fx-spotlight');
+  spotEls.forEach(function(el){
+    el.addEventListener('mousemove', function(e){
+      var r = el.getBoundingClientRect();
+      el.style.setProperty('--sx', ((e.clientX - r.left) / r.width * 100) + '%');
+      el.style.setProperty('--sy', ((e.clientY - r.top) / r.height * 100) + '%');
+    });
+  });
+
+  // Interactive FX: Chroma grid proximity glow (Benefícios cards)
+  var chromaGrid = document.getElementById('chroma-grid');
+  if(chromaGrid){
+    var chromaCards = chromaGrid.querySelectorAll('.fx-chroma');
+    var chromaRadius = 320;
+    chromaGrid.addEventListener('mousemove', function(e){
+      chromaCards.forEach(function(card){
+        var r = card.getBoundingClientRect();
+        var cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+        var dist = Math.hypot(e.clientX - cx, e.clientY - cy);
+        var proximity = Math.max(0, 1 - dist / chromaRadius);
+        card.style.setProperty('--proximity', proximity.toFixed(3));
+        card.style.setProperty('--sx', ((e.clientX - r.left) / r.width * 100) + '%');
+        card.style.setProperty('--sy', ((e.clientY - r.top) / r.height * 100) + '%');
+      });
+    });
+    chromaGrid.addEventListener('mouseleave', function(){
+      chromaCards.forEach(function(card){ card.style.setProperty('--proximity', 0); });
+    });
+  }
+
+  // Interactive FX: Specular shine on payment CTA buttons (follows cursor within proximity)
+  var specBtns = document.querySelectorAll('.fx-spec');
+  if(specBtns.length){
+    var specProximity = 250;
+    var specTicking = false;
+    var lastSpecEvent = null;
+    function updateSpecButtons(){
+      specBtns.forEach(function(btn){
+        var r = btn.getBoundingClientRect();
+        var cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+        var dist = Math.hypot(lastSpecEvent.clientX - cx, lastSpecEvent.clientY - cy);
+        var strength = Math.max(0, 1 - dist / specProximity);
+        btn.style.setProperty('--spec-opacity', strength.toFixed(3));
+        var lx = Math.min(Math.max(lastSpecEvent.clientX, r.left), r.right) - r.left;
+        var ly = Math.min(Math.max(lastSpecEvent.clientY, r.top), r.bottom) - r.top;
+        btn.style.setProperty('--sx', (lx / r.width * 100) + '%');
+        btn.style.setProperty('--sy', (ly / r.height * 100) + '%');
+      });
+      specTicking = false;
+    }
+    document.addEventListener('mousemove', function(e){
+      lastSpecEvent = e;
+      if(!specTicking){ requestAnimationFrame(updateSpecButtons); specTicking = true; }
+    }, {passive:true});
+  }
 })();
 </script>
 
