@@ -74,11 +74,29 @@
     letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);margin-bottom:14px;
   }
   .eyebrow::before{content:"";width:18px;height:2px;background:var(--yellow);display:inline-block;}
-  .price-block h1{font-size:clamp(24px,4vw,34px);text-transform:uppercase;margin-bottom:10px;}
-  .price-row{display:flex;align-items:baseline;justify-content:center;gap:12px;flex-wrap:wrap;font-family:var(--display);}
-  .price-old{font-size:20px;color:var(--text-secondary);text-decoration:line-through;font-weight:600;}
-  .price-new{font-size:38px;font-weight:900;color:var(--green);}
-  .price-sub{color:var(--text-secondary);font-size:14.5px;margin-top:10px;}
+  .price-block h1{font-size:clamp(24px,4vw,34px);text-transform:uppercase;margin-bottom:28px;}
+
+  .price-hero{
+    display:inline-flex;flex-direction:column;align-items:center;gap:4px;
+    background:var(--card);border:1px solid var(--border-strong);border-radius:16px;
+    padding:26px 40px 22px;box-shadow:0 24px 50px -30px rgba(0,0,0,.7);
+  }
+  .price-hero-tag{
+    background:var(--yellow);color:var(--black);font-weight:800;font-size:12.5px;
+    letter-spacing:.06em;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:8px;
+  }
+  .price-hero-amount{font-family:var(--display);font-weight:900;font-size:clamp(38px,6vw,56px);color:var(--text);line-height:1;}
+  .price-hero-amount .cents{font-size:22px;}
+  .price-hero-amount .per{font-size:16px;font-weight:700;color:var(--text-secondary);margin-left:4px;}
+  .price-hero-note{color:var(--text-secondary);font-size:13.5px;margin-top:6px;}
+
+  .price-impact{
+    margin-top:22px;font-family:var(--display);font-weight:700;font-size:clamp(16px,2.4vw,19px);color:var(--text);
+  }
+  .price-impact strong{color:var(--yellow);}
+
+  .price-old{font-size:14px;color:var(--text-secondary);text-decoration:line-through;font-weight:600;}
+  .price-sub{color:var(--text-secondary);font-size:13.5px;margin-top:16px;max-width:480px;margin-left:auto;margin-right:auto;}
 
   /* Payment options */
   .pay-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-bottom:52px;}
@@ -190,6 +208,7 @@
     .trust-grid{grid-template-columns:1fr 1fr;}
     .support-callout{flex-direction:column;text-align:center;}
     .support-callout a.btn{width:100%;}
+    .price-hero{padding:22px 28px 18px;width:100%;max-width:320px;}
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -232,11 +251,16 @@
     <div class="price-block">
       <span class="eyebrow">Finalizar pedido</span>
       <h1>Escolha a melhor forma de pagamento para você</h1>
-      <div class="price-row">
-        <span class="price-old">De R$ 690,00</span>
-        <span class="price-new">por R$ 455,00 no Pix</span>
+
+      <div class="price-hero">
+        <span class="price-hero-tag">5x sem juros</span>
+        <div class="price-hero-amount">R$ 98<span class="cents">,00</span><span class="per">/mês</span></div>
+        <p class="price-hero-note">no cartão de crédito, sem burocracia</p>
       </div>
-      <p class="price-sub">ou em até <strong style="color:var(--text)">5x sem juros de R$ 98,00</strong> no cartão de crédito</p>
+
+      <p class="price-impact">Sua camada extra de segurança sai por <strong>menos de R$ 4 por dia</strong>.</p>
+
+      <p class="price-sub">De <span class="price-old">R$ 690,00</span> por <strong style="color:var(--text)">R$ 455,00 no Pix</strong> ou em até <strong style="color:var(--text)">5x sem juros de R$ 98,00</strong> no cartão de crédito</p>
     </div>
 
     <div class="pay-grid">
