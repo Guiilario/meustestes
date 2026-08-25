@@ -557,11 +557,8 @@
   }
   .media-track{
     display:flex;gap:20px;width:max-content;
-    animation:mediaScroll 48s linear infinite;
+    will-change:transform;
   }
-  .media-track-wrapper:hover .media-track,
-  .media-track-wrapper:focus-within .media-track{animation-play-state:paused;}
-  @keyframes mediaScroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
   .media-item{
     position:relative;flex:0 0 auto;width:230px;aspect-ratio:16/10;
     border-radius:10px;overflow:hidden;border:1px solid var(--border);display:block;
@@ -579,13 +576,32 @@
     background:linear-gradient(180deg, transparent 55%, rgba(5,5,5,.85) 100%);
   }
   .media-source{position:absolute;left:12px;bottom:10px;z-index:2;font-size:12px;font-weight:700;color:var(--text);letter-spacing:.02em;}
+
+  /* Small centered drag accelerator */
+  .media-accelerator{display:flex;justify-content:center;margin-top:22px;}
+  .media-accel-track{
+    position:relative;width:130px;height:5px;border-radius:6px;
+    background:var(--elevated);border:1px solid var(--border);
+  }
+  .media-accel-fill{
+    position:absolute;top:0;left:50%;height:100%;width:0;border-radius:6px;
+    background:var(--yellow);opacity:.6;
+  }
+  .media-accel-handle{
+    position:absolute;top:50%;left:50%;width:16px;height:16px;border-radius:50%;
+    background:var(--yellow);border:2px solid var(--black);
+    transform:translate(-50%,-50%);cursor:grab;
+    box-shadow:0 4px 12px -2px rgba(0,0,0,.6);
+    transition:transform .35s var(--ease), left .35s var(--ease);
+  }
+  .media-accel-handle:active{cursor:grabbing;transform:translate(-50%,-50%) scale(1.15);transition:transform .15s var(--ease);}
+  .media-accel-handle.dragging{transition:none;}
   @media (max-width:640px){
     .media-item{width:170px;}
-    .media-track{animation-duration:32s;}
   }
   @media (prefers-reduced-motion: reduce){
-    .media-track{animation:none;}
     .media-track-wrapper{overflow-x:auto;}
+    .media-accelerator{display:none;}
   }
   .report-title{font-size:clamp(20px,3.4vw,38px);text-transform:uppercase;white-space:nowrap;}
   @media (max-width:480px){
@@ -1363,7 +1379,12 @@ boneco@bonecowilson.com.br
         <a class="media-item" href="https://www.otempo.com.br/autotempo/2025/6/16/passageiro-reborn-boneco-no-carro-vira-truque-para-se-sentir-mais-seguro-no-transito" target="_blank" rel="noopener" aria-label="Ler matéria: O Tempo"><img src="https://drive.google.com/thumbnail?id=1itDEyNLov0_ly2nzJcREstGf3VMiebMM&sz=w500" alt="Reportagem sobre o Boneco Wilson — O Tempo" loading="lazy"><span class="media-source">O Tempo</span></a>
         <a class="media-item" href="https://noticiasdatv.uol.com.br/noticia/televisao/de-aposta-milionaria-boneco-inflavel-tudo-sobre-volta-do-shark-tank-brasil-27802" target="_blank" rel="noopener" aria-label="Ler matéria: Notícias da TV"><img src="https://drive.google.com/thumbnail?id=1fB6n9puwbm__GLr9OjvborJRd5QJfqTe&sz=w500" alt="Reportagem sobre o Boneco Wilson — Notícias da TV" loading="lazy"><span class="media-source">Notícias da TV</span></a>
         <a class="media-item" href="https://motorshow.com.br/artista-compra-boneco-para-se-proteger-de-transito-no-rj" target="_blank" rel="noopener" aria-label="Ler matéria: Motorshow"><img src="https://drive.google.com/thumbnail?id=1PnCB9KpCepIMrDfleRoc-CsgyGG-5vJ6&sz=w500" alt="Reportagem sobre o Boneco Wilson — Motorshow" loading="lazy"><span class="media-source">Motorshow</span></a>
-        <a class="media-item" href="https://www.bnews.com.br/noticias/geral/passageiro-reborn-vira-tatica-contra-assaltos-mas-gera-consequencias-entenda.html" target="_blank" rel="noopener" aria-label="Ler matéria: BNews"><img src="https://drive.google.com/thumbnail?id=1LxM4AkRCIIpYhAv5MMSPbtUTtBjySjHM&sz=w500" alt="Reportagem sobre o Boneco Wilson — BNews" loading="lazy"><span class="media-source">BNews</span></a>
+      </div>
+    </div>
+    <div class="media-accelerator" id="media-accelerator" aria-label="Arraste para acelerar a rolagem">
+      <div class="media-accel-track" id="media-accel-track">
+        <div class="media-accel-fill" id="media-accel-fill"></div>
+        <div class="media-accel-handle" id="media-accel-handle" role="slider" tabindex="0" aria-valuemin="-1" aria-valuemax="1" aria-valuenow="0" aria-label="Acelerador de rolagem"></div>
       </div>
     </div>
   </section>
@@ -1492,19 +1513,15 @@ boneco@bonecowilson.com.br
   const heroFrame = document.getElementById('hero-frame');
   const heroCopy = document.querySelector('.hero-copy');
   const heroScrollHint = document.getElementById('hero-scroll-hint');
-  const diferenciaisEl = document.getElementById('diferenciais');
   const TOTAL_FRAMES = 99;
   function framePath(n){ return 'assets/frames/frame_' + String(n).padStart(3, '0') + '.jpg'; }
   let currentFrame = 1;
   let animEnd = 0;
 
   function recalcAnimEnd(){
-    if(diferenciaisEl){
-      var rect = diferenciaisEl.getBoundingClientRect();
-      animEnd = Math.max(1, rect.bottom + window.scrollY);
-    } else {
-      animEnd = document.documentElement.scrollHeight - window.innerHeight;
-    }
+    // Fixed, viewport-based scroll distance — robust against layout/timing races
+    // (element-position based calculations can misfire before images/fonts finish loading)
+    animEnd = Math.max(800, window.innerHeight * 5.2);
   }
 
   function preloadFrames(){
@@ -1532,7 +1549,7 @@ boneco@bonecowilson.com.br
       currentFrame = frameIndex;
       heroFrame.src = framePath(frameIndex);
     }
-    if(scrollBg){ scrollBg.classList.toggle('done', progress >= 0.999); }
+    if(scrollBg){ scrollBg.classList.toggle('done', progress >= 0.999 && window.scrollY > 400); }
     if(heroCopy && hero){
       var heroRect = hero.getBoundingClientRect();
       var heroTextProgress = Math.min(Math.max(-heroRect.top / (hero.offsetHeight * 0.6), 0), 1);
@@ -1552,6 +1569,7 @@ boneco@bonecowilson.com.br
     if(heroFrame){ heroFrame.src = framePath(60); }
     if(scrollBg){ scrollBg.classList.add('done'); }
   } else {
+    updateScrollBg();
     window.addEventListener('load', function(){ preloadFrames(); });
   }
 
@@ -1755,6 +1773,93 @@ boneco@bonecowilson.com.br
       lastSpecEvent = e;
       if(!specTicking){ requestAnimationFrame(updateSpecButtons); specTicking = true; }
     }, {passive:true});
+  }
+
+  // "Na mídia" auto-scroll carousel with drag accelerator
+  var mediaTrack = document.getElementById('media-track');
+  var mediaWrapper = document.querySelector('.media-track-wrapper');
+  var accelTrack = document.getElementById('media-accel-track');
+  var accelHandle = document.getElementById('media-accel-handle');
+  var accelFill = document.getElementById('media-accel-fill');
+
+  if(mediaTrack && mediaWrapper && !reduceMotion){
+    var trackHalfWidth = 0;
+    function recalcTrackWidth(){ trackHalfWidth = mediaTrack.scrollWidth / 2; }
+    recalcTrackWidth();
+    window.addEventListener('load', recalcTrackWidth);
+    window.addEventListener('resize', recalcTrackWidth);
+
+    var mediaOffset = 0;
+    var baseSpeed = 0.55;
+    var accelValue = 0;
+    var maxExtra = 2.4;
+    var hoveringMedia = false;
+
+    mediaWrapper.addEventListener('mouseenter', function(){ hoveringMedia = true; });
+    mediaWrapper.addEventListener('mouseleave', function(){ hoveringMedia = false; });
+
+    function mediaTick(){
+      if(!hoveringMedia && trackHalfWidth > 0){
+        var speed = baseSpeed + accelValue * maxExtra;
+        mediaOffset -= speed;
+        if(mediaOffset <= -trackHalfWidth){ mediaOffset += trackHalfWidth; }
+        if(mediaOffset > 0){ mediaOffset -= trackHalfWidth; }
+        mediaTrack.style.transform = 'translateX(' + mediaOffset + 'px)';
+      }
+      requestAnimationFrame(mediaTick);
+    }
+    requestAnimationFrame(mediaTick);
+
+    if(accelTrack && accelHandle && accelFill){
+      function updateAccelUI(){
+        var pct = (accelValue + 1) / 2 * 100;
+        accelHandle.style.left = pct + '%';
+        accelHandle.setAttribute('aria-valuenow', accelValue.toFixed(2));
+        var fillLeft = Math.min(50, pct);
+        var fillWidth = Math.abs(pct - 50);
+        accelFill.style.left = fillLeft + '%';
+        accelFill.style.width = fillWidth + '%';
+      }
+      function setAccelFromClientX(clientX){
+        var rect = accelTrack.getBoundingClientRect();
+        var pos = Math.min(Math.max(clientX - rect.left, 0), rect.width);
+        accelValue = (pos / rect.width) * 2 - 1;
+        updateAccelUI();
+      }
+      function resetAccel(){
+        accelValue = 0;
+        updateAccelUI();
+      }
+      resetAccel();
+
+      var draggingAccel = false;
+      accelHandle.addEventListener('pointerdown', function(e){
+        draggingAccel = true;
+        hoveringMedia = false;
+        accelHandle.classList.add('dragging');
+        setAccelFromClientX(e.clientX);
+        e.preventDefault();
+      });
+      accelTrack.addEventListener('pointerdown', function(e){
+        draggingAccel = true;
+        accelHandle.classList.add('dragging');
+        setAccelFromClientX(e.clientX);
+      });
+      window.addEventListener('pointermove', function(e){
+        if(!draggingAccel) return;
+        setAccelFromClientX(e.clientX);
+      });
+      window.addEventListener('pointerup', function(){
+        if(!draggingAccel) return;
+        draggingAccel = false;
+        accelHandle.classList.remove('dragging');
+        resetAccel();
+      });
+      accelHandle.addEventListener('keydown', function(e){
+        if(e.key === 'ArrowLeft'){ accelValue = Math.max(-1, accelValue - 0.15); updateAccelUI(); }
+        if(e.key === 'ArrowRight'){ accelValue = Math.min(1, accelValue + 0.15); updateAccelUI(); }
+      });
+    }
   }
 })();
 </script>
