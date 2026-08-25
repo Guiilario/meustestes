@@ -202,6 +202,53 @@
     transition:transform .35s var(--ease);
   }
   .wa-float:hover{transform:scale(1.08);}
+
+  /* Legal document modals (Termos / Privacidade) */
+  .legal-modal{
+    position:fixed;inset:0;z-index:2000;display:flex;align-items:center;justify-content:center;
+    padding:24px;background:rgba(3,3,3,.92);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+    opacity:0;visibility:hidden;transition:opacity .35s var(--ease), visibility .35s var(--ease);
+  }
+  .legal-modal.open{opacity:1;visibility:visible;}
+  .legal-modal-inner{
+    position:relative;width:100%;max-width:720px;max-height:85vh;
+    display:flex;flex-direction:column;
+    border-radius:14px;overflow:hidden;border:1px solid var(--border-strong);
+    background:var(--card);box-shadow:0 60px 120px -40px rgba(0,0,0,.85);
+    transform:translateY(18px) scale(.98);transition:transform .4s var(--ease);
+  }
+  .legal-modal.open .legal-modal-inner{transform:translateY(0) scale(1);}
+  .legal-modal-header{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:22px 26px;border-bottom:1px solid var(--border);flex-shrink:0;
+  }
+  .legal-modal-header h3{font-family:var(--display);font-weight:800;font-size:18px;text-transform:uppercase;}
+  .legal-modal-close{
+    width:34px;height:34px;border-radius:50%;flex-shrink:0;
+    background:rgba(245,245,245,.08);border:1px solid var(--border-strong);
+    display:flex;align-items:center;justify-content:center;color:var(--text);
+    transition:background .3s var(--ease), transform .3s var(--ease), border-color .3s var(--ease);
+  }
+  .legal-modal-close:hover{background:var(--red-deep);border-color:var(--red-deep);transform:rotate(90deg);}
+  .legal-modal-close svg{width:16px;height:16px;}
+  .legal-modal-body{overflow-y:auto;padding:26px 28px 34px;font-size:14px;color:var(--text-secondary);line-height:1.75;}
+  .legal-modal-body h2{font-family:var(--display);font-weight:800;font-size:15.5px;color:var(--text);text-transform:uppercase;margin:26px 0 10px;letter-spacing:.01em;}
+  .legal-modal-body h2:first-child{margin-top:0;}
+  .legal-modal-body h3{font-weight:700;color:var(--text);font-size:14px;margin:16px 0 6px;}
+  .legal-modal-body p{margin-bottom:12px;}
+  .legal-modal-body ul,.legal-modal-body ol{margin:6px 0 14px 20px;}
+  .legal-modal-body li{margin-bottom:6px;}
+  .legal-modal-body strong{color:var(--text);font-weight:700;}
+  .legal-modal-body .legal-updated{color:var(--yellow);font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin-bottom:18px;}
+  .legal-modal-body .legal-summary{margin-top:24px;padding:16px 18px;border-left:2px solid var(--yellow);background:rgba(255,224,0,.05);border-radius:0 8px 8px 0;}
+  .legal-modal-body .legal-summary p{margin-bottom:0;font-size:13px;}
+  .footer-legal-links{font-size:12px;}
+  .footer-legal-links a{color:var(--text-secondary);}
+  .footer-legal-links a:hover{color:var(--yellow);}
+  @media (max-width:640px){
+    .legal-modal{padding:0;}
+    .legal-modal-inner{max-width:100%;max-height:100vh;height:100%;border-radius:0;}
+  }
   .wa-float svg{width:27px;height:27px;fill:#fff;}
 
   @media (max-width:760px){
@@ -359,12 +406,323 @@
     BONECO <span class="sub">WILSON</span>
   </a>
   <p>Dúvidas ou suporte: <a href="https://wa.me/5511997343865">(11) 99734-3865</a> · boneco@bonecowilson.com.br</p>
-  <p>© 2026 Boneco Wilson. Todos os direitos reservados.</p>
+  <p class="footer-legal-links"><a href="#" class="js-open-legal" data-modal="privacy-modal">Política de privacidade</a> · <a href="#" class="js-open-legal" data-modal="terms-modal">Termos de uso</a></p>
+  <p>© 2026 Boneco Wilson. Todos os direitos reservados - Produto licenciado</p>
+  <p>Site oficial - Não use cópias</p>
 </footer>
 
 <a class="wa-float" href="https://wa.me/5511997343865?text=Ol%C3%A1!%20Tenho%20uma%20d%C3%BAvida%20sobre%20o%20Boneco%20Wilson." target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
   <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.39 1.26 4.82L2 22l5.4-1.36a9.9 9.9 0 004.64 1.16h.01c5.46 0 9.9-4.45 9.9-9.9C21.95 6.45 17.5 2 12.04 2zm0 18.02c-1.53 0-2.96-.42-4.19-1.15l-.3-.18-3.2.8.85-3.12-.2-.32a8.2 8.2 0 01-1.26-4.14c0-4.53 3.68-8.21 8.3-8.21 4.63 0 8.31 3.68 8.31 8.21 0 4.53-3.68 8.11-8.31 8.11z"/></svg>
 </a>
+
+<div id="terms-modal" class="legal-modal" role="dialog" aria-modal="true" aria-label="Termos de Uso">
+  <div class="legal-modal-inner">
+    <div class="legal-modal-header">
+      <h3>Termos de Uso</h3>
+      <button class="legal-modal-close js-close-legal" data-modal="terms-modal" aria-label="Fechar Termos de Uso">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="legal-modal-body">
+<p class="legal-updated">Última atualização: 24 de agosto de 2026</p>
+<p>Bem-vindo ao Wilson.</p>
+<p>Estes Termos de Uso regulam a aquisição, instalação, utilização e demais condições relacionadas ao <strong>Wilson</strong>, um boneco de borracha desenvolvido para simular visualmente a presença de uma pessoa no interior de um veículo.</p>
+<p>Ao adquirir, instalar ou utilizar o Wilson, você declara que leu, compreendeu e concorda com estes Termos de Uso.</p>
+<h2>1. SOBRE O PRODUTO</h2>
+<p>O Wilson é um produto desenvolvido para <strong>simulação visual e cenográfica da presença humana no interior de veículos</strong>.</p>
+<p>O produto pode ser utilizado em situações em que o usuário deseje criar a aparência visual de que há uma pessoa no veículo, desde que seu uso seja realizado de maneira segura, legal e de acordo com as instruções fornecidas pelo fabricante.</p>
+<p>O Wilson <strong>não é uma pessoa, dispositivo eletrônico de segurança, sistema antifurto, equipamento de proteção, dispositivo de segurança veicular ou substituto de qualquer sistema original do veículo</strong>.</p>
+<p>O produto não garante a prevenção de furtos, roubos, abordagens, acidentes, danos materiais ou qualquer outro evento.</p>
+<h2>2. FINALIDADE DE USO</h2>
+<p>O Wilson deve ser utilizado exclusivamente para a finalidade para a qual foi desenvolvido: <strong>simular visualmente a presença de uma pessoa dentro de um veículo</strong>.</p>
+<p>O usuário é integralmente responsável por verificar se a utilização do produto é permitida no local, nas circunstâncias e no veículo em que pretende utilizá-lo.</p>
+<p>O produto não deve ser utilizado para:</p>
+<ul>
+<li>praticar, facilitar ou ocultar atividades ilícitas;</li>
+<li>enganar autoridades, agentes públicos ou serviços de emergência;</li>
+<li>criar uma falsa identidade ou representação de uma pessoa específica;</li>
+<li>simular a presença de uma pessoa em circunstâncias que possam colocar terceiros em risco;</li>
+<li>interferir no funcionamento dos sistemas de segurança do veículo;</li>
+<li>substituir uma pessoa real quando sua presença for legalmente necessária;</li>
+<li>realizar qualquer atividade que possa caracterizar fraude, estelionato ou outra conduta ilícita.</li>
+</ul>
+<h2>3. SEGURANÇA NO INTERIOR DO VEÍCULO</h2>
+<p>A instalação do Wilson deve ser realizada de maneira que <strong>não prejudique a segurança do motorista, dos passageiros ou de terceiros</strong>.</p>
+<p>O usuário deve verificar, antes de cada utilização, se o produto:</p>
+<ul>
+<li>não bloqueia o campo de visão do motorista;</li>
+<li>não interfere no volante, pedais, câmbio ou demais controles;</li>
+<li>não obstrui espelhos ou câmeras do veículo;</li>
+<li>não interfere nos cintos de segurança;</li>
+<li>não impede o funcionamento correto dos bancos;</li>
+<li>não interfere em airbags ou outros sistemas de segurança;</li>
+<li>não pode se deslocar de maneira perigosa durante uma frenagem, colisão ou manobra;</li>
+<li>não apresenta danos que possam comprometer sua utilização.</li>
+</ul>
+<p><strong>Nunca utilize o Wilson de maneira que possa interferir no funcionamento de um airbag.</strong></p>
+<p>O usuário deve seguir sempre as orientações do manual do veículo e as instruções de instalação e utilização fornecidas com o produto.</p>
+<p>Em caso de dúvida sobre a compatibilidade do Wilson com determinado veículo ou posição, o usuário deverá consultar o fabricante do veículo ou um profissional qualificado antes de utilizá-lo.</p>
+<h2>4. USO DURANTE A CONDUÇÃO</h2>
+<p>O Wilson não deve, em nenhuma circunstância, comprometer a capacidade do motorista de conduzir o veículo com segurança.</p>
+<p>O motorista deve manter atenção integral à condução e respeitar todas as leis e normas de trânsito aplicáveis.</p>
+<p>O usuário é responsável por garantir que a presença do produto dentro do veículo não configure infração de trânsito ou qualquer outra irregularidade.</p>
+<p>Caso uma autoridade de trânsito determine que o produto deve ser removido, o usuário deverá cumprir a determinação.</p>
+<h2>5. O WILSON NÃO É UM EQUIPAMENTO DE SEGURANÇA</h2>
+<p>O Wilson <strong>não oferece proteção física contra colisões, furtos, roubos ou qualquer outro risco</strong>.</p>
+<p>Qualquer comunicação comercial que utilize expressões como "mais segurança", "mais tranquilidade" ou similares deve ser compreendida como referência à finalidade e à proposta de utilização do produto, e <strong>não como promessa de prevenção ou eliminação de riscos</strong>.</p>
+<p>O fabricante não declara que a utilização do Wilson impedirá qualquer ocorrência criminosa ou acidente.</p>
+<h2>6. RESPONSABILIDADE DO USUÁRIO</h2>
+<p>O usuário é responsável pela instalação, posicionamento, conservação e utilização adequada do Wilson.</p>
+<p>Também é responsabilidade do usuário:</p>
+<ol>
+<li>conhecer e respeitar a legislação aplicável;</li>
+<li>verificar a compatibilidade do produto com seu veículo;</li>
+<li>posicionar corretamente o produto;</li>
+<li>realizar inspeções periódicas;</li>
+<li>interromper imediatamente o uso caso identifique qualquer condição insegura;</li>
+<li>manter o produto fora do alcance de crianças quando não estiver sendo utilizado;</li>
+<li>utilizar o produto somente conforme as instruções fornecidas pelo fabricante.</li>
+</ol>
+<p>O fabricante não se responsabiliza por consequências decorrentes de instalação incorreta, uso inadequado, alteração do produto ou utilização em desacordo com estes Termos.</p>
+<h2>7. LIMITAÇÃO DE RESPONSABILIDADE</h2>
+<p>Na máxima extensão permitida pela legislação aplicável, o fabricante não será responsável por danos ou prejuízos decorrentes de:</p>
+<ul>
+<li>uso inadequado ou contrário às instruções;</li>
+<li>instalação incorreta;</li>
+<li>posicionamento inadequado dentro do veículo;</li>
+<li>utilização em veículo incompatível;</li>
+<li>interferência em sistemas de segurança do veículo causada pelo posicionamento escolhido pelo usuário;</li>
+<li>acidentes decorrentes da utilização ou movimentação do produto;</li>
+<li>furtos, roubos ou tentativas de furto;</li>
+<li>interpretações equivocadas acerca da finalidade do produto;</li>
+<li>descumprimento da legislação pelo usuário;</li>
+<li>utilização do produto para finalidade diferente daquela prevista nestes Termos.</li>
+</ul>
+<p>Nenhuma disposição destes Termos tem a intenção de excluir ou limitar direitos do consumidor que não possam ser legalmente excluídos ou limitados.</p>
+<h2>8. CONSERVAÇÃO DO PRODUTO</h2>
+<p>O usuário deverá armazenar e conservar o Wilson de acordo com as orientações fornecidas pelo fabricante.</p>
+<p>Não devem ser realizadas modificações estruturais, cortes, perfurações, alterações de peso ou adaptações que possam modificar as características originais do produto.</p>
+<p>Caso o produto apresente deformações, rachaduras, desprendimento de componentes ou qualquer outro defeito que possa comprometer sua utilização, seu uso deverá ser imediatamente interrompido.</p>
+<h2>9. CRIANÇAS E ANIMAIS</h2>
+<p>O Wilson não é um brinquedo.</p>
+<p>O produto deve ser mantido fora do alcance de crianças pequenas e não deve ser utilizado como assento, apoio, brinquedo ou objeto de interação física.</p>
+<p>O produto também não deve ser utilizado de maneira que possa representar risco para animais.</p>
+<h2>10. PROPRIEDADE INTELECTUAL</h2>
+<p>Todos os elementos relacionados ao Wilson, incluindo marca, nome comercial, identidade visual, textos, fotografias, vídeos, ilustrações, modelos, materiais publicitários e conteúdo do site, pertencem ao respectivo titular de direitos ou são utilizados mediante autorização.</p>
+<p>É proibida a reprodução, distribuição, modificação ou utilização comercial desses elementos sem autorização prévia, ressalvadas as hipóteses permitidas pela legislação.</p>
+<h2>11. COMPRA, PAGAMENTO, ENTREGA E GARANTIA</h2>
+<p>As condições referentes a preço, formas de pagamento, disponibilidade, prazo de entrega, garantia, trocas, devoluções e demais condições comerciais serão aquelas apresentadas no momento da compra e nas políticas específicas disponibilizadas pela empresa.</p>
+<p>Nada nestes Termos limita os direitos assegurados ao consumidor pela legislação brasileira aplicável.</p>
+<h2>12. DIREITO DE ARREPENDIMENTO</h2>
+<p>Nas hipóteses em que a compra estiver sujeita à legislação brasileira de proteção ao consumidor, o consumidor poderá exercer os direitos legalmente assegurados, inclusive o direito de arrependimento nas compras realizadas fora do estabelecimento comercial, observadas as condições e os prazos previstos em lei.</p>
+<p>As informações sobre procedimento de devolução deverão ser consultadas na política de trocas e devoluções disponibilizada pela empresa.</p>
+<h2>13. ALTERAÇÕES DESTES TERMOS</h2>
+<p>A empresa poderá atualizar estes Termos de Uso sempre que necessário para refletir alterações no produto, na legislação, nos processos comerciais ou nas práticas de utilização.</p>
+<p>A versão vigente será aquela disponibilizada nos canais oficiais da empresa.</p>
+<h2>14. LEGISLAÇÃO APLICÁVEL</h2>
+<p>Estes Termos de Uso serão interpretados de acordo com as leis da República Federativa do Brasil.</p>
+<p>Eventuais relações de consumo observarão também a legislação brasileira de proteção e defesa do consumidor, incluindo as normas aplicáveis do Código de Defesa do Consumidor.</p>
+<h2>15. CONTATO</h2>
+<p>Em caso de dúvidas sobre o produto, instalação, utilização, garantia ou estes Termos de Uso, o usuário deverá entrar em contato pelos canais oficiais de atendimento disponibilizados pela empresa.</p>
+<p>Boneco Wilson
+boneco@bonecowilson.com.br
+bonecowilson.com.br</p>
+<div class="legal-summary"><p><strong>IMPORTANTE:</strong> O Wilson é um produto de simulação visual. Sua utilização não garante segurança, prevenção de crimes ou proteção contra acidentes. O usuário deve sempre observar a legislação aplicável e garantir que o produto não interfira na condução ou nos sistemas de segurança do veículo.</p></div>
+    </div>
+  </div>
+</div>
+
+<div id="privacy-modal" class="legal-modal" role="dialog" aria-modal="true" aria-label="Política de Privacidade">
+  <div class="legal-modal-inner">
+    <div class="legal-modal-header">
+      <h3>Política de Privacidade</h3>
+      <button class="legal-modal-close js-close-legal" data-modal="privacy-modal" aria-label="Fechar Política de Privacidade">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="legal-modal-body">
+<p class="legal-updated">Última atualização: 24 de agosto de 2026</p>
+<p>A sua privacidade é importante para nós.</p>
+<p>Esta Política de Privacidade explica como a <strong>Boneco Wilson</strong>, responsável pela comercialização do Wilson, coleta, utiliza, armazena e protege informações pessoais de visitantes do site, clientes e demais pessoas que utilizam nossos canais digitais.</p>
+<p>Ao utilizar nosso site, realizar uma compra ou entrar em contato conosco, você declara estar ciente das práticas descritas nesta Política.</p>
+<h2>1. QUEM SOMOS</h2>
+<p>Esta Política se aplica ao tratamento de dados pessoais realizado pela:</p>
+<p>Boneco Wilson
+boneco@bonecowilson.com.br
+bonecowilson.com.br</p>
+<p>Para os fins da legislação aplicável, especialmente a Lei Geral de Proteção de Dados Pessoais — LGPD, a empresa poderá atuar como <strong>Controladora</strong> dos dados pessoais tratados nas situações descritas nesta Política.</p>
+<h2>2. QUAIS DADOS PODEMOS COLETAR</h2>
+<p>Dependendo da forma como você interage conosco, podemos coletar diferentes categorias de informações.</p>
+<h3>2.1. Dados fornecidos diretamente por você</h3>
+<p>Quando você realiza uma compra, solicita atendimento ou preenche um formulário, podemos coletar:</p>
+<ul>
+<li>nome completo;</li>
+<li>CPF, quando necessário para a operação;</li>
+<li>endereço de entrega;</li>
+<li>endereço de cobrança;</li>
+<li>e-mail;</li>
+<li>número de telefone ou celular;</li>
+<li>informações relacionadas ao pedido;</li>
+<li>informações fornecidas voluntariamente durante o atendimento;</li>
+<li>dados necessários para emissão de documentos fiscais.</li>
+</ul>
+<p>Não solicitamos dados pessoais além daqueles necessários para as finalidades informadas.</p>
+<h3>2.2. Dados relacionados ao pagamento</h3>
+<p>Os pagamentos podem ser processados por empresas especializadas em meios de pagamento.</p>
+<p>Dependendo do método escolhido, essas empresas poderão coletar e processar informações necessárias para concluir a transação.</p>
+<p>Sempre que possível, os dados completos de cartão de crédito ou débito serão tratados diretamente pelo provedor de pagamento, não sendo necessário que a empresa armazene essas informações em seus próprios sistemas.</p>
+<h3>2.3. Dados de navegação</h3>
+<p>Quando você acessa nosso site, determinadas informações técnicas podem ser coletadas automaticamente, como:</p>
+<ul>
+<li>endereço IP;</li>
+<li>tipo e versão do navegador;</li>
+<li>dispositivo utilizado;</li>
+<li>sistema operacional;</li>
+<li>páginas acessadas;</li>
+<li>data e horário de acesso;</li>
+<li>origem do acesso;</li>
+<li>informações relacionadas à interação com o site.</li>
+</ul>
+<p>Esses dados podem ser obtidos por meio de cookies, pixels, tags e tecnologias semelhantes.</p>
+<h2>3. COMO UTILIZAMOS OS SEUS DADOS</h2>
+<p>Os dados pessoais poderão ser utilizados para finalidades legítimas e compatíveis com a relação estabelecida com você, incluindo:</p>
+<ul>
+<li>processar e administrar pedidos;</li>
+<li>confirmar pagamentos;</li>
+<li>realizar entregas;</li>
+<li>emitir notas fiscais;</li>
+<li>prestar atendimento ao cliente;</li>
+<li>responder dúvidas e solicitações;</li>
+<li>fornecer informações sobre produtos;</li>
+<li>processar trocas, devoluções e solicitações de garantia;</li>
+<li>prevenir fraudes e atividades ilícitas;</li>
+<li>melhorar o funcionamento e a segurança do site;</li>
+<li>compreender como os visitantes utilizam nosso site;</li>
+<li>desenvolver e aprimorar nossos produtos e serviços;</li>
+<li>enviar comunicações relacionadas a pedidos e serviços;</li>
+<li>enviar comunicações de marketing, quando permitido e de acordo com suas preferências;</li>
+<li>cumprir obrigações legais e regulatórias;</li>
+<li>exercer ou defender direitos em processos administrativos, judiciais ou arbitrais.</li>
+</ul>
+<h2>4. BASES LEGAIS PARA O TRATAMENTO</h2>
+<p>O tratamento de dados pessoais será realizado de acordo com as hipóteses previstas na legislação aplicável.</p>
+<p>Dependendo da situação, poderemos utilizar como base legal:</p>
+<ul>
+<li>execução de contrato ou de procedimentos relacionados ao contrato;</li>
+<li>cumprimento de obrigação legal ou regulatória;</li>
+<li>exercício regular de direitos;</li>
+<li>legítimo interesse, quando aplicável;</li>
+<li>consentimento do titular, quando necessário;</li>
+<li>proteção do crédito, quando aplicável;</li>
+<li>prevenção à fraude e à segurança do titular;</li>
+<li>outras bases legais previstas na legislação.</li>
+</ul>
+<p>Quando o tratamento depender de consentimento, você poderá revogá-lo nos termos da legislação aplicável.</p>
+<h2>5. COOKIES E TECNOLOGIAS SEMELHANTES</h2>
+<p>Nosso site poderá utilizar cookies e tecnologias semelhantes para diferentes finalidades.</p>
+<p>Os cookies podem ser utilizados para:</p>
+<ul>
+<li>permitir o funcionamento adequado do site;</li>
+<li>lembrar determinadas preferências;</li>
+<li>manter itens adicionados ao carrinho;</li>
+<li>compreender como o site é utilizado;</li>
+<li>medir desempenho;</li>
+<li>melhorar a experiência de navegação;</li>
+<li>realizar análises estatísticas;</li>
+<li>apresentar publicidade ou conteúdo mais relevante, quando aplicável.</li>
+</ul>
+<h3>Cookies necessários</h3>
+<p>São utilizados para permitir o funcionamento básico do site e de recursos essenciais, como navegação, carrinho e processos de compra.</p>
+<h3>Cookies analíticos</h3>
+<p>Podem ser utilizados para compreender como os visitantes utilizam o site e identificar oportunidades de melhoria.</p>
+<h3>Cookies de marketing</h3>
+<p>Quando utilizados, podem permitir a medição de campanhas e a apresentação de publicidade relacionada aos interesses do usuário.</p>
+<p>Você poderá controlar ou bloquear determinados cookies por meio das configurações do seu navegador ou das ferramentas disponibilizadas pelo próprio site, quando aplicável.</p>
+<p>A desativação de determinados cookies poderá afetar o funcionamento de algumas funcionalidades.</p>
+<h2>6. COMPARTILHAMENTO DE DADOS</h2>
+<p>Não comercializamos dados pessoais dos nossos clientes.</p>
+<p>Poderemos compartilhar informações pessoais com terceiros quando isso for necessário para as finalidades descritas nesta Política, incluindo:</p>
+<ul>
+<li>empresas responsáveis pelo processamento de pagamentos;</li>
+<li>empresas de logística e transporte;</li>
+<li>fornecedores de tecnologia e hospedagem;</li>
+<li>plataformas de comércio eletrônico;</li>
+<li>empresas responsáveis por atendimento ao cliente;</li>
+<li>prestadores de serviços de comunicação;</li>
+<li>ferramentas de análise e métricas;</li>
+<li>prestadores de serviços de marketing, quando aplicável;</li>
+<li>autoridades públicas, quando houver obrigação legal;</li>
+<li>assessorias jurídicas, contábeis ou profissionais quando necessário;</li>
+<li>terceiros envolvidos na prevenção e investigação de fraudes.</li>
+</ul>
+<p>Os terceiros que tratarem dados em nosso nome deverão observar as obrigações aplicáveis à proteção e segurança das informações.</p>
+<h2>7. TRANSFERÊNCIA INTERNACIONAL DE DADOS</h2>
+<p>Alguns dos nossos fornecedores de tecnologia ou serviços podem estar localizados fora do Brasil ou utilizar infraestrutura localizada em outros países.</p>
+<p>Quando houver transferência internacional de dados pessoais, serão adotadas as medidas e mecanismos previstos na legislação aplicável para proteger essas informações.</p>
+<h2>8. SEGURANÇA DOS DADOS</h2>
+<p>Adotamos medidas técnicas e administrativas razoáveis para proteger os dados pessoais contra acessos não autorizados, destruição, perda, alteração, comunicação ou qualquer outra forma de tratamento inadequado ou ilícito.</p>
+<p>Entretanto, nenhum sistema conectado à internet pode ser considerado completamente seguro.</p>
+<p>Por isso, embora empreguemos medidas de proteção adequadas, não podemos garantir segurança absoluta das informações.</p>
+<h2>9. POR QUANTO TEMPO MANTEMOS OS DADOS</h2>
+<p>Os dados pessoais serão mantidos pelo período necessário para cumprir as finalidades para as quais foram coletados.</p>
+<p>Após o encerramento da relação, determinados dados poderão permanecer armazenados quando isso for necessário para:</p>
+<ul>
+<li>cumprimento de obrigações legais ou regulatórias;</li>
+<li>exercício regular de direitos;</li>
+<li>prevenção de fraudes;</li>
+<li>cumprimento de obrigações contratuais;</li>
+<li>manutenção de registros exigidos pela legislação;</li>
+<li>outras hipóteses legalmente autorizadas.</li>
+</ul>
+<p>Quando os dados deixarem de ser necessários e não houver obrigação legal ou outra justificativa legítima para sua conservação, eles poderão ser eliminados ou anonimizados.</p>
+<h2>10. DIREITOS DO TITULAR</h2>
+<p>Nos termos da legislação aplicável, você poderá exercer direitos relacionados aos seus dados pessoais, incluindo, quando aplicável:</p>
+<ul>
+<li>confirmação da existência de tratamento;</li>
+<li>acesso aos dados;</li>
+<li>correção de dados incompletos, inexatos ou desatualizados;</li>
+<li>anonimização, bloqueio ou eliminação de dados desnecessários ou tratados em desconformidade;</li>
+<li>portabilidade, observadas as condições previstas em lei;</li>
+<li>informação sobre entidades públicas e privadas com as quais os dados foram compartilhados;</li>
+<li>informação sobre a possibilidade de não fornecer consentimento e sobre as consequências dessa decisão;</li>
+<li>revogação do consentimento;</li>
+<li>oposição ao tratamento realizado em determinadas hipóteses;</li>
+<li>revisão de decisões tomadas unicamente com base em tratamento automatizado, quando aplicável.</li>
+</ul>
+<p>Alguns desses direitos estão sujeitos às condições e limitações estabelecidas pela legislação.</p>
+<h2>11. COMO EXERCER SEUS DIREITOS</h2>
+<p>Para solicitar informações sobre seus dados pessoais ou exercer seus direitos, entre em contato através de:</p>
+<p><strong>E-mail:</strong> boneco@bonecowilson.com.br</p>
+<p>Para proteger a privacidade dos titulares, poderemos solicitar informações adicionais para confirmar a identidade do solicitante antes de atender determinadas solicitações.</p>
+<p>Responderemos às solicitações dentro dos prazos e condições estabelecidos pela legislação aplicável.</p>
+<h2>12. COMUNICAÇÕES E MARKETING</h2>
+<p>Podemos enviar comunicações relacionadas ao processamento de pedidos, pagamentos, entregas, atendimento, segurança e outros aspectos necessários à execução da relação com o cliente.</p>
+<p>Também poderemos enviar comunicações promocionais quando houver base legal adequada para isso.</p>
+<p>Caso não queira mais receber determinadas comunicações de marketing, você poderá utilizar a opção de descadastramento disponibilizada na própria comunicação ou entrar em contato conosco.</p>
+<p>O cancelamento de comunicações promocionais não impede o envio de mensagens necessárias para a execução de pedidos ou prestação de serviços.</p>
+<h2>13. DADOS DE CRIANÇAS E ADOLESCENTES</h2>
+<p>Nosso site e nossos produtos não são direcionados especificamente a crianças.</p>
+<p>Não buscamos coletar intencionalmente dados pessoais de crianças sem a observância das exigências legais aplicáveis.</p>
+<p>Caso um responsável identifique que dados pessoais de uma criança foram fornecidos ao site de maneira inadequada, poderá entrar em contato conosco pelo canal de privacidade indicado nesta Política.</p>
+<h2>14. LINKS PARA OUTROS SITES</h2>
+<p>Nosso site poderá conter links para sites, plataformas ou serviços de terceiros.</p>
+<p>Esta Política de Privacidade não se aplica às práticas de privacidade desses terceiros.</p>
+<p>Recomendamos que você consulte as respectivas políticas de privacidade antes de fornecer informações pessoais a esses serviços.</p>
+<h2>15. ALTERAÇÕES NESTA POLÍTICA</h2>
+<p>Esta Política de Privacidade poderá ser atualizada periodicamente para refletir mudanças em nossos serviços, processos, tecnologias ou requisitos legais.</p>
+<p>Quando houver alterações relevantes, poderemos utilizar meios razoáveis para informar os usuários.</p>
+<p>A versão mais recente estará sempre disponível em nosso site.</p>
+<h2>16. CONTATO SOBRE PRIVACIDADE</h2>
+<p>Caso tenha dúvidas, solicitações ou reclamações relacionadas ao tratamento de seus dados pessoais, entre em contato:</p>
+<p>Boneco Wilson
+boneco@bonecowilson.com.br
+(11) 99734-3865</p>
+<h2>17. LEGISLAÇÃO APLICÁVEL</h2>
+<p>Esta Política de Privacidade será interpretada de acordo com a legislação brasileira aplicável à proteção de dados pessoais, especialmente a <strong>Lei Geral de Proteção de Dados Pessoais — LGPD (Lei nº 13.709/2018)</strong>.</p>
+<div class="legal-summary"><p><strong>Resumo da nossa política:</strong> coletamos apenas os dados necessários para operar nosso site, processar pedidos, entregar produtos, prestar atendimento, cumprir obrigações legais e, quando permitido, melhorar nossos serviços e comunicações. Não vendemos dados pessoais dos nossos clientes.</p></div>
+    </div>
+  </div>
+</div>
 
 <script>
 (function(){
@@ -380,6 +738,42 @@
   }
   tick();
   setInterval(tick, 1000);
+
+  // Legal modals (Termos de Uso / Política de Privacidade)
+  function openLegalModal(id){
+    var modal = document.getElementById(id);
+    if(!modal) return;
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    var closeBtn = modal.querySelector('.legal-modal-close');
+    if(closeBtn){ closeBtn.focus(); }
+  }
+  function closeLegalModal(modal){
+    if(!modal) return;
+    modal.classList.remove('open');
+    var anyOpen = document.querySelector('.legal-modal.open');
+    if(!anyOpen){ document.body.style.overflow = ''; }
+  }
+  document.querySelectorAll('.js-open-legal').forEach(function(link){
+    link.addEventListener('click', function(e){
+      e.preventDefault();
+      openLegalModal(link.getAttribute('data-modal'));
+    });
+  });
+  document.querySelectorAll('.js-close-legal').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      closeLegalModal(document.getElementById(btn.getAttribute('data-modal')));
+    });
+  });
+  document.querySelectorAll('.legal-modal').forEach(function(modal){
+    modal.addEventListener('click', function(e){ if(e.target === modal){ closeLegalModal(modal); } });
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape'){
+      var openModal = document.querySelector('.legal-modal.open');
+      if(openModal){ closeLegalModal(openModal); }
+    }
+  });
 
   // Specular shine on payment buttons (follows cursor within proximity)
   var specBtns = document.querySelectorAll('.fx-spec');

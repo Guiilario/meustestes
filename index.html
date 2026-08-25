@@ -204,6 +204,50 @@
     .video-modal-close:hover{transform:translateX(50%) rotate(90deg);}
   }
 
+  /* ===== Legal document modals (Termos / Privacidade) ===== */
+  .legal-modal{
+    position:fixed;inset:0;z-index:2000;display:flex;align-items:center;justify-content:center;
+    padding:24px;background:rgba(3,3,3,.92);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+    opacity:0;visibility:hidden;transition:opacity .35s var(--ease), visibility .35s var(--ease);
+  }
+  .legal-modal.open{opacity:1;visibility:visible;}
+  .legal-modal-inner{
+    position:relative;width:100%;max-width:720px;max-height:85vh;
+    display:flex;flex-direction:column;
+    border-radius:14px;overflow:hidden;border:1px solid var(--border-strong);
+    background:var(--card);box-shadow:0 60px 120px -40px rgba(0,0,0,.85);
+    transform:translateY(18px) scale(.98);transition:transform .4s var(--ease);
+  }
+  .legal-modal.open .legal-modal-inner{transform:translateY(0) scale(1);}
+  .legal-modal-header{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:22px 26px;border-bottom:1px solid var(--border);flex-shrink:0;
+  }
+  .legal-modal-header h3{font-family:var(--display);font-weight:800;font-size:18px;text-transform:uppercase;}
+  .legal-modal-close{
+    width:34px;height:34px;border-radius:50%;flex-shrink:0;
+    background:rgba(245,245,245,.08);border:1px solid var(--border-strong);
+    display:flex;align-items:center;justify-content:center;color:var(--text);
+    transition:background .3s var(--ease), transform .3s var(--ease), border-color .3s var(--ease);
+  }
+  .legal-modal-close:hover{background:var(--red-deep);border-color:var(--red-deep);transform:rotate(90deg);}
+  .legal-modal-close svg{width:16px;height:16px;}
+  .legal-modal-body{overflow-y:auto;padding:26px 28px 34px;font-size:14px;color:var(--text-secondary);line-height:1.75;}
+  .legal-modal-body h2{font-family:var(--display);font-weight:800;font-size:15.5px;color:var(--text);text-transform:uppercase;margin:26px 0 10px;letter-spacing:.01em;}
+  .legal-modal-body h2:first-child{margin-top:0;}
+  .legal-modal-body h3{font-weight:700;color:var(--text);font-size:14px;margin:16px 0 6px;}
+  .legal-modal-body p{margin-bottom:12px;}
+  .legal-modal-body ul,.legal-modal-body ol{margin:6px 0 14px 20px;}
+  .legal-modal-body li{margin-bottom:6px;}
+  .legal-modal-body strong{color:var(--text);font-weight:700;}
+  .legal-modal-body .legal-updated{color:var(--yellow);font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin-bottom:18px;}
+  .legal-modal-body .legal-summary{margin-top:24px;padding:16px 18px;border-left:2px solid var(--yellow);background:rgba(255,224,0,.05);border-radius:0 8px 8px 0;}
+  .legal-modal-body .legal-summary p{margin-bottom:0;font-size:13px;}
+  @media (max-width:640px){
+    .legal-modal{padding:0;}
+    .legal-modal-inner{max-width:100%;max-height:100vh;height:100%;border-radius:0;}
+  }
+
   /* ===== Interactive FX: Spotlight (Como funciona rows + stat cards) ===== */
   .fx-spotlight{position:relative;overflow:hidden;}
   .fx-spotlight::before{
@@ -371,28 +415,8 @@
   .hero-anim .support{animation-delay:.3s;}
   .hero-anim .hero-cta{animation-delay:.42s;}
   .hero-anim .free-shipping{animation-delay:.52s;}
-  .hero-anim .video-teaser{animation-delay:.62s;}
   @keyframes heroIn{to{opacity:1;transform:translateY(0);}}
 
-  /* Compact video teaser bar at the bottom of the hero */
-  .video-teaser{
-    display:inline-flex;align-items:center;gap:14px;
-    background:rgba(17,17,17,.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-    border:1px solid var(--border-strong);border-radius:100px;
-    padding:8px 22px 8px 8px;margin:0 auto;
-    transition:transform .35s var(--ease), border-color .35s var(--ease), background .35s var(--ease);
-  }
-  .video-teaser:hover{transform:translateY(-3px);border-color:var(--yellow);background:rgba(17,17,17,.75);}
-  .vt-thumb{position:relative;width:48px;height:48px;border-radius:50%;overflow:hidden;flex-shrink:0;border:1px solid var(--border-strong);}
-  .vt-thumb img{width:100%;height:100%;object-fit:cover;}
-  .vt-play{
-    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-    background:rgba(5,5,5,.35);
-  }
-  .vt-play svg{width:16px;height:16px;fill:var(--yellow);}
-  .vt-text{text-align:left;}
-  .vt-text p{font-size:13.5px;font-weight:700;color:var(--text);}
-  .vt-text span{font-size:11.5px;color:var(--text-secondary);}
 
   /* ===== Trust bar ===== */
   .trust-bar{background:transparent;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:26px 0;}
@@ -500,6 +524,73 @@
   /* ===== Why Wilson ===== */
   .why{background:transparent;}
   .report-cta{background:var(--black);border-top:1px solid var(--border);}
+  .report-video-card{
+    position:relative;width:100%;max-width:640px;margin:0 auto;
+    border-radius:14px;overflow:hidden;cursor:pointer;
+    border:1px solid var(--border-strong);
+    box-shadow:0 40px 80px -30px rgba(0,0,0,.75);
+    aspect-ratio:16/9;
+    transition:transform .4s var(--ease);
+  }
+  .report-video-card:hover{transform:translateY(-4px);}
+  .report-video-card img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease);}
+  .report-video-card:hover img{transform:scale(1.05);}
+  .report-video-overlay{position:absolute;inset:0;background:linear-gradient(180deg, rgba(5,5,5,0) 40%, rgba(5,5,5,.88) 100%);}
+  .report-video-play{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:72px;height:72px;border-radius:50%;background:var(--yellow);
+    display:flex;align-items:center;justify-content:center;
+    transition:transform .35s var(--ease);
+  }
+  .report-video-play svg{width:24px;height:24px;fill:var(--black);margin-left:3px;}
+  .report-video-card:hover .report-video-play{transform:translate(-50%,-50%) scale(1.08);}
+  .report-video-caption{position:absolute;left:22px;right:22px;bottom:18px;text-align:left;}
+  .report-video-caption p{font-weight:700;font-size:15px;color:var(--text);}
+  .report-video-caption span{font-size:12.5px;color:var(--text-secondary);}
+
+  /* ===== Na mídia: infinite auto-scroll carousel ===== */
+  .media-section{background:var(--black);overflow:hidden;}
+  .media-track-wrapper{
+    width:100%;overflow:hidden;margin-top:44px;padding:6px 0;
+    mask-image:linear-gradient(90deg, transparent, black 6%, black 94%, transparent);
+    -webkit-mask-image:linear-gradient(90deg, transparent, black 6%, black 94%, transparent);
+  }
+  .media-track{
+    display:flex;gap:20px;width:max-content;
+    animation:mediaScroll 48s linear infinite;
+  }
+  .media-track-wrapper:hover .media-track,
+  .media-track-wrapper:focus-within .media-track{animation-play-state:paused;}
+  @keyframes mediaScroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+  .media-item{
+    position:relative;flex:0 0 auto;width:230px;aspect-ratio:16/10;
+    border-radius:10px;overflow:hidden;border:1px solid var(--border);display:block;
+    transition:transform .4s var(--ease), border-color .4s var(--ease), box-shadow .4s var(--ease);
+  }
+  .media-item:hover{transform:translateY(-5px);border-color:var(--yellow);box-shadow:0 20px 40px -20px rgba(0,0,0,.6);}
+  .media-item img{
+    width:100%;height:100%;object-fit:cover;
+    filter:grayscale(1) brightness(.72);transform:scale(1);
+    transition:filter .5s var(--ease), transform .5s var(--ease);
+  }
+  .media-item:hover img{filter:grayscale(0) brightness(1);transform:scale(1.08);}
+  .media-item::after{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(180deg, transparent 55%, rgba(5,5,5,.85) 100%);
+  }
+  .media-source{position:absolute;left:12px;bottom:10px;z-index:2;font-size:12px;font-weight:700;color:var(--text);letter-spacing:.02em;}
+  @media (max-width:640px){
+    .media-item{width:170px;}
+    .media-track{animation-duration:32s;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .media-track{animation:none;}
+    .media-track-wrapper{overflow-x:auto;}
+  }
+  .report-title{font-size:clamp(20px,3.4vw,38px);text-transform:uppercase;white-space:nowrap;}
+  @media (max-width:480px){
+    .report-title{white-space:normal;font-size:clamp(19px,6vw,24px);max-width:340px;margin-left:auto;margin-right:auto;}
+  }
   .why-grid{display:grid;grid-template-columns:0.9fr 1.1fr;gap:60px;align-items:center;}
   .why-visual{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:1/1;border:1px solid var(--border-strong);}
   .why-visual img{width:100%;height:100%;object-fit:cover;}
@@ -596,10 +687,9 @@
     .nav-cta{gap:8px;}
     .nav-cta .btn{padding:9px 12px;font-size:11px;}
     .container{padding:0 18px;}
-    .video-teaser{padding:8px 16px 8px 8px;gap:10px;max-width:calc(100% - 36px);}
-    .vt-thumb{width:40px;height:40px;}
-    .vt-text p{font-size:12.5px;}
-    .vt-text span{display:none;}
+    .report-video-caption p{font-size:13px;}
+    .report-video-caption span{display:none;}
+    .report-video-play{width:56px;height:56px;}
   }
   @media (max-width:640px){
     .section-pad{padding:74px 0;}
@@ -682,6 +772,315 @@
     </button>
     <div class="video-modal-frame">
       <iframe id="video-modal-iframe" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
+
+<div id="terms-modal" class="legal-modal" role="dialog" aria-modal="true" aria-label="Termos de Uso">
+  <div class="legal-modal-inner">
+    <div class="legal-modal-header">
+      <h3>Termos de Uso</h3>
+      <button class="legal-modal-close js-close-legal" data-modal="terms-modal" aria-label="Fechar Termos de Uso">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="legal-modal-body">
+<p class="legal-updated">Última atualização: 24 de agosto de 2026</p>
+<p>Bem-vindo ao Wilson.</p>
+<p>Estes Termos de Uso regulam a aquisição, instalação, utilização e demais condições relacionadas ao <strong>Wilson</strong>, um boneco de borracha desenvolvido para simular visualmente a presença de uma pessoa no interior de um veículo.</p>
+<p>Ao adquirir, instalar ou utilizar o Wilson, você declara que leu, compreendeu e concorda com estes Termos de Uso.</p>
+<h2>1. SOBRE O PRODUTO</h2>
+<p>O Wilson é um produto desenvolvido para <strong>simulação visual e cenográfica da presença humana no interior de veículos</strong>.</p>
+<p>O produto pode ser utilizado em situações em que o usuário deseje criar a aparência visual de que há uma pessoa no veículo, desde que seu uso seja realizado de maneira segura, legal e de acordo com as instruções fornecidas pelo fabricante.</p>
+<p>O Wilson <strong>não é uma pessoa, dispositivo eletrônico de segurança, sistema antifurto, equipamento de proteção, dispositivo de segurança veicular ou substituto de qualquer sistema original do veículo</strong>.</p>
+<p>O produto não garante a prevenção de furtos, roubos, abordagens, acidentes, danos materiais ou qualquer outro evento.</p>
+<h2>2. FINALIDADE DE USO</h2>
+<p>O Wilson deve ser utilizado exclusivamente para a finalidade para a qual foi desenvolvido: <strong>simular visualmente a presença de uma pessoa dentro de um veículo</strong>.</p>
+<p>O usuário é integralmente responsável por verificar se a utilização do produto é permitida no local, nas circunstâncias e no veículo em que pretende utilizá-lo.</p>
+<p>O produto não deve ser utilizado para:</p>
+<ul>
+<li>praticar, facilitar ou ocultar atividades ilícitas;</li>
+<li>enganar autoridades, agentes públicos ou serviços de emergência;</li>
+<li>criar uma falsa identidade ou representação de uma pessoa específica;</li>
+<li>simular a presença de uma pessoa em circunstâncias que possam colocar terceiros em risco;</li>
+<li>interferir no funcionamento dos sistemas de segurança do veículo;</li>
+<li>substituir uma pessoa real quando sua presença for legalmente necessária;</li>
+<li>realizar qualquer atividade que possa caracterizar fraude, estelionato ou outra conduta ilícita.</li>
+</ul>
+<h2>3. SEGURANÇA NO INTERIOR DO VEÍCULO</h2>
+<p>A instalação do Wilson deve ser realizada de maneira que <strong>não prejudique a segurança do motorista, dos passageiros ou de terceiros</strong>.</p>
+<p>O usuário deve verificar, antes de cada utilização, se o produto:</p>
+<ul>
+<li>não bloqueia o campo de visão do motorista;</li>
+<li>não interfere no volante, pedais, câmbio ou demais controles;</li>
+<li>não obstrui espelhos ou câmeras do veículo;</li>
+<li>não interfere nos cintos de segurança;</li>
+<li>não impede o funcionamento correto dos bancos;</li>
+<li>não interfere em airbags ou outros sistemas de segurança;</li>
+<li>não pode se deslocar de maneira perigosa durante uma frenagem, colisão ou manobra;</li>
+<li>não apresenta danos que possam comprometer sua utilização.</li>
+</ul>
+<p><strong>Nunca utilize o Wilson de maneira que possa interferir no funcionamento de um airbag.</strong></p>
+<p>O usuário deve seguir sempre as orientações do manual do veículo e as instruções de instalação e utilização fornecidas com o produto.</p>
+<p>Em caso de dúvida sobre a compatibilidade do Wilson com determinado veículo ou posição, o usuário deverá consultar o fabricante do veículo ou um profissional qualificado antes de utilizá-lo.</p>
+<h2>4. USO DURANTE A CONDUÇÃO</h2>
+<p>O Wilson não deve, em nenhuma circunstância, comprometer a capacidade do motorista de conduzir o veículo com segurança.</p>
+<p>O motorista deve manter atenção integral à condução e respeitar todas as leis e normas de trânsito aplicáveis.</p>
+<p>O usuário é responsável por garantir que a presença do produto dentro do veículo não configure infração de trânsito ou qualquer outra irregularidade.</p>
+<p>Caso uma autoridade de trânsito determine que o produto deve ser removido, o usuário deverá cumprir a determinação.</p>
+<h2>5. O WILSON NÃO É UM EQUIPAMENTO DE SEGURANÇA</h2>
+<p>O Wilson <strong>não oferece proteção física contra colisões, furtos, roubos ou qualquer outro risco</strong>.</p>
+<p>Qualquer comunicação comercial que utilize expressões como "mais segurança", "mais tranquilidade" ou similares deve ser compreendida como referência à finalidade e à proposta de utilização do produto, e <strong>não como promessa de prevenção ou eliminação de riscos</strong>.</p>
+<p>O fabricante não declara que a utilização do Wilson impedirá qualquer ocorrência criminosa ou acidente.</p>
+<h2>6. RESPONSABILIDADE DO USUÁRIO</h2>
+<p>O usuário é responsável pela instalação, posicionamento, conservação e utilização adequada do Wilson.</p>
+<p>Também é responsabilidade do usuário:</p>
+<ol>
+<li>conhecer e respeitar a legislação aplicável;</li>
+<li>verificar a compatibilidade do produto com seu veículo;</li>
+<li>posicionar corretamente o produto;</li>
+<li>realizar inspeções periódicas;</li>
+<li>interromper imediatamente o uso caso identifique qualquer condição insegura;</li>
+<li>manter o produto fora do alcance de crianças quando não estiver sendo utilizado;</li>
+<li>utilizar o produto somente conforme as instruções fornecidas pelo fabricante.</li>
+</ol>
+<p>O fabricante não se responsabiliza por consequências decorrentes de instalação incorreta, uso inadequado, alteração do produto ou utilização em desacordo com estes Termos.</p>
+<h2>7. LIMITAÇÃO DE RESPONSABILIDADE</h2>
+<p>Na máxima extensão permitida pela legislação aplicável, o fabricante não será responsável por danos ou prejuízos decorrentes de:</p>
+<ul>
+<li>uso inadequado ou contrário às instruções;</li>
+<li>instalação incorreta;</li>
+<li>posicionamento inadequado dentro do veículo;</li>
+<li>utilização em veículo incompatível;</li>
+<li>interferência em sistemas de segurança do veículo causada pelo posicionamento escolhido pelo usuário;</li>
+<li>acidentes decorrentes da utilização ou movimentação do produto;</li>
+<li>furtos, roubos ou tentativas de furto;</li>
+<li>interpretações equivocadas acerca da finalidade do produto;</li>
+<li>descumprimento da legislação pelo usuário;</li>
+<li>utilização do produto para finalidade diferente daquela prevista nestes Termos.</li>
+</ul>
+<p>Nenhuma disposição destes Termos tem a intenção de excluir ou limitar direitos do consumidor que não possam ser legalmente excluídos ou limitados.</p>
+<h2>8. CONSERVAÇÃO DO PRODUTO</h2>
+<p>O usuário deverá armazenar e conservar o Wilson de acordo com as orientações fornecidas pelo fabricante.</p>
+<p>Não devem ser realizadas modificações estruturais, cortes, perfurações, alterações de peso ou adaptações que possam modificar as características originais do produto.</p>
+<p>Caso o produto apresente deformações, rachaduras, desprendimento de componentes ou qualquer outro defeito que possa comprometer sua utilização, seu uso deverá ser imediatamente interrompido.</p>
+<h2>9. CRIANÇAS E ANIMAIS</h2>
+<p>O Wilson não é um brinquedo.</p>
+<p>O produto deve ser mantido fora do alcance de crianças pequenas e não deve ser utilizado como assento, apoio, brinquedo ou objeto de interação física.</p>
+<p>O produto também não deve ser utilizado de maneira que possa representar risco para animais.</p>
+<h2>10. PROPRIEDADE INTELECTUAL</h2>
+<p>Todos os elementos relacionados ao Wilson, incluindo marca, nome comercial, identidade visual, textos, fotografias, vídeos, ilustrações, modelos, materiais publicitários e conteúdo do site, pertencem ao respectivo titular de direitos ou são utilizados mediante autorização.</p>
+<p>É proibida a reprodução, distribuição, modificação ou utilização comercial desses elementos sem autorização prévia, ressalvadas as hipóteses permitidas pela legislação.</p>
+<h2>11. COMPRA, PAGAMENTO, ENTREGA E GARANTIA</h2>
+<p>As condições referentes a preço, formas de pagamento, disponibilidade, prazo de entrega, garantia, trocas, devoluções e demais condições comerciais serão aquelas apresentadas no momento da compra e nas políticas específicas disponibilizadas pela empresa.</p>
+<p>Nada nestes Termos limita os direitos assegurados ao consumidor pela legislação brasileira aplicável.</p>
+<h2>12. DIREITO DE ARREPENDIMENTO</h2>
+<p>Nas hipóteses em que a compra estiver sujeita à legislação brasileira de proteção ao consumidor, o consumidor poderá exercer os direitos legalmente assegurados, inclusive o direito de arrependimento nas compras realizadas fora do estabelecimento comercial, observadas as condições e os prazos previstos em lei.</p>
+<p>As informações sobre procedimento de devolução deverão ser consultadas na política de trocas e devoluções disponibilizada pela empresa.</p>
+<h2>13. ALTERAÇÕES DESTES TERMOS</h2>
+<p>A empresa poderá atualizar estes Termos de Uso sempre que necessário para refletir alterações no produto, na legislação, nos processos comerciais ou nas práticas de utilização.</p>
+<p>A versão vigente será aquela disponibilizada nos canais oficiais da empresa.</p>
+<h2>14. LEGISLAÇÃO APLICÁVEL</h2>
+<p>Estes Termos de Uso serão interpretados de acordo com as leis da República Federativa do Brasil.</p>
+<p>Eventuais relações de consumo observarão também a legislação brasileira de proteção e defesa do consumidor, incluindo as normas aplicáveis do Código de Defesa do Consumidor.</p>
+<h2>15. CONTATO</h2>
+<p>Em caso de dúvidas sobre o produto, instalação, utilização, garantia ou estes Termos de Uso, o usuário deverá entrar em contato pelos canais oficiais de atendimento disponibilizados pela empresa.</p>
+<p>Boneco Wilson
+boneco@bonecowilson.com.br
+bonecowilson.com.br</p>
+<div class="legal-summary"><p><strong>IMPORTANTE:</strong> O Wilson é um produto de simulação visual. Sua utilização não garante segurança, prevenção de crimes ou proteção contra acidentes. O usuário deve sempre observar a legislação aplicável e garantir que o produto não interfira na condução ou nos sistemas de segurança do veículo.</p></div>
+    </div>
+  </div>
+</div>
+
+<div id="privacy-modal" class="legal-modal" role="dialog" aria-modal="true" aria-label="Política de Privacidade">
+  <div class="legal-modal-inner">
+    <div class="legal-modal-header">
+      <h3>Política de Privacidade</h3>
+      <button class="legal-modal-close js-close-legal" data-modal="privacy-modal" aria-label="Fechar Política de Privacidade">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="legal-modal-body">
+<p class="legal-updated">Última atualização: 24 de agosto de 2026</p>
+<p>A sua privacidade é importante para nós.</p>
+<p>Esta Política de Privacidade explica como a <strong>Boneco Wilson</strong>, responsável pela comercialização do Wilson, coleta, utiliza, armazena e protege informações pessoais de visitantes do site, clientes e demais pessoas que utilizam nossos canais digitais.</p>
+<p>Ao utilizar nosso site, realizar uma compra ou entrar em contato conosco, você declara estar ciente das práticas descritas nesta Política.</p>
+<h2>1. QUEM SOMOS</h2>
+<p>Esta Política se aplica ao tratamento de dados pessoais realizado pela:</p>
+<p>Boneco Wilson
+boneco@bonecowilson.com.br
+bonecowilson.com.br</p>
+<p>Para os fins da legislação aplicável, especialmente a Lei Geral de Proteção de Dados Pessoais — LGPD, a empresa poderá atuar como <strong>Controladora</strong> dos dados pessoais tratados nas situações descritas nesta Política.</p>
+<h2>2. QUAIS DADOS PODEMOS COLETAR</h2>
+<p>Dependendo da forma como você interage conosco, podemos coletar diferentes categorias de informações.</p>
+<h3>2.1. Dados fornecidos diretamente por você</h3>
+<p>Quando você realiza uma compra, solicita atendimento ou preenche um formulário, podemos coletar:</p>
+<ul>
+<li>nome completo;</li>
+<li>CPF, quando necessário para a operação;</li>
+<li>endereço de entrega;</li>
+<li>endereço de cobrança;</li>
+<li>e-mail;</li>
+<li>número de telefone ou celular;</li>
+<li>informações relacionadas ao pedido;</li>
+<li>informações fornecidas voluntariamente durante o atendimento;</li>
+<li>dados necessários para emissão de documentos fiscais.</li>
+</ul>
+<p>Não solicitamos dados pessoais além daqueles necessários para as finalidades informadas.</p>
+<h3>2.2. Dados relacionados ao pagamento</h3>
+<p>Os pagamentos podem ser processados por empresas especializadas em meios de pagamento.</p>
+<p>Dependendo do método escolhido, essas empresas poderão coletar e processar informações necessárias para concluir a transação.</p>
+<p>Sempre que possível, os dados completos de cartão de crédito ou débito serão tratados diretamente pelo provedor de pagamento, não sendo necessário que a empresa armazene essas informações em seus próprios sistemas.</p>
+<h3>2.3. Dados de navegação</h3>
+<p>Quando você acessa nosso site, determinadas informações técnicas podem ser coletadas automaticamente, como:</p>
+<ul>
+<li>endereço IP;</li>
+<li>tipo e versão do navegador;</li>
+<li>dispositivo utilizado;</li>
+<li>sistema operacional;</li>
+<li>páginas acessadas;</li>
+<li>data e horário de acesso;</li>
+<li>origem do acesso;</li>
+<li>informações relacionadas à interação com o site.</li>
+</ul>
+<p>Esses dados podem ser obtidos por meio de cookies, pixels, tags e tecnologias semelhantes.</p>
+<h2>3. COMO UTILIZAMOS OS SEUS DADOS</h2>
+<p>Os dados pessoais poderão ser utilizados para finalidades legítimas e compatíveis com a relação estabelecida com você, incluindo:</p>
+<ul>
+<li>processar e administrar pedidos;</li>
+<li>confirmar pagamentos;</li>
+<li>realizar entregas;</li>
+<li>emitir notas fiscais;</li>
+<li>prestar atendimento ao cliente;</li>
+<li>responder dúvidas e solicitações;</li>
+<li>fornecer informações sobre produtos;</li>
+<li>processar trocas, devoluções e solicitações de garantia;</li>
+<li>prevenir fraudes e atividades ilícitas;</li>
+<li>melhorar o funcionamento e a segurança do site;</li>
+<li>compreender como os visitantes utilizam nosso site;</li>
+<li>desenvolver e aprimorar nossos produtos e serviços;</li>
+<li>enviar comunicações relacionadas a pedidos e serviços;</li>
+<li>enviar comunicações de marketing, quando permitido e de acordo com suas preferências;</li>
+<li>cumprir obrigações legais e regulatórias;</li>
+<li>exercer ou defender direitos em processos administrativos, judiciais ou arbitrais.</li>
+</ul>
+<h2>4. BASES LEGAIS PARA O TRATAMENTO</h2>
+<p>O tratamento de dados pessoais será realizado de acordo com as hipóteses previstas na legislação aplicável.</p>
+<p>Dependendo da situação, poderemos utilizar como base legal:</p>
+<ul>
+<li>execução de contrato ou de procedimentos relacionados ao contrato;</li>
+<li>cumprimento de obrigação legal ou regulatória;</li>
+<li>exercício regular de direitos;</li>
+<li>legítimo interesse, quando aplicável;</li>
+<li>consentimento do titular, quando necessário;</li>
+<li>proteção do crédito, quando aplicável;</li>
+<li>prevenção à fraude e à segurança do titular;</li>
+<li>outras bases legais previstas na legislação.</li>
+</ul>
+<p>Quando o tratamento depender de consentimento, você poderá revogá-lo nos termos da legislação aplicável.</p>
+<h2>5. COOKIES E TECNOLOGIAS SEMELHANTES</h2>
+<p>Nosso site poderá utilizar cookies e tecnologias semelhantes para diferentes finalidades.</p>
+<p>Os cookies podem ser utilizados para:</p>
+<ul>
+<li>permitir o funcionamento adequado do site;</li>
+<li>lembrar determinadas preferências;</li>
+<li>manter itens adicionados ao carrinho;</li>
+<li>compreender como o site é utilizado;</li>
+<li>medir desempenho;</li>
+<li>melhorar a experiência de navegação;</li>
+<li>realizar análises estatísticas;</li>
+<li>apresentar publicidade ou conteúdo mais relevante, quando aplicável.</li>
+</ul>
+<h3>Cookies necessários</h3>
+<p>São utilizados para permitir o funcionamento básico do site e de recursos essenciais, como navegação, carrinho e processos de compra.</p>
+<h3>Cookies analíticos</h3>
+<p>Podem ser utilizados para compreender como os visitantes utilizam o site e identificar oportunidades de melhoria.</p>
+<h3>Cookies de marketing</h3>
+<p>Quando utilizados, podem permitir a medição de campanhas e a apresentação de publicidade relacionada aos interesses do usuário.</p>
+<p>Você poderá controlar ou bloquear determinados cookies por meio das configurações do seu navegador ou das ferramentas disponibilizadas pelo próprio site, quando aplicável.</p>
+<p>A desativação de determinados cookies poderá afetar o funcionamento de algumas funcionalidades.</p>
+<h2>6. COMPARTILHAMENTO DE DADOS</h2>
+<p>Não comercializamos dados pessoais dos nossos clientes.</p>
+<p>Poderemos compartilhar informações pessoais com terceiros quando isso for necessário para as finalidades descritas nesta Política, incluindo:</p>
+<ul>
+<li>empresas responsáveis pelo processamento de pagamentos;</li>
+<li>empresas de logística e transporte;</li>
+<li>fornecedores de tecnologia e hospedagem;</li>
+<li>plataformas de comércio eletrônico;</li>
+<li>empresas responsáveis por atendimento ao cliente;</li>
+<li>prestadores de serviços de comunicação;</li>
+<li>ferramentas de análise e métricas;</li>
+<li>prestadores de serviços de marketing, quando aplicável;</li>
+<li>autoridades públicas, quando houver obrigação legal;</li>
+<li>assessorias jurídicas, contábeis ou profissionais quando necessário;</li>
+<li>terceiros envolvidos na prevenção e investigação de fraudes.</li>
+</ul>
+<p>Os terceiros que tratarem dados em nosso nome deverão observar as obrigações aplicáveis à proteção e segurança das informações.</p>
+<h2>7. TRANSFERÊNCIA INTERNACIONAL DE DADOS</h2>
+<p>Alguns dos nossos fornecedores de tecnologia ou serviços podem estar localizados fora do Brasil ou utilizar infraestrutura localizada em outros países.</p>
+<p>Quando houver transferência internacional de dados pessoais, serão adotadas as medidas e mecanismos previstos na legislação aplicável para proteger essas informações.</p>
+<h2>8. SEGURANÇA DOS DADOS</h2>
+<p>Adotamos medidas técnicas e administrativas razoáveis para proteger os dados pessoais contra acessos não autorizados, destruição, perda, alteração, comunicação ou qualquer outra forma de tratamento inadequado ou ilícito.</p>
+<p>Entretanto, nenhum sistema conectado à internet pode ser considerado completamente seguro.</p>
+<p>Por isso, embora empreguemos medidas de proteção adequadas, não podemos garantir segurança absoluta das informações.</p>
+<h2>9. POR QUANTO TEMPO MANTEMOS OS DADOS</h2>
+<p>Os dados pessoais serão mantidos pelo período necessário para cumprir as finalidades para as quais foram coletados.</p>
+<p>Após o encerramento da relação, determinados dados poderão permanecer armazenados quando isso for necessário para:</p>
+<ul>
+<li>cumprimento de obrigações legais ou regulatórias;</li>
+<li>exercício regular de direitos;</li>
+<li>prevenção de fraudes;</li>
+<li>cumprimento de obrigações contratuais;</li>
+<li>manutenção de registros exigidos pela legislação;</li>
+<li>outras hipóteses legalmente autorizadas.</li>
+</ul>
+<p>Quando os dados deixarem de ser necessários e não houver obrigação legal ou outra justificativa legítima para sua conservação, eles poderão ser eliminados ou anonimizados.</p>
+<h2>10. DIREITOS DO TITULAR</h2>
+<p>Nos termos da legislação aplicável, você poderá exercer direitos relacionados aos seus dados pessoais, incluindo, quando aplicável:</p>
+<ul>
+<li>confirmação da existência de tratamento;</li>
+<li>acesso aos dados;</li>
+<li>correção de dados incompletos, inexatos ou desatualizados;</li>
+<li>anonimização, bloqueio ou eliminação de dados desnecessários ou tratados em desconformidade;</li>
+<li>portabilidade, observadas as condições previstas em lei;</li>
+<li>informação sobre entidades públicas e privadas com as quais os dados foram compartilhados;</li>
+<li>informação sobre a possibilidade de não fornecer consentimento e sobre as consequências dessa decisão;</li>
+<li>revogação do consentimento;</li>
+<li>oposição ao tratamento realizado em determinadas hipóteses;</li>
+<li>revisão de decisões tomadas unicamente com base em tratamento automatizado, quando aplicável.</li>
+</ul>
+<p>Alguns desses direitos estão sujeitos às condições e limitações estabelecidas pela legislação.</p>
+<h2>11. COMO EXERCER SEUS DIREITOS</h2>
+<p>Para solicitar informações sobre seus dados pessoais ou exercer seus direitos, entre em contato através de:</p>
+<p><strong>E-mail:</strong> boneco@bonecowilson.com.br</p>
+<p>Para proteger a privacidade dos titulares, poderemos solicitar informações adicionais para confirmar a identidade do solicitante antes de atender determinadas solicitações.</p>
+<p>Responderemos às solicitações dentro dos prazos e condições estabelecidos pela legislação aplicável.</p>
+<h2>12. COMUNICAÇÕES E MARKETING</h2>
+<p>Podemos enviar comunicações relacionadas ao processamento de pedidos, pagamentos, entregas, atendimento, segurança e outros aspectos necessários à execução da relação com o cliente.</p>
+<p>Também poderemos enviar comunicações promocionais quando houver base legal adequada para isso.</p>
+<p>Caso não queira mais receber determinadas comunicações de marketing, você poderá utilizar a opção de descadastramento disponibilizada na própria comunicação ou entrar em contato conosco.</p>
+<p>O cancelamento de comunicações promocionais não impede o envio de mensagens necessárias para a execução de pedidos ou prestação de serviços.</p>
+<h2>13. DADOS DE CRIANÇAS E ADOLESCENTES</h2>
+<p>Nosso site e nossos produtos não são direcionados especificamente a crianças.</p>
+<p>Não buscamos coletar intencionalmente dados pessoais de crianças sem a observância das exigências legais aplicáveis.</p>
+<p>Caso um responsável identifique que dados pessoais de uma criança foram fornecidos ao site de maneira inadequada, poderá entrar em contato conosco pelo canal de privacidade indicado nesta Política.</p>
+<h2>14. LINKS PARA OUTROS SITES</h2>
+<p>Nosso site poderá conter links para sites, plataformas ou serviços de terceiros.</p>
+<p>Esta Política de Privacidade não se aplica às práticas de privacidade desses terceiros.</p>
+<p>Recomendamos que você consulte as respectivas políticas de privacidade antes de fornecer informações pessoais a esses serviços.</p>
+<h2>15. ALTERAÇÕES NESTA POLÍTICA</h2>
+<p>Esta Política de Privacidade poderá ser atualizada periodicamente para refletir mudanças em nossos serviços, processos, tecnologias ou requisitos legais.</p>
+<p>Quando houver alterações relevantes, poderemos utilizar meios razoáveis para informar os usuários.</p>
+<p>A versão mais recente estará sempre disponível em nosso site.</p>
+<h2>16. CONTATO SOBRE PRIVACIDADE</h2>
+<p>Caso tenha dúvidas, solicitações ou reclamações relacionadas ao tratamento de seus dados pessoais, entre em contato:</p>
+<p>Boneco Wilson
+boneco@bonecowilson.com.br
+(11) 99734-3865</p>
+<h2>17. LEGISLAÇÃO APLICÁVEL</h2>
+<p>Esta Política de Privacidade será interpretada de acordo com a legislação brasileira aplicável à proteção de dados pessoais, especialmente a <strong>Lei Geral de Proteção de Dados Pessoais — LGPD (Lei nº 13.709/2018)</strong>.</p>
+<div class="legal-summary"><p><strong>Resumo da nossa política:</strong> coletamos apenas os dados necessários para operar nosso site, processar pedidos, entregar produtos, prestar atendimento, cumprir obrigações legais e, quando permitido, melhorar nossos serviços e comunicações. Não vendemos dados pessoais dos nossos clientes.</p></div>
     </div>
   </div>
 </div>
@@ -908,14 +1307,13 @@
   <section class="report-cta section-pad">
     <div class="container" style="text-align:center;">
       <span class="eyebrow center" style="justify-content:center;">Na mídia</span>
-      <h2 class="center" style="font-size:clamp(26px,3.4vw,38px);text-transform:uppercase;max-width:640px;">Assista à reportagem sobre o Wilson.</h2>
+      <h2 class="report-title center">Assista à reportagem sobre o Wilson.</h2>
       <p class="center" style="color:var(--text-secondary);max-width:520px;margin:16px auto 40px;">Veja como o Boneco Wilson é usado no dia a dia e por que motoristas têm adotado essa camada extra de companhia no trânsito.</p>
-      <div class="video-teaser" role="button" tabindex="0" aria-label="Assistir reportagem sobre o Boneco Wilson" id="video-trigger" data-youtube-id="NPlYQAWT_SQ" style="margin:0 auto;">
-        <div class="vt-thumb">
-          <img src="https://img.youtube.com/vi/NPlYQAWT_SQ/hqdefault.jpg" alt="Prévia da reportagem sobre o Boneco Wilson">
-          <span class="vt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
-        </div>
-        <div class="vt-text">
+      <div class="report-video-card" role="button" tabindex="0" aria-label="Assistir reportagem sobre o Boneco Wilson" id="video-trigger" data-youtube-id="NPlYQAWT_SQ">
+        <img src="https://img.youtube.com/vi/NPlYQAWT_SQ/maxresdefault.jpg" alt="Prévia da reportagem sobre o Boneco Wilson">
+        <div class="report-video-overlay"></div>
+        <div class="report-video-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        <div class="report-video-caption">
           <p>Assista à reportagem sobre o Wilson</p>
           <span>Veja como ele é usado no dia a dia</span>
         </div>
@@ -937,6 +1335,35 @@
         <div class="t-card"><div class="stars">★★★★★</div><p>Entrega rápida e produto bem embalado. Ficou exatamente como nas fotos do site.</p><div class="t-author"><div class="t-avatar">PA</div><div><span>Pedro A.</span><small>Porto Alegre, RS</small></div></div></div>
         <div class="t-card"><div class="stars">★★★★★</div><p>Comprei para minha mãe, que dirige sozinha à noite. Ela disse que se sente mais confortável agora.</p><div class="t-author"><div class="t-avatar">LT</div><div><span>Lucas T.</span><small>Salvador, BA</small></div></div></div>
         <div class="t-card"><div class="stars">★★★★★</div><p>Simples, prático e cumpre o que promete. Já indiquei para colegas de trabalho.</p><div class="t-author"><div class="t-avatar">CB</div><div><span>Camila B.</span><small>Recife, PE</small></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NA MIDIA -->
+  <section class="media-section section-pad" id="na-midia">
+    <div class="container" style="text-align:center;">
+      <span class="eyebrow center" style="justify-content:center;">Na mídia</span>
+      <h2 class="center" style="font-size:clamp(24px,3.4vw,38px);text-transform:uppercase;">Boneco Wilson na mídia</h2>
+      <p class="center" style="color:var(--text-secondary);max-width:520px;margin:16px auto 0;">Reportagens e matérias sobre o boneco mais vendido do Brasil</p>
+    </div>
+    <div class="media-track-wrapper">
+      <div class="media-track" id="media-track">
+        <a class="media-item" href="https://oglobo.globo.com/brasil/noticia/2025/06/16/passageiro-reborn-e-usado-por-motoristas-para-se-protegerem-de-assaltos-no-transito.ghtml" target="_blank" rel="noopener" aria-label="Ler matéria: O Globo"><img src="https://drive.google.com/thumbnail?id=1qFrfw4Et5_sNpwcJUBQAEuK703lYjXGe&sz=w500" alt="Reportagem sobre o Boneco Wilson — O Globo" loading="lazy"><span class="media-source">O Globo</span></a>
+        <a class="media-item" href="https://www.uol.com.br/carros/noticias/redacao/2025/06/16/passageiro-reborn-vira-tatica-de-mulheres-e-fretistas-contra-assaltantes.htm" target="_blank" rel="noopener" aria-label="Ler matéria: UOL"><img src="https://drive.google.com/thumbnail?id=1oJwRrhAkPfgkCrQPWc4N9IISy600R9dz&sz=w500" alt="Reportagem sobre o Boneco Wilson — UOL" loading="lazy"><span class="media-source">UOL</span></a>
+        <a class="media-item" href="https://www.estadao.com.br/cultura/curiocidade/mulheres-no-volante-companhia-constante/?srsltid=AfmBOop7On1xruBdGXKEA5V294ep68j-w9CfrF_iDeWxdZVtr51c-7Lv" target="_blank" rel="noopener" aria-label="Ler matéria: Estadão"><img src="https://drive.google.com/thumbnail?id=15-wu3F1GEe839LYQCMBR5BmKe6b5yVK5&sz=w500" alt="Reportagem sobre o Boneco Wilson — Estadão" loading="lazy"><span class="media-source">Estadão</span></a>
+        <a class="media-item" href="https://www.gazetadopovo.com.br/automoveis/acessorios-07ukqxvgeyksoddzmjednj0b2/" target="_blank" rel="noopener" aria-label="Ler matéria: Gazeta do Povo"><img src="https://drive.google.com/thumbnail?id=12fIPEBciE7WO8jHCl_T3jiWU566TZjv6&sz=w500" alt="Reportagem sobre o Boneco Wilson — Gazeta do Povo" loading="lazy"><span class="media-source">Gazeta do Povo</span></a>
+        <a class="media-item" href="https://www.otempo.com.br/autotempo/2025/6/16/passageiro-reborn-boneco-no-carro-vira-truque-para-se-sentir-mais-seguro-no-transito" target="_blank" rel="noopener" aria-label="Ler matéria: O Tempo"><img src="https://drive.google.com/thumbnail?id=1itDEyNLov0_ly2nzJcREstGf3VMiebMM&sz=w500" alt="Reportagem sobre o Boneco Wilson — O Tempo" loading="lazy"><span class="media-source">O Tempo</span></a>
+        <a class="media-item" href="https://noticiasdatv.uol.com.br/noticia/televisao/de-aposta-milionaria-boneco-inflavel-tudo-sobre-volta-do-shark-tank-brasil-27802" target="_blank" rel="noopener" aria-label="Ler matéria: Notícias da TV"><img src="https://drive.google.com/thumbnail?id=1fB6n9puwbm__GLr9OjvborJRd5QJfqTe&sz=w500" alt="Reportagem sobre o Boneco Wilson — Notícias da TV" loading="lazy"><span class="media-source">Notícias da TV</span></a>
+        <a class="media-item" href="https://motorshow.com.br/artista-compra-boneco-para-se-proteger-de-transito-no-rj" target="_blank" rel="noopener" aria-label="Ler matéria: Motorshow"><img src="https://drive.google.com/thumbnail?id=1PnCB9KpCepIMrDfleRoc-CsgyGG-5vJ6&sz=w500" alt="Reportagem sobre o Boneco Wilson — Motorshow" loading="lazy"><span class="media-source">Motorshow</span></a>
+        <a class="media-item" href="https://www.bnews.com.br/noticias/geral/passageiro-reborn-vira-tatica-contra-assaltos-mas-gera-consequencias-entenda.html" target="_blank" rel="noopener" aria-label="Ler matéria: BNews"><img src="https://drive.google.com/thumbnail?id=1LxM4AkRCIIpYhAv5MMSPbtUTtBjySjHM&sz=w500" alt="Reportagem sobre o Boneco Wilson — BNews" loading="lazy"><span class="media-source">BNews</span></a>
+        <a class="media-item" href="https://oglobo.globo.com/brasil/noticia/2025/06/16/passageiro-reborn-e-usado-por-motoristas-para-se-protegerem-de-assaltos-no-transito.ghtml" target="_blank" rel="noopener" aria-label="Ler matéria: O Globo"><img src="https://drive.google.com/thumbnail?id=1qFrfw4Et5_sNpwcJUBQAEuK703lYjXGe&sz=w500" alt="Reportagem sobre o Boneco Wilson — O Globo" loading="lazy"><span class="media-source">O Globo</span></a>
+        <a class="media-item" href="https://www.uol.com.br/carros/noticias/redacao/2025/06/16/passageiro-reborn-vira-tatica-de-mulheres-e-fretistas-contra-assaltantes.htm" target="_blank" rel="noopener" aria-label="Ler matéria: UOL"><img src="https://drive.google.com/thumbnail?id=1oJwRrhAkPfgkCrQPWc4N9IISy600R9dz&sz=w500" alt="Reportagem sobre o Boneco Wilson — UOL" loading="lazy"><span class="media-source">UOL</span></a>
+        <a class="media-item" href="https://www.estadao.com.br/cultura/curiocidade/mulheres-no-volante-companhia-constante/?srsltid=AfmBOop7On1xruBdGXKEA5V294ep68j-w9CfrF_iDeWxdZVtr51c-7Lv" target="_blank" rel="noopener" aria-label="Ler matéria: Estadão"><img src="https://drive.google.com/thumbnail?id=15-wu3F1GEe839LYQCMBR5BmKe6b5yVK5&sz=w500" alt="Reportagem sobre o Boneco Wilson — Estadão" loading="lazy"><span class="media-source">Estadão</span></a>
+        <a class="media-item" href="https://www.gazetadopovo.com.br/automoveis/acessorios-07ukqxvgeyksoddzmjednj0b2/" target="_blank" rel="noopener" aria-label="Ler matéria: Gazeta do Povo"><img src="https://drive.google.com/thumbnail?id=12fIPEBciE7WO8jHCl_T3jiWU566TZjv6&sz=w500" alt="Reportagem sobre o Boneco Wilson — Gazeta do Povo" loading="lazy"><span class="media-source">Gazeta do Povo</span></a>
+        <a class="media-item" href="https://www.otempo.com.br/autotempo/2025/6/16/passageiro-reborn-boneco-no-carro-vira-truque-para-se-sentir-mais-seguro-no-transito" target="_blank" rel="noopener" aria-label="Ler matéria: O Tempo"><img src="https://drive.google.com/thumbnail?id=1itDEyNLov0_ly2nzJcREstGf3VMiebMM&sz=w500" alt="Reportagem sobre o Boneco Wilson — O Tempo" loading="lazy"><span class="media-source">O Tempo</span></a>
+        <a class="media-item" href="https://noticiasdatv.uol.com.br/noticia/televisao/de-aposta-milionaria-boneco-inflavel-tudo-sobre-volta-do-shark-tank-brasil-27802" target="_blank" rel="noopener" aria-label="Ler matéria: Notícias da TV"><img src="https://drive.google.com/thumbnail?id=1fB6n9puwbm__GLr9OjvborJRd5QJfqTe&sz=w500" alt="Reportagem sobre o Boneco Wilson — Notícias da TV" loading="lazy"><span class="media-source">Notícias da TV</span></a>
+        <a class="media-item" href="https://motorshow.com.br/artista-compra-boneco-para-se-proteger-de-transito-no-rj" target="_blank" rel="noopener" aria-label="Ler matéria: Motorshow"><img src="https://drive.google.com/thumbnail?id=1PnCB9KpCepIMrDfleRoc-CsgyGG-5vJ6&sz=w500" alt="Reportagem sobre o Boneco Wilson — Motorshow" loading="lazy"><span class="media-source">Motorshow</span></a>
+        <a class="media-item" href="https://www.bnews.com.br/noticias/geral/passageiro-reborn-vira-tatica-contra-assaltos-mas-gera-consequencias-entenda.html" target="_blank" rel="noopener" aria-label="Ler matéria: BNews"><img src="https://drive.google.com/thumbnail?id=1LxM4AkRCIIpYhAv5MMSPbtUTtBjySjHM&sz=w500" alt="Reportagem sobre o Boneco Wilson — BNews" loading="lazy"><span class="media-source">BNews</span></a>
       </div>
     </div>
   </section>
@@ -1020,15 +1447,15 @@
         <a href="#beneficios">Benefícios</a><a href="#como-funciona">Como funciona</a><a href="#depoimentos">Depoimentos</a><a href="#faq">FAQ</a>
       </div>
       <div class="footer-col"><h5>Suporte</h5>
-        <a href="#faq">Central de ajuda</a><a href="#faq">Rastrear pedido</a><a href="#faq">Trocas e devoluções</a>
+        <a href="https://wa.me/5511997343865?text=Ol%C3%A1!%20Preciso%20de%20ajuda%20com%20o%20Boneco%20Wilson." target="_blank" rel="noopener">Central de ajuda</a><a href="https://wa.me/5511997343865?text=Ol%C3%A1!%20Quero%20rastrear%20meu%20pedido%20do%20Boneco%20Wilson." target="_blank" rel="noopener">Rastrear pedido</a><a href="https://wa.me/5511997343865?text=Ol%C3%A1!%20Preciso%20de%20ajuda%20com%20troca%20ou%20devolu%C3%A7%C3%A3o." target="_blank" rel="noopener">Trocas e devoluções</a>
       </div>
       <div class="footer-col"><h5>Institucional</h5>
-        <a href="#">Política de privacidade</a><a href="#">Termos de uso</a><a href="#">Contato</a>
+        <a href="#" class="js-open-legal" data-modal="privacy-modal">Política de privacidade</a><a href="#" class="js-open-legal" data-modal="terms-modal">Termos de uso</a><a href="https://wa.me/5511997343865?text=Ol%C3%A1!%20Gostaria%20de%20falar%20sobre%20o%20Boneco%20Wilson." target="_blank" rel="noopener">Contato</a>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Boneco Wilson. Todos os direitos reservados.</span>
-      <span>Site não oficial de demonstração.</span>
+      <span>© 2026 Boneco Wilson. Todos os direitos reservados - Produto licenciado</span>
+      <span>Site oficial - Não use cópias</span>
     </div>
   </div>
 </footer>
@@ -1236,6 +1663,42 @@
     videoModal.addEventListener('click', function(e){ if(e.target === videoModal){ closeVideoModal(); } });
   }
   document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && videoModal && videoModal.classList.contains('open')){ closeVideoModal(); } });
+
+  // Legal modals (Termos de Uso / Política de Privacidade)
+  function openLegalModal(id){
+    var modal = document.getElementById(id);
+    if(!modal) return;
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    var closeBtn = modal.querySelector('.legal-modal-close');
+    if(closeBtn){ closeBtn.focus(); }
+  }
+  function closeLegalModal(modal){
+    if(!modal) return;
+    modal.classList.remove('open');
+    var anyOpen = document.querySelector('.legal-modal.open, #video-modal.open');
+    if(!anyOpen){ document.body.style.overflow = ''; }
+  }
+  document.querySelectorAll('.js-open-legal').forEach(function(link){
+    link.addEventListener('click', function(e){
+      e.preventDefault();
+      openLegalModal(link.getAttribute('data-modal'));
+    });
+  });
+  document.querySelectorAll('.js-close-legal').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      closeLegalModal(document.getElementById(btn.getAttribute('data-modal')));
+    });
+  });
+  document.querySelectorAll('.legal-modal').forEach(function(modal){
+    modal.addEventListener('click', function(e){ if(e.target === modal){ closeLegalModal(modal); } });
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape'){
+      var openModal = document.querySelector('.legal-modal.open');
+      if(openModal){ closeLegalModal(openModal); }
+    }
+  });
 
   // Interactive FX: Spotlight (Como funciona rows + stat cards)
   var spotEls = document.querySelectorAll('.fx-spotlight');
