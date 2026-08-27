@@ -159,14 +159,27 @@
     padding:34px 30px;text-align:center;margin-bottom:52px;
   }
   .guarantee p{color:var(--text-secondary);font-size:14px;max-width:520px;margin:0 auto 18px;}
-  .guarantee .pagbank{
-    display:inline-flex;align-items:center;gap:10px;font-family:var(--display);font-weight:900;font-size:20px;
-    background:var(--elevated);padding:12px 22px;border-radius:10px;border:1px solid var(--border-strong);
+  .guarantee-banner{
+    position:relative;width:100%;max-width:600px;margin:0 auto 18px;
+    border-radius:12px;overflow:hidden;border:1px solid var(--border-strong);
+    box-shadow:0 20px 40px -22px rgba(0,0,0,.6);
   }
-  .guarantee .pagbank .dot{width:10px;height:10px;border-radius:50%;}
-  .guarantee .pagbank .dot.d1{background:#8DD35F;}
-  .guarantee .pagbank .dot.d2{background:#5FC7D3;}
-  .guarantee .pagbank .dot.d3{background:var(--yellow);}
+  .guarantee-banner img{width:100%;height:auto;display:block;}
+  .guarantee-banner-text{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    max-width:88%;padding:10px 22px;text-align:center;border-radius:10px;
+    background:rgba(255,250,235,.88);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
+    box-shadow:0 8px 24px -8px rgba(0,0,0,.35);
+    font-family:var(--display);font-weight:900;font-size:clamp(15px,2.6vw,23px);
+    color:#1A1200;letter-spacing:-0.01em;line-height:1.2;
+  }
+  .guarantee-caption{
+    font-size:13.5px;color:var(--text-secondary);text-align:center;max-width:640px;margin:0 auto;
+  }
+  .guarantee-caption strong{color:var(--yellow);font-weight:700;}
+  @media (min-width:641px){
+    .guarantee-caption{white-space:nowrap;}
+  }
 
   /* Support callout */
   .support-callout{
@@ -378,8 +391,11 @@
     </div>
 
     <div class="guarantee">
-      <p>Pagamentos processados pela maior plataforma de pagamentos do Brasil, garantindo segurança e rapidez em todas as transações.</p>
-      <div class="pagbank"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span>Pagamento garantido por PagBank</div>
+      <div class="guarantee-banner">
+        <img src="https://drive.google.com/thumbnail?id=1MQGTbMXapZ2GInrPYg3ZsLFOqUqLp8-D&sz=w1000" alt="Banner PagBank">
+        <span class="guarantee-banner-text">Pagamento garantido pelo PagBank</span>
+      </div>
+      <p class="guarantee-caption">Pagamentos processados pela maior plataforma de pagamentos do Brasil, garantindo <strong>segurança</strong> e <strong>rapidez</strong> em todas as transações.</p>
     </div>
 
     <div class="support-callout">
