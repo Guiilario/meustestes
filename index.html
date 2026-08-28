@@ -63,18 +63,14 @@
   ul{list-style:none;}
   h1,h2,h3,h4{font-family:var(--display);font-weight:800;letter-spacing:-0.02em;line-height:1.05;}
   .container{max-width:var(--container);margin:0 auto;padding:0 24px;}
+
+  /* Ambient site-wide liquid background — sits behind everything, toned down for legibility */
+  #liquid-ether{position:fixed;inset:0;z-index:0;width:100%;height:100%;opacity:.34;mix-blend-mode:screen;pointer-events:none;}
+  #page-content{position:relative;z-index:1;}
+  @media (max-width:640px){#liquid-ether{opacity:.22;}}
   section{position:relative;}
   ::selection{background:var(--yellow);color:var(--black);}
   :focus-visible{outline:2px solid var(--yellow);outline-offset:3px;}
-
-  /* LiquidEther: ensure all content layers above the fixed WebGL canvas */
-  #liquid-ether-bg{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;}
-  .announce,header,.mobile-menu,main,footer,.sticky-cta,#preloader,#scroll-progress,#video-modal,.legal-modal{position:relative;z-index:1;}
-  header{z-index:900;}
-  #preloader{z-index:9999;}
-  #scroll-progress{z-index:1000;}
-  #video-modal,.legal-modal{z-index:2000;}
-  .sticky-cta{z-index:850;}
 
   .eyebrow{
     display:inline-flex;align-items:center;gap:8px;
@@ -415,7 +411,7 @@
 
 
   /* ===== Trust bar ===== */
-  .trust-bar{background:var(--dark);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:26px 0;}
+  .trust-bar{background:rgba(10,10,10,.88);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:26px 0;}
   .trust-inner{display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;}
   .trust-item{display:flex;align-items:center;gap:10px;font-size:13.5px;font-weight:600;color:var(--text-secondary);}
   .trust-item svg{width:19px;height:19px;stroke:var(--yellow);flex-shrink:0;}
@@ -437,7 +433,7 @@
   .stagger .reveal:nth-child(6){transition-delay:.5s;}
 
   /* ===== Product intro ===== */
-  .product-intro{background:var(--dark);}
+  .product-intro{background:rgba(10,10,10,.88);}
   .pi-grid{display:grid;grid-template-columns:0.85fr 1.15fr;gap:64px;align-items:center;}
   .pi-visual{
     position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--border-strong);
@@ -457,7 +453,7 @@
   .benefit-row p{color:var(--text-secondary);font-size:14.5px;}
 
   /* ===== Problem section ===== */
-  .problem{background:var(--black);}
+  .problem{background:rgba(5,5,5,.88);}
   .problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;}
   .problem-visual{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:5/6;border:1px solid var(--border-strong);}
   .problem-visual img{width:100%;height:100%;object-fit:cover;filter:grayscale(.15) brightness(.85);}
@@ -471,7 +467,7 @@
   }
 
   /* ===== Stats / context section ===== */
-  .stats-section{background:var(--dark);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+  .stats-section{background:rgba(10,10,10,.88);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
   .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:52px;}
   .stat-card{
     background:var(--card);border:1px solid var(--border);border-radius:12px;padding:30px 24px;text-align:center;
@@ -518,8 +514,8 @@
   .cinematic .fs{margin-top:20px;color:var(--yellow);font-weight:700;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;}
 
   /* ===== Why Wilson ===== */
-  .why{background:var(--dark);}
-  .report-cta{background:var(--black);border-top:1px solid var(--border);}
+  .why{background:rgba(10,10,10,.88);}
+  .report-cta{background:rgba(5,5,5,.9);border-top:1px solid var(--border);}
   .report-video-card{
     position:relative;width:100%;max-width:640px;margin:0 auto;
     border-radius:14px;overflow:hidden;cursor:pointer;
@@ -545,7 +541,7 @@
   .report-video-caption span{font-size:12.5px;color:var(--text-secondary);}
 
   /* ===== Na mídia: 3D scroll gallery (inspired by CircularGallery, bend=0/flat) ===== */
-  .media-section{background:var(--black);overflow:hidden;}
+  .media-section{background:rgba(5,5,5,.9);overflow:hidden;}
   .media-gallery{
     position:relative;width:100%;margin-top:48px;padding:20px 0 34px;
     perspective:1000px;cursor:grab;
@@ -553,6 +549,7 @@
     -webkit-mask-image:linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
   }
   .media-gallery.dragging{cursor:grabbing;}
+  .media-gallery:focus-visible{outline:2px solid var(--yellow);outline-offset:6px;}
   .media-track{
     display:flex;align-items:flex-start;gap:26px;width:max-content;
     will-change:transform;transform-style:preserve-3d;
@@ -620,7 +617,7 @@
 
   /* ===== Final offer ===== */
   .final-offer{
-    background:linear-gradient(180deg,var(--dark),var(--black));
+    background:linear-gradient(180deg,rgba(10,10,10,.9),rgba(5,5,5,.94));
     padding:120px 0;text-align:center;position:relative;
   }
   .final-offer::before{
@@ -635,7 +632,7 @@
   .checks svg{width:16px;height:16px;stroke:var(--yellow);}
 
   /* ===== FAQ ===== */
-  .faq{background:var(--dark);}
+  .faq{background:rgba(10,10,10,.88);}
   .faq-list{max-width:760px;margin:56px auto 0;}
   .faq-item{border-bottom:1px solid var(--border);}
   .faq-q{
@@ -652,7 +649,7 @@
   .faq-a p{padding:0 4px 24px;color:var(--text-secondary);font-size:14.5px;max-width:640px;}
 
   /* ===== Footer ===== */
-  footer{background:var(--black);border-top:1px solid var(--border);padding:70px 0 30px;}
+  footer{background:rgba(5,5,5,.94);border-top:1px solid var(--border);padding:70px 0 30px;}
   .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;}
   .footer-brand p{color:var(--text-secondary);font-size:13.5px;margin-top:14px;max-width:280px;}
   .footer-col h5{font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-secondary);margin-bottom:16px;}
@@ -713,6 +710,10 @@
 </style>
 </head>
 <body>
+
+<canvas id="liquid-ether" aria-hidden="true"></canvas>
+
+<div id="page-content">
 
 <div id="preloader" aria-hidden="true">
   <div class="pre-grid"></div>
@@ -1214,7 +1215,7 @@ boneco@bonecowilson.com.br
   </section>
 
   <!-- BENEFITS -->
-  <section class="section-pad" id="beneficios" style="background:var(--black);">
+  <section class="section-pad" id="beneficios" style="background:rgba(5,5,5,.88);">
     <div class="container">
       <div class="heading-block center">
         <span class="eyebrow">Benefícios</span>
@@ -1310,7 +1311,7 @@ boneco@bonecowilson.com.br
   </section>
 
   <!-- TESTIMONIALS -->
-  <section class="section-pad" id="depoimentos" style="background:var(--black);">
+  <section class="section-pad" id="depoimentos" style="background:rgba(5,5,5,.88);">
     <div class="container">
       <div class="heading-block center">
         <span class="eyebrow">Depoimentos</span>
@@ -1334,7 +1335,7 @@ boneco@bonecowilson.com.br
       <h2 class="center" style="font-size:clamp(24px,3.4vw,38px);text-transform:uppercase;">Boneco Wilson na mídia</h2>
       <p class="center" style="color:var(--text-secondary);max-width:520px;margin:16px auto 0;">Reportagens e matérias sobre o boneco mais vendido do Brasil</p>
     </div>
-    <div class="media-gallery" id="media-gallery">
+    <div class="media-gallery" id="media-gallery" tabindex="0" role="region" aria-label="Galeria de reportagens sobre o Boneco Wilson. Use as setas do teclado para navegar.">
       <div class="media-track" id="media-track">
         <a class="media-item" href="https://oglobo.globo.com/brasil/noticia/2025/06/16/passageiro-reborn-e-usado-por-motoristas-para-se-protegerem-de-assaltos-no-transito.ghtml" target="_blank" rel="noopener" aria-label="Ler matéria: O Globo"><span class="media-item-frame"><img src="https://drive.google.com/thumbnail?id=1qFrfw4Et5_sNpwcJUBQAEuK703lYjXGe&sz=w500" alt="Reportagem sobre o Boneco Wilson — O Globo" loading="lazy" draggable="false"></span><span class="media-label">O Globo</span></a>
         <a class="media-item" href="https://www.uol.com.br/carros/noticias/redacao/2025/06/16/passageiro-reborn-vira-tatica-de-mulheres-e-fretistas-contra-assaltantes.htm" target="_blank" rel="noopener" aria-label="Ler matéria: UOL"><span class="media-item-frame"><img src="https://drive.google.com/thumbnail?id=1oJwRrhAkPfgkCrQPWc4N9IISy600R9dz&sz=w500" alt="Reportagem sobre o Boneco Wilson — UOL" loading="lazy" draggable="false"></span><span class="media-label">UOL</span></a>
@@ -1680,86 +1681,94 @@ boneco@bonecowilson.com.br
     }, {passive:true});
   }
 
-  // "Na mídia" gallery — drag + wheel scroll with eased momentum (CircularGallery-style, bend=0/flat)
+  // "Na mídia" gallery — ported from the CircularGallery reference (bend=0, DOM/CSS instead of OGL/WebGL)
   var mediaGallery = document.getElementById('media-gallery');
   var mediaTrack = document.getElementById('media-track');
 
   if(mediaGallery && mediaTrack && !reduceMotion){
-    var trackHalfWidth = 0;
-    function recalcTrackWidth(){ trackHalfWidth = mediaTrack.scrollWidth / 2; }
-    recalcTrackWidth();
-    window.addEventListener('load', recalcTrackWidth);
-    window.addEventListener('resize', recalcTrackWidth);
-
-    var current = 0;
-    var target = 0;
-    var scrollEase = 0.05;
-    var scrollSpeed = 3.8;
-    var idleDrift = 0.4;
-    var isDragging = false;
+    var galleryScrollSpeed = 3.8;
+    var galleryScrollEase = 0.02;
+    var scroll = {current:0, target:0, last:0, position:0};
+    var itemWidth = 0;
+    var loopWidth = 0;
+    var isDown = false;
     var dragMoved = false;
     var dragStartX = 0;
-    var dragStartTarget = 0;
-    var lastPointerX = 0;
-    var lastPointerTime = 0;
-    var velocity = 0;
+    var checkTimeout = null;
 
-    function wrapOffset(v){
-      if(trackHalfWidth <= 0) return v;
-      while(v <= -trackHalfWidth){ v += trackHalfWidth; }
-      while(v > 0){ v -= trackHalfWidth; }
-      return v;
+    function lerp(p1, p2, t){ return p1 + (p2 - p1) * t; }
+
+    function measureGallery(){
+      var firstItem = mediaTrack.querySelector('.media-item');
+      if(!firstItem) return;
+      var gapPx = parseFloat(getComputedStyle(mediaTrack).columnGap || getComputedStyle(mediaTrack).gap) || 26;
+      itemWidth = firstItem.getBoundingClientRect().width + gapPx;
+      loopWidth = itemWidth * 8; // 8 unique items per set (content is duplicated once for the infinite loop)
+    }
+    measureGallery();
+    window.addEventListener('load', measureGallery);
+    window.addEventListener('resize', measureGallery);
+
+    function onCheck(){
+      if(itemWidth <= 0) return;
+      var itemIndex = Math.round(Math.abs(scroll.target) / itemWidth);
+      var item = itemWidth * itemIndex;
+      scroll.target = scroll.target < 0 ? -item : item;
+    }
+    function onCheckDebounce(){
+      clearTimeout(checkTimeout);
+      checkTimeout = setTimeout(onCheck, 200);
     }
 
-    function mediaTick(){
-      if(!isDragging){ target -= idleDrift; }
-      current += (target - current) * scrollEase;
-      current = wrapOffset(current);
-      target = wrapOffset(target);
-      mediaTrack.style.transform = 'translateX(' + current + 'px)';
-      requestAnimationFrame(mediaTick);
+    function galleryTick(){
+      scroll.current = lerp(scroll.current, scroll.target, galleryScrollEase);
+      if(loopWidth > 0){
+        while(scroll.current <= -loopWidth){ scroll.current += loopWidth; scroll.target += loopWidth; }
+        while(scroll.current > 0){ scroll.current -= loopWidth; scroll.target -= loopWidth; }
+      }
+      mediaTrack.style.transform = 'translateX(' + scroll.current + 'px)';
+      scroll.last = scroll.current;
+      requestAnimationFrame(galleryTick);
     }
-    requestAnimationFrame(mediaTick);
+    requestAnimationFrame(galleryTick);
 
-    // Wheel: horizontal or vertical wheel input nudges the target with momentum
+    // Wheel — fixed-step nudge per event (matches reference), then snaps to the nearest item
     mediaGallery.addEventListener('wheel', function(e){
       e.preventDefault();
-      var delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
-      target -= delta * (scrollSpeed / 10);
+      var delta = e.deltaY || e.deltaX;
+      scroll.target += (delta > 0 ? galleryScrollSpeed : -galleryScrollSpeed) * 0.2;
+      onCheckDebounce();
     }, {passive:false});
 
-    // Pointer drag: 1:1 grab-and-pull scrolling
+    // Drag — position measured from the fixed start point, like the reference's onTouchMove
     mediaGallery.addEventListener('pointerdown', function(e){
-      isDragging = true;
+      isDown = true;
       dragMoved = false;
+      scroll.position = scroll.current;
       dragStartX = e.clientX;
-      dragStartTarget = target;
-      lastPointerX = e.clientX;
-      lastPointerTime = performance.now();
-      velocity = 0;
       mediaGallery.classList.add('dragging');
-      mediaGallery.setPointerCapture && mediaGallery.setPointerCapture(e.pointerId);
     });
-    mediaGallery.addEventListener('pointermove', function(e){
-      if(!isDragging) return;
-      var dx = e.clientX - dragStartX;
-      if(Math.abs(dx) > 5){ dragMoved = true; }
-      target = dragStartTarget + dx;
-      var now = performance.now();
-      var dt = now - lastPointerTime;
-      if(dt > 0){ velocity = (e.clientX - lastPointerX) / dt; }
-      lastPointerX = e.clientX;
-      lastPointerTime = now;
+    window.addEventListener('pointermove', function(e){
+      if(!isDown) return;
+      var distance = (dragStartX - e.clientX) * (galleryScrollSpeed * 0.025);
+      if(Math.abs(distance) > 3){ dragMoved = true; }
+      scroll.target = scroll.position + distance;
     });
-    function endDrag(){
-      if(!isDragging) return;
-      isDragging = false;
+    function endGalleryDrag(){
+      if(!isDown) return;
+      isDown = false;
       mediaGallery.classList.remove('dragging');
-      target += velocity * 120; // fling momentum on release
+      onCheck();
     }
-    mediaGallery.addEventListener('pointerup', endDrag);
-    mediaGallery.addEventListener('pointerleave', endDrag);
-    mediaGallery.addEventListener('pointercancel', endDrag);
+    window.addEventListener('pointerup', endGalleryDrag);
+    window.addEventListener('pointercancel', endGalleryDrag);
+
+    // Keyboard navigation
+    mediaGallery.addEventListener('keydown', function(e){
+      if(e.key === 'ArrowRight'){ e.preventDefault(); scroll.target += galleryScrollSpeed * 5; onCheckDebounce(); }
+      if(e.key === 'ArrowLeft'){ e.preventDefault(); scroll.target -= galleryScrollSpeed * 5; onCheckDebounce(); }
+      if(e.key === 'Home'){ e.preventDefault(); scroll.target = 0; onCheckDebounce(); }
+    });
 
     // Prevent link navigation when the interaction was a drag, not a click
     mediaTrack.querySelectorAll('.media-item').forEach(function(item){
@@ -1770,7 +1779,215 @@ boneco@bonecowilson.com.br
   }
 })();
 </script>
-<script src="liquid-ether.js"></script>
+
+</div>
+
+<script>
+(function(){
+  var canvas = document.getElementById('liquid-ether');
+  if(!canvas) return;
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduceMotion){ canvas.style.display = 'none'; return; }
+
+  var gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  if(!gl){ canvas.style.display = 'none'; return; }
+
+  // ----- config (mapped from the LiquidEther prop set) -----
+  var mouseForce = 6;
+  var cursorSize = 100;
+  var resolution = 0.5;
+  var autoSpeed = 0.5;
+  var autoIntensity = 2.2;
+  var takeoverDuration = 0.25;      // seconds
+  var autoResumeDelay = 3000;       // ms
+  var autoRampDuration = 0.6;       // seconds
+  var color0 = [0xf3/255, 0xc6/255, 0x0e/255];
+  var color1 = [0xbd/255, 0x97/255, 0x17/255];
+  var color2 = [0xd5/255, 0xd2/255, 0x15/255];
+
+  var vertSrc = 'attribute vec2 aPos; void main(){ gl_Position = vec4(aPos, 0.0, 1.0); }';
+  var fragSrc = [
+    'precision highp float;',
+    '#define N 14',
+    'uniform float uTime;',
+    'uniform vec2 uResolution;',
+    'uniform vec4 uImpulses[N];',
+    'uniform vec3 uColor0;',
+    'uniform vec3 uColor1;',
+    'uniform vec3 uColor2;',
+    'vec3 mod289(vec3 x){return x - floor(x*(1.0/289.0))*289.0;}',
+    'vec2 mod289(vec2 x){return x - floor(x*(1.0/289.0))*289.0;}',
+    'vec3 permute(vec3 x){return mod289(((x*34.0)+1.0)*x);}',
+    'float snoise(vec2 v){',
+    '  const vec4 C = vec4(0.211324865405187,0.366025403784439,-0.577350269189626,0.024390243902439);',
+    '  vec2 i = floor(v + dot(v, C.yy));',
+    '  vec2 x0 = v - i + dot(i, C.xx);',
+    '  vec2 i1 = (x0.x > x0.y) ? vec2(1.0,0.0) : vec2(0.0,1.0);',
+    '  vec4 x12 = x0.xyxy + C.xxzz;',
+    '  x12.xy -= i1;',
+    '  i = mod289(i);',
+    '  vec3 p = permute(permute(i.y + vec3(0.0, i1.y, 1.0)) + i.x + vec3(0.0, i1.x, 1.0));',
+    '  vec3 m = max(0.5 - vec3(dot(x0,x0), dot(x12.xy,x12.xy), dot(x12.zw,x12.zw)), 0.0);',
+    '  m = m*m; m = m*m;',
+    '  vec3 x = 2.0 * fract(p * C.www) - 1.0;',
+    '  vec3 h = abs(x) - 0.5;',
+    '  vec3 ox = floor(x + 0.5);',
+    '  vec3 a0 = x - ox;',
+    '  m *= 1.79284291400159 - 0.85373472095314 * (a0*a0 + h*h);',
+    '  vec3 g;',
+    '  g.x = a0.x * x0.x + h.x * x0.y;',
+    '  g.yz = a0.yz * x12.xz + h.yz * x12.yw;',
+    '  return 130.0 * dot(m, g);',
+    '}',
+    'void main(){',
+    '  vec2 uv = gl_FragCoord.xy / uResolution.xy;',
+    '  vec2 warp = vec2(0.0);',
+    '  for(int i=0;i<N;i++){',
+    '    vec4 imp = uImpulses[i];',
+    '    float dist = distance(uv, imp.xy);',
+    '    float falloff = exp(-dist*dist / (imp.w*imp.w + 0.0001));',
+    '    warp += normalize(uv - imp.xy + 0.0001) * imp.z * falloff;',
+    '  }',
+    '  vec2 p = uv * 3.0 + warp;',
+    '  float n1 = snoise(p + uTime*0.05);',
+    '  float n2 = snoise(p*1.8 - uTime*0.07 + 4.2);',
+    '  float n = (n1 + n2*0.6) * 0.5 + 0.5;',
+    '  vec3 col = mix(uColor0, uColor1, smoothstep(0.2,0.6,n));',
+    '  col = mix(col, uColor2, smoothstep(0.55,0.95,n));',
+    '  float alpha = smoothstep(0.15, 0.5, n) * 0.9;',
+    '  gl_FragColor = vec4(col, alpha);',
+    '}'
+  ].join('\n');
+
+  function compile(type, src){
+    var s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    if(!gl.getShaderParameter(s, gl.COMPILE_STATUS)){
+      console.error('LiquidEther shader error:', gl.getShaderInfoLog(s));
+      return null;
+    }
+    return s;
+  }
+  var vs = compile(gl.VERTEX_SHADER, vertSrc);
+  var fs = compile(gl.FRAGMENT_SHADER, fragSrc);
+  if(!vs || !fs){ canvas.style.display = 'none'; return; }
+  var program = gl.createProgram();
+  gl.attachShader(program, vs);
+  gl.attachShader(program, fs);
+  gl.linkProgram(program);
+  if(!gl.getProgramParameter(program, gl.LINK_STATUS)){
+    console.error('LiquidEther link error:', gl.getProgramInfoLog(program));
+    canvas.style.display = 'none';
+    return;
+  }
+  gl.useProgram(program);
+
+  var quad = new Float32Array([-1,-1, 1,-1, -1,1, 1,1]);
+  var buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, quad, gl.STATIC_DRAW);
+  var aPos = gl.getAttribLocation(program, 'aPos');
+  gl.enableVertexAttribArray(aPos);
+  gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+
+  var uTime = gl.getUniformLocation(program, 'uTime');
+  var uResolution = gl.getUniformLocation(program, 'uResolution');
+  var uImpulses = gl.getUniformLocation(program, 'uImpulses');
+  var uColor0 = gl.getUniformLocation(program, 'uColor0');
+  var uColor1 = gl.getUniformLocation(program, 'uColor1');
+  var uColor2 = gl.getUniformLocation(program, 'uColor2');
+  gl.uniform3fv(uColor0, color0);
+  gl.uniform3fv(uColor1, color1);
+  gl.uniform3fv(uColor2, color2);
+
+  var MAX_IMPULSES = 14;
+  var impulses = []; // {x,y,strength,radius,age,maxAge}
+
+  function resize(){
+    var w = Math.max(1, Math.floor(window.innerWidth * resolution));
+    var h = Math.max(1, Math.floor(window.innerHeight * resolution));
+    canvas.width = w;
+    canvas.height = h;
+    canvas.style.width = '100%';
+    canvas.style.height = '100%';
+    gl.viewport(0, 0, w, h);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  var lastInteraction = -1e9;
+  var lastX = null, lastY = null;
+  var autoBlend = 1; // 1 = fully autonomous, 0 = fully user-driven
+
+  function addImpulse(nx, ny, strength, radiusPx){
+    var radius = radiusPx / window.innerWidth;
+    impulses.push({x:nx, y:ny, strength:strength, radius:Math.max(radius,0.01), age:0, maxAge:1.1});
+    if(impulses.length > MAX_IMPULSES){ impulses.shift(); }
+  }
+
+  window.addEventListener('pointermove', function(e){
+    var nx = e.clientX / window.innerWidth;
+    var ny = 1.0 - e.clientY / window.innerHeight;
+    if(lastX !== null){
+      var dx = e.clientX - lastX, dy = e.clientY - lastY;
+      var mag = Math.sqrt(dx*dx + dy*dy);
+      if(mag > 1){
+        addImpulse(nx, ny, Math.min(mag * 0.0025 * mouseForce, 0.9), cursorSize);
+      }
+    }
+    lastX = e.clientX; lastY = e.clientY;
+    lastInteraction = performance.now();
+  }, {passive:true});
+
+  var startTime = performance.now();
+
+  function tick(){
+    var now = performance.now();
+    var t = (now - startTime) / 1000;
+
+    // cross-fade between user control and autonomous idle motion
+    var idleFor = now - lastInteraction;
+    var rampMs = (idleFor > autoResumeDelay ? autoRampDuration : takeoverDuration) * 1000;
+    var toward = idleFor > autoResumeDelay ? 1 : 0;
+    var step = rampMs > 0 ? (1 / (rampMs / 16.7)) : 1;
+    autoBlend += (toward - autoBlend) * Math.min(1, step);
+
+    if(autoBlend > 0.01){
+      var ax = 0.5 + 0.35 * Math.sin(t * autoSpeed * 0.6);
+      var ay = 0.5 + 0.3 * Math.cos(t * autoSpeed * 0.9 + 1.3);
+      addImpulse(ax, ay, 0.012 * autoIntensity * autoBlend, cursorSize * 1.4);
+    }
+
+    // age out impulses
+    for(var i = impulses.length - 1; i >= 0; i--){
+      impulses[i].age += 1/60;
+      if(impulses[i].age > impulses[i].maxAge){ impulses.splice(i, 1); }
+    }
+
+    var data = new Float32Array(MAX_IMPULSES * 4);
+    for(var j = 0; j < MAX_IMPULSES; j++){
+      var imp = impulses[j];
+      if(imp){
+        var lifeFactor = 1 - imp.age / imp.maxAge;
+        data[j*4+0] = imp.x;
+        data[j*4+1] = imp.y;
+        data[j*4+2] = imp.strength * lifeFactor;
+        data[j*4+3] = imp.radius;
+      }
+    }
+
+    gl.useProgram(program);
+    gl.uniform1f(uTime, t);
+    gl.uniform2f(uResolution, canvas.width, canvas.height);
+    gl.uniform4fv(uImpulses, data);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+})();
+</script>
 
 </body>
 </html>
