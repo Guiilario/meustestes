@@ -42,6 +42,12 @@
   ::selection{background:var(--yellow);color:var(--black);}
   :focus-visible{outline:2px solid var(--yellow);outline-offset:3px;}
 
+  /* LiquidEther: ensure all content layers above the fixed WebGL canvas */
+  #liquid-ether-bg{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;}
+  .urgency-bar,header,main,footer,.wa-float,.legal-modal{position:relative;z-index:1;}
+  header{z-index:200;}
+  .wa-float{z-index:400;}
+  .legal-modal{z-index:2000;}
   /* Urgency bar */
   .urgency-bar{
     background:linear-gradient(90deg, var(--pale), #E3E5EA);
@@ -804,6 +810,7 @@ boneco@bonecowilson.com.br
   }
 })();
 </script>
+<script src="liquid-ether.js"></script>
 
 </body>
 </html>
