@@ -1787,122 +1787,174 @@ boneco@bonecowilson.com.br
   var canvas = document.getElementById('liquid-ether');
   if(!canvas) return;
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(reduceMotion){ canvas.style.display = 'none'; return; }
 
-  var gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-  if(!gl){ canvas.style.display = 'none'; return; }
-
-  // ----- config (mapped from the LiquidEther prop set) -----
   var mouseForce = 6;
   var cursorSize = 100;
   var resolution = 0.5;
   var autoSpeed = 0.5;
   var autoIntensity = 2.2;
-  var takeoverDuration = 0.25;      // seconds
-  var autoResumeDelay = 3000;       // ms
-  var autoRampDuration = 0.6;       // seconds
-  var color0 = [0xf3/255, 0xc6/255, 0x0e/255];
-  var color1 = [0xbd/255, 0x97/255, 0x17/255];
-  var color2 = [0xd5/255, 0xd2/255, 0x15/255];
+  var takeoverDuration = 0.25;
+  var autoResumeDelay = 3000;
+  var autoRampDuration = 0.6;
+  var color0 = [0xf3, 0xc6, 0x0e];
+  var color1 = [0xbd, 0x97, 0x17];
+  var color2 = [0xd5, 0xd2, 0x15];
 
-  var vertSrc = 'attribute vec2 aPos; void main(){ gl_Position = vec4(aPos, 0.0, 1.0); }';
-  var fragSrc = [
-    'precision highp float;',
-    '#define N 14',
-    'uniform float uTime;',
-    'uniform vec2 uResolution;',
-    'uniform vec4 uImpulses[N];',
-    'uniform vec3 uColor0;',
-    'uniform vec3 uColor1;',
-    'uniform vec3 uColor2;',
-    'vec3 mod289(vec3 x){return x - floor(x*(1.0/289.0))*289.0;}',
-    'vec2 mod289(vec2 x){return x - floor(x*(1.0/289.0))*289.0;}',
-    'vec3 permute(vec3 x){return mod289(((x*34.0)+1.0)*x);}',
-    'float snoise(vec2 v){',
-    '  const vec4 C = vec4(0.211324865405187,0.366025403784439,-0.577350269189626,0.024390243902439);',
-    '  vec2 i = floor(v + dot(v, C.yy));',
-    '  vec2 x0 = v - i + dot(i, C.xx);',
-    '  vec2 i1 = (x0.x > x0.y) ? vec2(1.0,0.0) : vec2(0.0,1.0);',
-    '  vec4 x12 = x0.xyxy + C.xxzz;',
-    '  x12.xy -= i1;',
-    '  i = mod289(i);',
-    '  vec3 p = permute(permute(i.y + vec3(0.0, i1.y, 1.0)) + i.x + vec3(0.0, i1.x, 1.0));',
-    '  vec3 m = max(0.5 - vec3(dot(x0,x0), dot(x12.xy,x12.xy), dot(x12.zw,x12.zw)), 0.0);',
-    '  m = m*m; m = m*m;',
-    '  vec3 x = 2.0 * fract(p * C.www) - 1.0;',
-    '  vec3 h = abs(x) - 0.5;',
-    '  vec3 ox = floor(x + 0.5);',
-    '  vec3 a0 = x - ox;',
-    '  m *= 1.79284291400159 - 0.85373472095314 * (a0*a0 + h*h);',
-    '  vec3 g;',
-    '  g.x = a0.x * x0.x + h.x * x0.y;',
-    '  g.yz = a0.yz * x12.xz + h.yz * x12.yw;',
-    '  return 130.0 * dot(m, g);',
-    '}',
-    'void main(){',
-    '  vec2 uv = gl_FragCoord.xy / uResolution.xy;',
-    '  vec2 warp = vec2(0.0);',
-    '  for(int i=0;i<N;i++){',
-    '    vec4 imp = uImpulses[i];',
-    '    float dist = distance(uv, imp.xy);',
-    '    float falloff = exp(-dist*dist / (imp.w*imp.w + 0.0001));',
-    '    warp += normalize(uv - imp.xy + 0.0001) * imp.z * falloff;',
-    '  }',
-    '  vec2 p = uv * 3.0 + warp;',
-    '  float n1 = snoise(p + uTime*0.05);',
-    '  float n2 = snoise(p*1.8 - uTime*0.07 + 4.2);',
-    '  float n = (n1 + n2*0.6) * 0.5 + 0.5;',
-    '  vec3 col = mix(uColor0, uColor1, smoothstep(0.2,0.6,n));',
-    '  col = mix(col, uColor2, smoothstep(0.55,0.95,n));',
-    '  float alpha = smoothstep(0.15, 0.5, n) * 0.9;',
-    '  gl_FragColor = vec4(col, alpha);',
-    '}'
-  ].join('\n');
+  function tryInitWebGL(){
+    var gl = null;
+    try{
+      gl = canvas.getContext('webgl', {antialias:false, alpha:true})
+        || canvas.getContext('experimental-webgl', {antialias:false, alpha:true})
+        || canvas.getContext('webgl2', {antialias:false, alpha:true});
+    }catch(err){ gl = null; }
+    if(!gl) return null;
 
-  function compile(type, src){
-    var s = gl.createShader(type);
-    gl.shaderSource(s, src);
-    gl.compileShader(s);
-    if(!gl.getShaderParameter(s, gl.COMPILE_STATUS)){
-      console.error('LiquidEther shader error:', gl.getShaderInfoLog(s));
+    var vertSrc = 'attribute vec2 aPos; void main(){ gl_Position = vec4(aPos, 0.0, 1.0); }';
+    var fragSrc = [
+      'precision highp float;',
+      '#define N 14',
+      'uniform float uTime;',
+      'uniform vec2 uResolution;',
+      'uniform vec4 uImpulses[N];',
+      'uniform vec3 uColor0;',
+      'uniform vec3 uColor1;',
+      'uniform vec3 uColor2;',
+      'vec3 mod289(vec3 x){return x - floor(x*(1.0/289.0))*289.0;}',
+      'vec2 mod289(vec2 x){return x - floor(x*(1.0/289.0))*289.0;}',
+      'vec3 permute(vec3 x){return mod289(((x*34.0)+1.0)*x);}',
+      'float snoise(vec2 v){',
+      '  const vec4 C = vec4(0.211324865405187,0.366025403784439,-0.577350269189626,0.024390243902439);',
+      '  vec2 i = floor(v + dot(v, C.yy));',
+      '  vec2 x0 = v - i + dot(i, C.xx);',
+      '  vec2 i1 = (x0.x > x0.y) ? vec2(1.0,0.0) : vec2(0.0,1.0);',
+      '  vec4 x12 = x0.xyxy + C.xxzz;',
+      '  x12.xy -= i1;',
+      '  i = mod289(i);',
+      '  vec3 p = permute(permute(i.y + vec3(0.0, i1.y, 1.0)) + i.x + vec3(0.0, i1.x, 1.0));',
+      '  vec3 m = max(0.5 - vec3(dot(x0,x0), dot(x12.xy,x12.xy), dot(x12.zw,x12.zw)), 0.0);',
+      '  m = m*m; m = m*m;',
+      '  vec3 x = 2.0 * fract(p * C.www) - 1.0;',
+      '  vec3 h = abs(x) - 0.5;',
+      '  vec3 ox = floor(x + 0.5);',
+      '  vec3 a0 = x - ox;',
+      '  m *= 1.79284291400159 - 0.85373472095314 * (a0*a0 + h*h);',
+      '  vec3 g;',
+      '  g.x = a0.x * x0.x + h.x * x0.y;',
+      '  g.yz = a0.yz * x12.xz + h.yz * x12.yw;',
+      '  return 130.0 * dot(m, g);',
+      '}',
+      'void main(){',
+      '  vec2 uv = gl_FragCoord.xy / uResolution.xy;',
+      '  vec2 warp = vec2(0.0);',
+      '  for(int i=0;i<N;i++){',
+      '    vec4 imp = uImpulses[i];',
+      '    float dist = distance(uv, imp.xy);',
+      '    float falloff = exp(-dist*dist / (imp.w*imp.w + 0.0001));',
+      '    warp += normalize(uv - imp.xy + 0.0001) * imp.z * falloff;',
+      '  }',
+      '  vec2 p = uv * 3.0 + warp;',
+      '  float n1 = snoise(p + uTime*0.05);',
+      '  float n2 = snoise(p*1.8 - uTime*0.07 + 4.2);',
+      '  float n = (n1 + n2*0.6) * 0.5 + 0.5;',
+      '  vec3 col = mix(uColor0, uColor1, smoothstep(0.2,0.6,n));',
+      '  col = mix(col, uColor2, smoothstep(0.55,0.95,n));',
+      '  float alpha = smoothstep(0.15, 0.5, n) * 0.9;',
+      '  gl_FragColor = vec4(col, alpha);',
+      '}'
+    ].join('\n');
+
+    function compile(type, src){
+      var s = gl.createShader(type);
+      gl.shaderSource(s, src);
+      gl.compileShader(s);
+      if(!gl.getShaderParameter(s, gl.COMPILE_STATUS)){
+        console.warn('LiquidEther: shader compile failed, falling back to Canvas2D', gl.getShaderInfoLog(s));
+        return null;
+      }
+      return s;
+    }
+    var vs = compile(gl.VERTEX_SHADER, vertSrc);
+    var fs = compile(gl.FRAGMENT_SHADER, fragSrc);
+    if(!vs || !fs) return null;
+    var program = gl.createProgram();
+    gl.attachShader(program, vs);
+    gl.attachShader(program, fs);
+    gl.linkProgram(program);
+    if(!gl.getProgramParameter(program, gl.LINK_STATUS)){
+      console.warn('LiquidEther: program link failed, falling back to Canvas2D', gl.getProgramInfoLog(program));
       return null;
     }
-    return s;
-  }
-  var vs = compile(gl.VERTEX_SHADER, vertSrc);
-  var fs = compile(gl.FRAGMENT_SHADER, fragSrc);
-  if(!vs || !fs){ canvas.style.display = 'none'; return; }
-  var program = gl.createProgram();
-  gl.attachShader(program, vs);
-  gl.attachShader(program, fs);
-  gl.linkProgram(program);
-  if(!gl.getProgramParameter(program, gl.LINK_STATUS)){
-    console.error('LiquidEther link error:', gl.getProgramInfoLog(program));
-    canvas.style.display = 'none';
-    return;
-  }
-  gl.useProgram(program);
+    gl.useProgram(program);
 
-  var quad = new Float32Array([-1,-1, 1,-1, -1,1, 1,1]);
-  var buf = gl.createBuffer();
-  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-  gl.bufferData(gl.ARRAY_BUFFER, quad, gl.STATIC_DRAW);
-  var aPos = gl.getAttribLocation(program, 'aPos');
-  gl.enableVertexAttribArray(aPos);
-  gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+    var quad = new Float32Array([-1,-1, 1,-1, -1,1, 1,1]);
+    var buf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, quad, gl.STATIC_DRAW);
+    var aPos = gl.getAttribLocation(program, 'aPos');
+    gl.enableVertexAttribArray(aPos);
+    gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
 
-  var uTime = gl.getUniformLocation(program, 'uTime');
-  var uResolution = gl.getUniformLocation(program, 'uResolution');
-  var uImpulses = gl.getUniformLocation(program, 'uImpulses');
-  var uColor0 = gl.getUniformLocation(program, 'uColor0');
-  var uColor1 = gl.getUniformLocation(program, 'uColor1');
-  var uColor2 = gl.getUniformLocation(program, 'uColor2');
-  gl.uniform3fv(uColor0, color0);
-  gl.uniform3fv(uColor1, color1);
-  gl.uniform3fv(uColor2, color2);
+    var uTime = gl.getUniformLocation(program, 'uTime');
+    var uResolution = gl.getUniformLocation(program, 'uResolution');
+    var uImpulses = gl.getUniformLocation(program, 'uImpulses');
+    var uColor0 = gl.getUniformLocation(program, 'uColor0');
+    var uColor1 = gl.getUniformLocation(program, 'uColor1');
+    var uColor2 = gl.getUniformLocation(program, 'uColor2');
+    gl.uniform3fv(uColor0, [color0[0]/255, color0[1]/255, color0[2]/255]);
+    gl.uniform3fv(uColor1, [color1[0]/255, color1[1]/255, color1[2]/255]);
+    gl.uniform3fv(uColor2, [color2[0]/255, color2[1]/255, color2[2]/255]);
+
+    return {
+      draw: function(width, height, impulseData){
+        gl.viewport(0, 0, width, height);
+        gl.useProgram(program);
+        gl.uniform1f(uTime, impulseData.t);
+        gl.uniform2f(uResolution, width, height);
+        gl.uniform4fv(uImpulses, impulseData.data);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      }
+    };
+  }
+
+  // ----- Canvas2D fallback (used when WebGL is unavailable or blocked) -----
+  function initCanvas2D(){
+    var ctx = canvas.getContext('2d');
+    if(!ctx) return null;
+    return {
+      draw: function(width, height, impulseData){
+        ctx.clearRect(0, 0, width, height);
+        ctx.globalCompositeOperation = 'lighter';
+        var palette = [color0, color1, color2];
+        for(var i = 0; i < impulseData.impulses.length; i++){
+          var imp = impulseData.impulses[i];
+          var lifeFactor = Math.max(0, 1 - imp.age / imp.maxAge);
+          if(lifeFactor <= 0) continue;
+          var cx = imp.x * width;
+          var cy = (1 - imp.y) * height;
+          var radius = Math.max(20, imp.radius * width * 2.2);
+          var c = palette[i % 3];
+          var grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius);
+          var a = Math.min(0.55, imp.strength * 2.2) * lifeFactor;
+          grad.addColorStop(0, 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + a + ')');
+          grad.addColorStop(1, 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',0)');
+          ctx.fillStyle = grad;
+          ctx.beginPath();
+          ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.globalCompositeOperation = 'source-over';
+      }
+    };
+  }
+
+  var renderer = tryInitWebGL();
+  var usingWebGL = !!renderer;
+  if(!renderer){ renderer = initCanvas2D(); }
+  if(!renderer){ canvas.style.display = 'none'; return; }
+  if(!usingWebGL){ canvas.style.mixBlendMode = 'screen'; }
 
   var MAX_IMPULSES = 14;
-  var impulses = []; // {x,y,strength,radius,age,maxAge}
+  var impulses = [];
 
   function resize(){
     var w = Math.max(1, Math.floor(window.innerWidth * resolution));
@@ -1911,14 +1963,13 @@ boneco@bonecowilson.com.br
     canvas.height = h;
     canvas.style.width = '100%';
     canvas.style.height = '100%';
-    gl.viewport(0, 0, w, h);
   }
   resize();
   window.addEventListener('resize', resize);
 
   var lastInteraction = -1e9;
   var lastX = null, lastY = null;
-  var autoBlend = 1; // 1 = fully autonomous, 0 = fully user-driven
+  var autoBlend = 1;
 
   function addImpulse(nx, ny, strength, radiusPx){
     var radius = radiusPx / window.innerWidth;
@@ -1942,12 +1993,8 @@ boneco@bonecowilson.com.br
 
   var startTime = performance.now();
 
-  function tick(){
-    var now = performance.now();
-    var t = (now - startTime) / 1000;
-
-    // cross-fade between user control and autonomous idle motion
-    var idleFor = now - lastInteraction;
+  function buildFrameData(t){
+    var idleFor = performance.now() - lastInteraction;
     var rampMs = (idleFor > autoResumeDelay ? autoRampDuration : takeoverDuration) * 1000;
     var toward = idleFor > autoResumeDelay ? 1 : 0;
     var step = rampMs > 0 ? (1 / (rampMs / 16.7)) : 1;
@@ -1959,7 +2006,6 @@ boneco@bonecowilson.com.br
       addImpulse(ax, ay, 0.012 * autoIntensity * autoBlend, cursorSize * 1.4);
     }
 
-    // age out impulses
     for(var i = impulses.length - 1; i >= 0; i--){
       impulses[i].age += 1/60;
       if(impulses[i].age > impulses[i].maxAge){ impulses.splice(i, 1); }
@@ -1976,13 +2022,18 @@ boneco@bonecowilson.com.br
         data[j*4+3] = imp.radius;
       }
     }
+    return {t:t, data:data, impulses:impulses.slice()};
+  }
 
-    gl.useProgram(program);
-    gl.uniform1f(uTime, t);
-    gl.uniform2f(uResolution, canvas.width, canvas.height);
-    gl.uniform4fv(uImpulses, data);
-    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+  if(reduceMotion){
+    // Respect the OS/browser motion preference: paint one calm static frame, no ongoing animation.
+    renderer.draw(canvas.width, canvas.height, buildFrameData(2));
+    return;
+  }
 
+  function tick(){
+    var t = (performance.now() - startTime) / 1000;
+    renderer.draw(canvas.width, canvas.height, buildFrameData(t));
     requestAnimationFrame(tick);
   }
   requestAnimationFrame(tick);
