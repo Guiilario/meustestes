@@ -125,51 +125,41 @@
     background-size:56px 56px;
     mask-image:radial-gradient(ellipse 70% 60% at 50% 50%, black, transparent 75%);
   }
-  .pre-stage{position:relative;width:100%;max-width:520px;padding:0 24px;}
-  .pre-road{
-    position:relative;height:2px;width:100%;
-    background:repeating-linear-gradient(90deg, var(--border-strong) 0 22px, transparent 22px 40px);
-    margin:0 auto;
+  .pre-stage{position:relative;width:100%;max-width:520px;height:180px;padding:0 24px;}
+  .pre-car-wrap{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:190px;
+    animation:carWrapFade 6s var(--ease) forwards;
   }
-  .pre-car{
-    position:absolute;left:50%;bottom:2px;width:104px;height:auto;
-    transform:translateX(calc(-50% - 220px));
-    animation:carDrive 6s var(--ease) forwards;
+  .pre-car-svg{width:100%;height:auto;display:block;overflow:visible;}
+  .pre-car-outline{fill:none;stroke:var(--yellow);stroke-width:1.6;}
+  .pre-car-fill{
+    fill:var(--yellow);
+    clip-path:inset(100% 0 0 0);
+    animation:carFillUp 4s linear forwards;
   }
-  .pre-car .wheel{transform-origin:center;animation:wheelSpin 6s linear forwards;}
-  .pre-car .brake-light{animation:brakeGlow 6s ease forwards;}
+  .pre-wheel{fill:#0A0A0A;}
+  .pre-wheel-hub{fill:#3a3a3a;}
   .pre-logo{
-    position:absolute;left:0;right:0;bottom:34px;text-align:center;
-    opacity:0;transform:translateY(10px) scale(.96);
+    position:absolute;top:50%;left:0;right:0;transform:translateY(-50%);text-align:center;
+    opacity:0;
     animation:logoReveal 6s var(--ease) forwards;
   }
   .pre-logo-img{height:52px;width:auto;margin:0 auto;display:block;}
   .pre-logo .pre-slogan{
     margin-top:14px;font-size:13px;font-weight:600;color:var(--text-secondary);letter-spacing:.03em;
   }
-  @keyframes carDrive{
-    0%{transform:translateX(calc(-50% - 220px));}
-    33.3%{transform:translateX(-50%);}
-    66.6%{transform:translateX(-50%);}
-    83.3%{transform:translateX(calc(-50% + 260px));}
-    100%{transform:translateX(calc(-50% + 260px));}
+  @keyframes carFillUp{
+    to{clip-path:inset(0% 0 0 0);}
   }
-  @keyframes wheelSpin{
-    0%{transform:rotate(0deg);}
-    33.3%{transform:rotate(320deg);}
-    66.6%{transform:rotate(320deg);}
-    83.3%{transform:rotate(680deg);}
-    100%{transform:rotate(680deg);}
-  }
-  @keyframes brakeGlow{
-    0%,27%{opacity:.3;}
-    31%,42%{opacity:1;filter:drop-shadow(0 0 6px rgba(237,27,47,.85));}
-    50%,100%{opacity:.3;filter:none;}
+  @keyframes carWrapFade{
+    0%,66.6%{opacity:1;transform:translate(-50%,-50%) scale(1);}
+    83.3%,100%{opacity:0;transform:translate(-50%,-50%) scale(.9);}
   }
   @keyframes logoReveal{
-    0%,64%{opacity:0;transform:translateY(10px) scale(.96);}
-    83.3%{opacity:1;transform:translateY(0) scale(1);}
-    100%{opacity:1;transform:translateY(0) scale(1);}
+    0%,64%{opacity:0;transform:translateY(-50%) translateY(10px) scale(.96);}
+    83.3%{opacity:1;transform:translateY(-50%) translateY(0) scale(1);}
+    100%{opacity:1;transform:translateY(-50%) translateY(0) scale(1);}
   }
   @media (prefers-reduced-motion: reduce){
     #preloader{display:none !important;}
@@ -311,7 +301,11 @@
     animation:pulseBadge 2.2s ease-in-out infinite;
   }
   @keyframes pulseBadge{0%,100%{box-shadow:0 0 0 0 rgba(255,224,0,.55);}50%{box-shadow:0 0 0 6px rgba(255,224,0,0);}}
-  @media (max-width:640px){.announce{font-size:11.5px;padding:10px 14px;gap:10px;}}
+  @media (max-width:640px){
+    .announce{font-size:11.5px;padding:10px 14px;gap:10px;flex-wrap:nowrap;white-space:nowrap;}
+    .announce .divider,
+    .announce .seg:nth-child(3){display:none;}
+  }
 
   /* ===== Navbar ===== */
   header{
@@ -651,6 +645,10 @@
   .footer-col a{display:block;font-size:13.5px;color:var(--text);opacity:.85;padding:6px 0;transition:opacity .3s var(--ease), color .3s var(--ease);}
   .footer-col a:hover{opacity:1;color:var(--yellow);}
   .footer-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:56px;padding-top:24px;border-top:1px solid var(--border);font-size:12px;color:var(--text-secondary);}
+  .footer-mobile{display:none;text-align:center;}
+  .footer-mobile p{color:var(--text-secondary);font-size:12.5px;margin-bottom:6px;}
+  .footer-mobile a{color:var(--text-secondary);}
+  .footer-mobile a:hover{color:var(--yellow);}
 
   /* ===== Mobile sticky CTA ===== */
   .sticky-cta{
@@ -696,6 +694,8 @@
     .footer-grid{grid-template-columns:1fr;gap:32px;}
     .trust-inner{justify-content:flex-start;}
     .nav-cta .btn{padding:10px 16px;font-size:12px;}
+    .footer-full{display:none;}
+    .footer-mobile{display:block;}
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -709,18 +709,19 @@
 <div id="preloader" aria-hidden="true">
   <div class="pre-grid"></div>
   <div class="pre-stage">
-    <svg class="pre-car" viewBox="0 0 104 44" xmlns="http://www.w3.org/2000/svg">
-      <ellipse cx="52" cy="38" rx="46" ry="3" fill="rgba(0,0,0,.45)"/>
-      <path d="M6 27c0-2 2-4 5-4l6-10c2-3 5-5 9-5h20c4 0 7 2 9 5l7 9c5 1 9 2 11 4 2 1 3 3 3 5v3c0 2-1 3-3 3h-4a8 8 0 01-16 0H29a8 8 0 01-16 0H9c-2 0-3-1-3-3z" fill="#FFE000"/>
-      <path d="M23 13l-4 9h15v-9z" fill="#111111" opacity=".9"/>
-      <path d="M37 13v9h13l-3-9z" fill="#111111" opacity=".9"/>
-      <rect class="brake-light" x="4" y="21" width="4" height="4" rx="1.4" fill="#ED1B2F"/>
-      <circle class="wheel" cx="29" cy="34" r="7" fill="#0A0A0A"/>
-      <circle cx="29" cy="34" r="2.6" fill="#A0A0A0"/>
-      <circle class="wheel" cx="75" cy="34" r="7" fill="#0A0A0A"/>
-      <circle cx="75" cy="34" r="2.6" fill="#A0A0A0"/>
-    </svg>
-    <div class="pre-road"></div>
+    <div class="pre-car-wrap">
+      <svg class="pre-car-svg" viewBox="0 0 104 44" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <defs>
+          <path id="carBody" d="M6 27c0-2 2-4 5-4l6-10c2-3 5-5 9-5h20c4 0 7 2 9 5l7 9c5 1 9 2 11 4 2 1 3 3 3 5v3c0 2-1 3-3 3h-4a8 8 0 01-16 0H29a8 8 0 01-16 0H9c-2 0-3-1-3-3z"/>
+        </defs>
+        <use href="#carBody" xlink:href="#carBody" class="pre-car-fill"/>
+        <use href="#carBody" xlink:href="#carBody" class="pre-car-outline"/>
+        <circle class="pre-wheel" cx="29" cy="34" r="7"/>
+        <circle class="pre-wheel-hub" cx="29" cy="34" r="2.6"/>
+        <circle class="pre-wheel" cx="75" cy="34" r="7"/>
+        <circle class="pre-wheel-hub" cx="75" cy="34" r="2.6"/>
+      </svg>
+    </div>
     <div class="pre-logo">
       <img src="https://drive.google.com/thumbnail?id=1Fca_v2fM8sRoi5nVwrLWC67goNkXE8_x&sz=w500" alt="Boneco Wilson" class="pre-logo-img">
       <p class="pre-slogan">Simulando presença, uma camada extra de segurança.</p>
@@ -1100,7 +1101,6 @@ boneco@bonecowilson.com.br
   <a href="#como-funciona">Como funciona</a>
   <a href="#depoimentos">Depoimentos</a>
   <a href="#faq">FAQ</a>
-  <a href="pagamento.html" class="btn btn-primary fx-spec"><span class="btn-label">Quero meu Wilson</span></a>
 </div>
 
 <main id="top">
@@ -1411,32 +1411,38 @@ boneco@bonecowilson.com.br
 
 <footer>
   <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="#top" class="logo">
-          <img src="https://drive.google.com/thumbnail?id=1Fca_v2fM8sRoi5nVwrLWC67goNkXE8_x&sz=w500" alt="Boneco Wilson" class="logo-img">
-        </a>
-        <p>Um companheiro de viagem pensado para trazer mais presença e tranquilidade aos seus deslocamentos diários.</p>
+    <div class="footer-full">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#top" class="logo">
+            <img src="https://drive.google.com/thumbnail?id=1Fca_v2fM8sRoi5nVwrLWC67goNkXE8_x&sz=w500" alt="Boneco Wilson" class="logo-img">
+          </a>
+          <p>Um companheiro de viagem pensado para trazer mais presença e tranquilidade aos seus deslocamentos diários.</p>
+        </div>
+        <div class="footer-col"><h5>Navegação</h5>
+          <a href="#beneficios">Benefícios</a><a href="#como-funciona">Como funciona</a><a href="#depoimentos">Depoimentos</a><a href="#faq">FAQ</a>
+        </div>
+        <div class="footer-col"><h5>Suporte</h5>
+          <a href="https://wa.me/5511997343865?text=Ol%C3%A1!%20Preciso%20de%20ajuda%20com%20o%20Boneco%20Wilson." target="_blank" rel="noopener">Central de ajuda</a><a href="https://wa.me/5511997343865?text=Ol%C3%A1!%20Quero%20rastrear%20meu%20pedido%20do%20Boneco%20Wilson." target="_blank" rel="noopener">Rastrear pedido</a><a href="https://wa.me/5511997343865?text=Ol%C3%A1!%20Preciso%20de%20ajuda%20com%20troca%20ou%20devolu%C3%A7%C3%A3o." target="_blank" rel="noopener">Trocas e devoluções</a>
+        </div>
+        <div class="footer-col"><h5>Institucional</h5>
+          <a href="#" class="js-open-legal" data-modal="privacy-modal">Política de privacidade</a><a href="#" class="js-open-legal" data-modal="terms-modal">Termos de uso</a><a href="https://wa.me/5511997343865?text=Ol%C3%A1!%20Gostaria%20de%20falar%20sobre%20o%20Boneco%20Wilson." target="_blank" rel="noopener">Contato</a>
+        </div>
       </div>
-      <div class="footer-col"><h5>Navegação</h5>
-        <a href="#beneficios">Benefícios</a><a href="#como-funciona">Como funciona</a><a href="#depoimentos">Depoimentos</a><a href="#faq">FAQ</a>
-      </div>
-      <div class="footer-col"><h5>Suporte</h5>
-        <a href="https://wa.me/5511997343865?text=Ol%C3%A1!%20Preciso%20de%20ajuda%20com%20o%20Boneco%20Wilson." target="_blank" rel="noopener">Central de ajuda</a><a href="https://wa.me/5511997343865?text=Ol%C3%A1!%20Quero%20rastrear%20meu%20pedido%20do%20Boneco%20Wilson." target="_blank" rel="noopener">Rastrear pedido</a><a href="https://wa.me/5511997343865?text=Ol%C3%A1!%20Preciso%20de%20ajuda%20com%20troca%20ou%20devolu%C3%A7%C3%A3o." target="_blank" rel="noopener">Trocas e devoluções</a>
-      </div>
-      <div class="footer-col"><h5>Institucional</h5>
-        <a href="#" class="js-open-legal" data-modal="privacy-modal">Política de privacidade</a><a href="#" class="js-open-legal" data-modal="terms-modal">Termos de uso</a><a href="https://wa.me/5511997343865?text=Ol%C3%A1!%20Gostaria%20de%20falar%20sobre%20o%20Boneco%20Wilson." target="_blank" rel="noopener">Contato</a>
+      <div class="footer-bottom">
+        <span>© 2026 Boneco Wilson. Todos os direitos reservados - Produto licenciado</span>
+        <span>Site oficial - Não use cópias</span>
       </div>
     </div>
-    <div class="footer-bottom">
-      <span>© 2026 Boneco Wilson. Todos os direitos reservados - Produto licenciado</span>
-      <span>Site oficial - Não use cópias</span>
+    <div class="footer-mobile">
+      <p class="footer-legal-links"><a href="#" class="js-open-legal" data-modal="privacy-modal">Política de privacidade</a> · <a href="#" class="js-open-legal" data-modal="terms-modal">Termos de uso</a></p>
+      <p>Site oficial - Produto licenciado</p>
     </div>
   </div>
 </footer>
 
 <div class="sticky-cta" id="sticky-cta">
-  <a href="pagamento.html" class="btn btn-primary fx-spec"><span class="btn-label">Quero meu Wilson</span></a>
+  <a href="pagamento.html" class="btn btn-primary fx-spec"><span class="btn-label">Comprar sem juros</span></a>
 </div>
 
 <script>
@@ -1686,6 +1692,10 @@ boneco@bonecowilson.com.br
     var dragMoved = false;
     var dragStartX = 0;
     var checkTimeout = null;
+    var isMobileViewport = window.matchMedia('(max-width:1080px)').matches;
+    window.addEventListener('resize', function(){
+      isMobileViewport = window.matchMedia('(max-width:1080px)').matches;
+    });
 
     function lerp(p1, p2, t){ return p1 + (p2 - p1) * t; }
 
@@ -1711,7 +1721,10 @@ boneco@bonecowilson.com.br
       checkTimeout = setTimeout(onCheck, 200);
     }
 
+    // Mobile-only: gentle continuous auto-scroll when the user isn't actively touching the gallery
+    var mobileIdleDrift = 0.35;
     function galleryTick(){
+      if(isMobileViewport && !isDown){ scroll.target -= mobileIdleDrift; }
       scroll.current = lerp(scroll.current, scroll.target, galleryScrollEase);
       if(loopWidth > 0){
         while(scroll.current <= -loopWidth){ scroll.current += loopWidth; scroll.target += loopWidth; }
