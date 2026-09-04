@@ -4,6 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Boneco Wilson | Mais tranquilidade no trânsito</title>
+<link rel="icon" type="image/x-icon" href="assets/favicon/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+<link rel="manifest" href="assets/favicon/site.webmanifest">
 <meta name="description" content="Boneco Wilson: um companheiro de viagem pensado para trazer mais presença, confiança e tranquilidade aos seus deslocamentos. Frete grátis para todo o Brasil.">
 <meta property="og:title" content="Boneco Wilson | Mais tranquilidade no trânsito">
 <meta property="og:description" content="Um companheiro de viagem criado para aumentar sua sensação de segurança e trazer mais tranquilidade para o dia a dia.">
@@ -330,6 +335,9 @@
   .hero-copy .headline .accent{color:var(--yellow);}
   .hero-copy .sub-headline{font-family:var(--display);font-weight:700;font-size:clamp(18px,2vw,23px);color:var(--text);margin-top:18px;}
   .hero-copy .support{color:var(--text-secondary);font-size:16.5px;max-width:480px;margin-top:18px;}
+  @media (min-width:1081px){
+    .hero-copy .support{max-width:565px;text-wrap:balance;}
+  }
   .hero-cta{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:34px;}
   .free-shipping{
     display:inline-flex;align-items:center;justify-content:center;gap:8px;margin-top:26px;
@@ -547,7 +555,8 @@
   .stars svg{width:15px;height:15px;fill:var(--yellow);}
   .t-card p{font-size:14.5px;color:var(--text);margin-bottom:20px;}
   .t-author{display:flex;align-items:center;gap:10px;}
-  .t-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--yellow),var(--red));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;color:var(--black);}
+  .t-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--yellow),var(--red));display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;}
+  .t-avatar-icon{width:20px;height:20px;}
   .t-author span{font-size:13.5px;font-weight:600;}
   .t-author small{display:block;font-size:11.5px;color:var(--text-secondary);}
 
@@ -1214,12 +1223,12 @@ boneco@bonecowilson.com.br
         <h2>O que dizem os motoristas.</h2>
       </div>
       <div class="testimonials-grid">
-        <div class="t-card"><div class="stars">★★★★★</div><p>Comecei usando pela curiosidade, mas gostei muito da sensação de ter uma presença no carro durante meus trajetos.</p><div class="t-author"><div class="t-avatar">MF</div><div><span>Marina F.</span><small>São Paulo, SP</small></div></div></div>
-        <div class="t-card"><div class="stars">★★★★★</div><p>Uso principalmente nas viagens noturnas de volta do trabalho. Fez diferença na minha tranquilidade.</p><div class="t-author"><div class="t-avatar">RC</div><div><span>Rodrigo C.</span><small>Belo Horizonte, MG</small></div></div></div>
-        <div class="t-card"><div class="stars">★★★★★</div><p>Achei o acabamento bem feito e o tamanho ideal para o banco do meu carro. Recomendo.</p><div class="t-author"><div class="t-avatar">JS</div><div><span>Juliana S.</span><small>Curitiba, PR</small></div></div></div>
-        <div class="t-card"><div class="stars">★★★★★</div><p>Entrega rápida e produto bem embalado. Ficou exatamente como nas fotos do site.</p><div class="t-author"><div class="t-avatar">PA</div><div><span>Pedro A.</span><small>Porto Alegre, RS</small></div></div></div>
-        <div class="t-card"><div class="stars">★★★★★</div><p>Comprei para minha mãe, que dirige sozinha à noite. Ela disse que se sente mais confortável agora.</p><div class="t-author"><div class="t-avatar">LT</div><div><span>Lucas T.</span><small>Salvador, BA</small></div></div></div>
-        <div class="t-card"><div class="stars">★★★★★</div><p>Simples, prático e cumpre o que promete. Já indiquei para colegas de trabalho.</p><div class="t-author"><div class="t-avatar">CB</div><div><span>Camila B.</span><small>Recife, PE</small></div></div></div>
+        <div class="t-card"><div class="stars">★★★★★</div><p>Comecei usando pela curiosidade, mas gostei muito da sensação de ter uma presença no carro durante meus trajetos.</p><div class="t-author"><div class="t-avatar"><svg class="t-avatar-icon" viewBox="0 0 24 24" fill="white"><path d="M12 2.8c-3.6 0-6.3 2.7-6.3 6.9 0 2.1.8 3.6 1.6 4.6l.4-5c1.3.8 2.8 1.1 4.3 1.1s3-.3 4.3-1.1l.4 5c.8-1 1.6-2.5 1.6-4.6 0-4.2-2.7-6.9-6.3-6.9z"/><circle cx="12" cy="9.6" r="3.5"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div><div><span>Marina F.</span><small>São Paulo, SP</small></div></div></div>
+        <div class="t-card"><div class="stars">★★★★★</div><p>Uso principalmente nas viagens noturnas de volta do trabalho. Fez diferença na minha tranquilidade.</p><div class="t-author"><div class="t-avatar"><svg class="t-avatar-icon" viewBox="0 0 24 24" fill="white"><circle cx="12" cy="8.5" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div><div><span>Rodrigo C.</span><small>Belo Horizonte, MG</small></div></div></div>
+        <div class="t-card"><div class="stars">★★★★★</div><p>Achei o acabamento bem feito e o tamanho ideal para o banco do meu carro. Recomendo.</p><div class="t-author"><div class="t-avatar"><svg class="t-avatar-icon" viewBox="0 0 24 24" fill="white"><path d="M12 2.8c-3.6 0-6.3 2.7-6.3 6.9 0 2.1.8 3.6 1.6 4.6l.4-5c1.3.8 2.8 1.1 4.3 1.1s3-.3 4.3-1.1l.4 5c.8-1 1.6-2.5 1.6-4.6 0-4.2-2.7-6.9-6.3-6.9z"/><circle cx="12" cy="9.6" r="3.5"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div><div><span>Juliana S.</span><small>Curitiba, PR</small></div></div></div>
+        <div class="t-card"><div class="stars">★★★★★</div><p>Entrega rápida e produto bem embalado. Ficou exatamente como nas fotos do site.</p><div class="t-author"><div class="t-avatar"><svg class="t-avatar-icon" viewBox="0 0 24 24" fill="white"><circle cx="12" cy="8.5" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div><div><span>Pedro A.</span><small>Porto Alegre, RS</small></div></div></div>
+        <div class="t-card"><div class="stars">★★★★★</div><p>Comprei para minha mãe, que dirige sozinha à noite. Ela disse que se sente mais confortável agora.</p><div class="t-author"><div class="t-avatar"><svg class="t-avatar-icon" viewBox="0 0 24 24" fill="white"><circle cx="12" cy="8.5" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div><div><span>Lucas T.</span><small>Salvador, BA</small></div></div></div>
+        <div class="t-card"><div class="stars">★★★★★</div><p>Simples, prático e cumpre o que promete. Já indiquei para colegas de trabalho.</p><div class="t-author"><div class="t-avatar"><svg class="t-avatar-icon" viewBox="0 0 24 24" fill="white"><path d="M12 2.8c-3.6 0-6.3 2.7-6.3 6.9 0 2.1.8 3.6 1.6 4.6l.4-5c1.3.8 2.8 1.1 4.3 1.1s3-.3 4.3-1.1l.4 5c.8-1 1.6-2.5 1.6-4.6 0-4.2-2.7-6.9-6.3-6.9z"/><circle cx="12" cy="9.6" r="3.5"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div><div><span>Camila B.</span><small>Recife, PE</small></div></div></div>
       </div>
     </div>
   </section>
